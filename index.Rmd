@@ -1,0 +1,13 @@
+--- 
+title: "Portofolio van Lisa Kuipers"
+author: "Lisa Kuipers"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+new_session: yes
+github-repo: portfolio
+description: "Portofolio"
+---
+
+# index

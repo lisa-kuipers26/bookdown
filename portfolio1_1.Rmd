@@ -1,0 +1,48 @@
+# C. elegans plate experiment
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE
+)
+
+library(DT)
+library(kableExtra)
+library(readxl)
+library(tidyverse)
+```
+
+```{r }
+tabel <- read_excel(here::here("data/CE.LIQ.FLOW.062_Tidydata.xlsx"))
+tabel$compConcentration <- as.double(tabel$compConcentration)
+tabel$compName <- as.factor(tabel$compName)
+
+#x-as concentreatie in -10log
+tabel$compConcentration <- ifelse(tabel$compConcentration==0,0,-log10(tabel$compConcentration))
+
+
+tabel %>% ggplot(aes(x=compConcentration,y=RawData,color=compName,shape=expType))+
+  geom_jitter(width=0.1)+
+  labs(x="Concentratie (-log10) ",
+       y="Number of offspring")
+```
+
+De compConcentration was eerst het type character waardoor de labels niet op schaal lagen. Door het te veranderen naar het type van een double kan er een schaal gemaakt worden.
+
+De positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium
+
+Experimentele opzet:
+1. Data plotten zodat er een globaal overzicht hebt
+2.
+
+```{r }
+#Genormalizeerd en gemiddelde naar 1
+
+neg_controle <- tabel %>% filter(expType=="controlNegative")
+
+tabel$RawData[tabel$expType == 'controlNegative'] <- neg_controle$RawData / mean(neg_controle$RawData)
+tabel %>% ggplot(aes(x=compConcentration,y=RawData,color=compName,shape=expType))+
+  geom_jitter(width=0.1)+
+  labs(x="Concentratie (-log10) ",
+       y="Number of offspring")
+```

@@ -1,0 +1,11 @@
+# Applying the Guerrilla analytics framework to your own project."
+
+```{r directory, echo=FALSE }
+fs::dir_tree("D:/Documenten/Data science/daur2")
+```
+
+Voorbeeldwn van readme bestand:
+
+!!RMD!!
+
+!!Data!!

@@ -1,11 +1,7 @@
-# Applying the Guerrilla analytics framework to your own project."
+# Applying the Guerrilla analytics framework to your own project.
+
+Het organizeren van data is belangrijk voor reproduceerbaarheid en algemene goede workflow. Hieronder staat een voorbeeld van een map met verschillende projecten.
 
 ```{r directory, echo=FALSE }
 fs::dir_tree("D:/Documenten/Data science/daur2")
 ```
-
-Voorbeeldwn van readme bestand:
-
-!!RMD!!
-
-!!Data!!

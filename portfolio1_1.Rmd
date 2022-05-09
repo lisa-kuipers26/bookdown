@@ -12,6 +12,11 @@ library(readxl)
 library(tidyverse)
 ```
 
+In dit onderzoek worden C. elegans nematodes blootgesteld aan verschillende soorten stoffen. In de RawData staat het aantal nematodes geteld zijn op de plat. compConcentration geeft de concentratie van de stof aan en expType de soort stof.
+
+Er wordt een grafiek gemaakt waarbij het aantal nematode per stof op de plaat tegen de -10log concentratie wordt uitgezet.
+In het experiment is de positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium
+
 ```{r }
 tabel <- read_excel(here::here("data/CE.LIQ.FLOW.062_Tidydata.xlsx"))
 tabel$compConcentration <- as.double(tabel$compConcentration)
@@ -27,13 +32,10 @@ tabel %>% ggplot(aes(x=compConcentration,y=RawData,color=compName,shape=expType)
        y="Number of offspring")
 ```
 
-De compConcentration was eerst het type character waardoor de labels niet op schaal lagen. Door het te veranderen naar het type van een double kan er een schaal gemaakt worden.
-
-De positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium
+Bij het importeren van de data naar een tibble was het type van de compConcentration kolom een character. Hierdoor wordt de x-as ingedeled in groepen in plaats van schaal. Dit is aangepast naar een double.
 
 Experimentele opzet:
 1. Data plotten zodat er een globaal overzicht hebt
-2.
 
 ```{r }
 #Genormalizeerd en gemiddelde naar 1

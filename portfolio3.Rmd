@@ -1,6 +1,6 @@
 # cv
 
-## Lisa Kuipers
+<h2> Lisa Kuipers </h2>
 
 ```{r foto, out.width = "200px", echo=FALSE}
 knitr::include_graphics(
@@ -10,13 +10,13 @@ knitr::include_graphics(
 ```
 
 
-### Contact
+<h2> Contact </h2>
 
 0612345678   
 lisa.kuipers26@hotmail.com
 
 -----
-### Werkervaring
+<h2> Werkervaring </h2>
 
 HEMA Rhenen | 2015 – heden  
 Kassa medewerker, horeca medewerker  
@@ -25,7 +25,7 @@ Kassa medewerker, horeca medewerker
   * Klanten bedienen in de horeca  
   * Aanvullen van producten in de winkel  
 
-### Opleiding
+<h2> Opleiding </h2>
 
 HAVO 
 Rembrandt college Veenendaal  |  2012 - 2017  
@@ -39,11 +39,11 @@ HBO Biologie en medisch laboratoriumonderzoek (life science)
   * Biomoleculair research specialisatie  
 
 
-### Talen
+<h2> Talen </h2>
 Nederlands   
 Engels    
 
-### Vaardigheden
+<h2> Vaardigheden </h2>
 Microsoft office    
 R   
 Bash    

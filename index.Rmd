@@ -1,5 +1,9 @@
 --- 
+<<<<<<< HEAD
+title: "Portfolio workflows"
+=======
 title: "Portofolio workflows"
+>>>>>>> f02cb804778af7b6f83fdd93ca6e5cb491b0a901
 author: "Lisa Kuipers"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -7,7 +11,13 @@ output: bookdown::gitbook
 documentclass: book
 new_session: yes
 github-repo: portfolio
-description: "Portofolio"
+description: "Portoflio"
 ---
 
+<<<<<<< HEAD
 # Introductie
+
+In dit portfolio staan verschillende onderwerpen die over reproduceerbaar werken en goede workflows gaan. Voor elk onderwerp is een aparte pagina gemaakt. Op deze pagina's staat beschreven wat ik geleerd heb tijdens mijn minor data science.
+=======
+# Introductie
+>>>>>>> f02cb804778af7b6f83fdd93ca6e5cb491b0a901

@@ -1,5 +1,5 @@
 --- 
-title: "Portofolio van Lisa Kuipers"
+title: "Portofolio workflows"
 author: "Lisa Kuipers"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -10,4 +10,4 @@ github-repo: portfolio
 description: "Portofolio"
 ---
 
-# index
+# Introductie

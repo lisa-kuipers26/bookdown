@@ -1,4 +1,4 @@
-# C. elegans plate experiment
+# Verwerken van data
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
@@ -12,12 +12,13 @@ library(readxl)
 library(tidyverse)
 ```
 
-In dit onderzoek worden C. elegans nematodes blootgesteld aan verschillende soorten stoffen. In de RawData staat het aantal nematodes geteld zijn op de plat. compConcentration geeft de concentratie van de stof aan en expType de soort stof.
+Het interperteren en verwerken van data van iemand anders is belangrijk in de data science. Er wordt hier data gebruikt van een onderzoek waar  C. elegans nematodes blootgesteld aan verschillende soorten stoffen. 
 
-Er wordt een grafiek gemaakt waarbij het aantal nematode per stof op de plaat tegen de -10log concentratie wordt uitgezet.
-In het experiment is de positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium
+Belangrijkste in een data analyse is bergrijpen waar je data over gaat. Door de metadata te lezen krijg je een goed idee van waar je dataset overgaat en wat elke kopje betekent. Voor dit onderzoek willen we het effect weten van verschillende stoffen op de nematode maar ook de het effect van verschillende concentraties. Om dit te onderzoeken worden de kolommen RawData, compConcentration en expType gebruikt. In RawData staan het aantal nematodes op de plaat, in de compConcentration de concentratie van de stof en de expType de soort stof.
 
-```{r }
+Om globaal een idee te krijgen van het effect worden deze variabel tegen elkaar uitget in de grafiek hieronder.
+
+```{r grafiek_1}
 tabel <- read_excel(here::here("data/CE.LIQ.FLOW.062_Tidydata.xlsx"))
 tabel$compConcentration <- as.double(tabel$compConcentration)
 tabel$compName <- as.factor(tabel$compName)
@@ -32,12 +33,15 @@ tabel %>% ggplot(aes(x=compConcentration,y=RawData,color=compName,shape=expType)
        y="Number of offspring")
 ```
 
-Bij het importeren van de data naar een tibble was het type van de compConcentration kolom een character. Hierdoor wordt de x-as ingedeled in groepen in plaats van schaal. Dit is aangepast naar een double.
+In het experiment is de positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium
 
-Experimentele opzet:
+Bij het verwerken van data is het belangrijk dat de data goed ingelezen wordt. Eén ding waar we tegen lopen bij deze dataset is dat de compConcentration ingelezen wordt als character type i.p.v. een getal. Hierdoor klopt de de x-as niet met wat je wilt zien, omdat er groepen en geen schaal weergegeven wordt. Dit wordt opgelost door het typ evan compConcentration te veranderen van een character naar een double. 
+
+De bovenstaande grafiek geeft een globaal overzicht, maar er kunnen geen conclusies uitgetrokken worden. Hiervoor is een verdere data analyse nodig. Zo'n data analyse kan er als volgt uitzien:   
+
 1. Data plotten zodat er een globaal overzicht hebt
 
-```{r }
+```{r Grafiek_2}
 #Genormalizeerd en gemiddelde naar 1
 
 neg_controle <- tabel %>% filter(expType=="controlNegative")

@@ -1,5 +1,5 @@
 introductie
-c.-elegans-plate-experiment
+verwerken-van-data
 open-peer-review
 onderzoek-op-reproduceerbaarheid-beoordelen
 omschrijving-onderzoek
@@ -7,6 +7,7 @@ beoordeling-artikel
 code-zelf-reproduceren
 beoordeling-script
 probleem-in-script
-applying-the-guerrilla-analytics-framework-to-your-own-project.
+data-organiseren
 cv
 vrije-ruimte---sql
+het-citeren-van-andere-werken

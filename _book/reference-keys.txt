@@ -9,5 +9,5 @@ beoordeling-script
 probleem-in-script
 data-organiseren
 cv
-vrije-ruimte---sql
+biologische-databases
 het-citeren-van-andere-werken

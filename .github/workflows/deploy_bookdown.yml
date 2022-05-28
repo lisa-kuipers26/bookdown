@@ -16,7 +16,7 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown
-        run: 'install.packages("rmarkdown", repos = "https://cran.revolutionanalytics.com")'
+        run: 'install.packages("rmarkdown",repos="https://cran.revolutionanalytics.com")'
       - name: Install bookdown
         run: Rscript -e 'install.packages("bookdown")'
       - name: Render Book

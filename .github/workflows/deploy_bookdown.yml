@@ -17,6 +17,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(rmarkdown)'
+      - name: Install bookdown
         run: Rscript -e 'install.packages(bookdown)'
       - name: Render Book
         run: Rscript -e 'bookdown::render_book("index.Rmd")'

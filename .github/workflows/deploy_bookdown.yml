@@ -20,7 +20,7 @@ jobs:
       - name: Install bookdown
         run: Rscript -e 'install.packages("bookdown")'
       - name: Install packages
-        run: Rscript -e 'install.packages(c("DT","kableExtra","readxl","tidyverse"))'
+        run: Rscript -e 'install.packages(c("DT","kableExtra","readxl","tidyverse","here"))'
       - name: Render Book
         run: Rscript -e 'bookdown::render_book("index.Rmd")'
       - uses: actions/upload-artifact@v1

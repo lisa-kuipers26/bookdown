@@ -1,0 +1,11 @@
+# Biologische databases
+
+Bij het zoeken naar vacatures werden er om veel verschillende c. Het bedrijf waar ik keek en intresse heb in stage lopen (genmab) werd in veel vacatures gevraagd om SQL kennis gevraagd. Er is een les waar er tijd besteed wordt aan het leren van SQL lijkt het mij handig om er wat dieper op in te gaan. Omdat dit nog een beetje een vaag doel is ging ik verder denken hoe ik dit kan toepassen. In een paar vacatures zag ik ook dat er gevraagd werd om mensen die een user interface konden maken. Met het project ga ik shiny leren en kwam op het idee om deze kennis toe te passen voor een product waarin mensen zoek opdrachten kunnen doen en zo informatie uit een database kunnen ophalen. Op deze manier kan ik de de SQL kennis toepassenen ook leren hoe een database met een app samenwerkt.
+
+Doel: Een product waarin mensen zoektermen opkunnen geven en een tabel met bijbehorende informatie returnd uit een database.
+
+(Globaal) stappen:    
+1. SQL kennis verbreden     
+2. Opzet shiny app bedenken
+3. Shiny app programmeren    
+4. Database met shiny app verbinden

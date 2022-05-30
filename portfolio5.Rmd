@@ -1,1 +1,8 @@
 # Het citeren van andere werken
+
+
+High trougputscreening is een techniek die gebruik wordt naar het onderzoeken van effecte van bepaalde medicijnen op kankercellen. Met deze technieken worden veel verschillende medicatie getest op cellen waaruit veel data uit één keer ontstaat[@carneroHighThroughputScreening2006]
+De opdracht werd gegeven door het prinses maxima center. Die zich focused op het onderzoek naar kinderoncologie[@OnsVerhaal]
+Onder gedaan naar leukemie [@brivioPhaseStudyInotuzumab2021]
+
+Door gebruik te maken van shiny kan de programmeertaal R gebruikt worden om apps te maken (@Shiny)

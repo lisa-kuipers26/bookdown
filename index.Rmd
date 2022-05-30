@@ -6,8 +6,8 @@ site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
 new_session: yes
-github-repo: portfolio
-description: "Portoflio"
+github-repo: portflio
+description: "Portflio"
 bibliography: "`r rbbt::bbt_write_bib('bibliography.json', overwrite = TRUE)`" 
 ---
 

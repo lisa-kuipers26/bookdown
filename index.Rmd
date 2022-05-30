@@ -8,7 +8,8 @@ documentclass: book
 new_session: yes
 github-repo: portflio
 description: "Portflio"
-bibliography: "`r rbbt::bbt_write_bib('bibliography.json', overwrite = TRUE)`" 
+bibliography: bibliography.json
+#bibliography: "`r rbbt::bbt_write_bib('bibliography.json', overwrite = TRUE)`" 
 ---
 
 # Introductie

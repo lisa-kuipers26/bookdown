@@ -21,8 +21,8 @@ jobs:
         run: Rscript -e 'install.packages("bookdown")'
       - name: Install packages
         run: Rscript -e 'install.packages(c("DT","kableExtra","readxl","tidyverse","here","devtools"))'
-      - name: Install rbbt
-        run: Rscript -e 'devtools::install_github("paleolimbot/rbbt", auth_token = NULL)'
+      #- name: Install rbbt
+      #  run: Rscript -e 'remotes::install_github("paleolimbot/rbbt", auth_token = NULL)'
       - name: Render Book
         run: Rscript -e 'bookdown::render_book("index.Rmd")'
       - uses: actions/upload-artifact@v1

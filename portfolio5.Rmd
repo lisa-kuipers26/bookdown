@@ -6,3 +6,6 @@ De opdracht werd gegeven door het prinses maxima center. Die zich focused op het
 Onder gedaan naar leukemie [@brivioPhaseStudyInotuzumab2021]
 
 Door gebruik te maken van shiny kan de programmeertaal R gebruikt worden om apps te maken (@Shiny)
+
+
+@SurvivalRateChildren

@@ -1,0 +1,121 @@
+# Databases
+Google Dengue Trends (http://www.google.org/denguetrends)
+"Data Source: Google Flu Trends (http://www.google.org/flutrends)"
+```{r data_laden, eval=FALSE}
+library(dslabs)
+library(tidyverse)
+#laden van gapminder
+gapminder_df <- gapminder %>% as.data.frame()
+
+#tidy maken van dengue data
+dengue_df <- read.csv("data/dengue_data.csv", skip=11) %>% as.data.frame
+col_dengue <- colnames(dengue_df)
+dengue_tidy <- dengue_df %>% pivot_longer(cols=col_dengue[2:11], names_to="country", values_to="dengue_activity") %>%
+  separate(Date, into = c("year", "month","day"),convert = TRUE)
+
+#Tidy maken van flu data
+flu_df <- read.csv("data/flu_data.csv",skip=11) %>% as.data.frame()
+col_flu <- colnames(flu_df)
+flu_tidy <- flu_df %>% pivot_longer(cols=col_flu[2:30], names_to="country", values_to="flu_activity") %>%
+  separate(Date, into = c("year", "month","day"),convert = TRUE) 
+
+#opslaan als RDS
+saveRDS(dengue_tidy, file = "data/dengue.rds")
+saveRDS(flu_tidy, file = "data/flu.rds")
+saveRDS(gapminder_df, file = "data/gapminder.rds")
+
+#opslaan als CSV
+write.csv(gapminder_df,"data/gapminder.csv")
+write.csv(dengue_tidy,"data/dengue.csv")
+write.csv(flu_tidy,"data/flu.csv")
+
+```
+SQL code voor het creëren van een database:
+```{sql opzetten database, eval=FALSE}
+CREATE DATABASE workflowsdb;
+```
+
+```{r database_laden, eval=FALSE}
+library(DBI)
+
+#Connectie opzetten
+con <- dbConnect(RPostgres::Postgres(), 
+                 dbname = "workflowsdb", 
+                 host="localhost", 
+                 port="5432", 
+                 user="postgres",
+                 password="Datascience")
+
+#Aanmaken van tabellen in databse
+dbWriteTable(con, "flu", flu_tidy)
+dbWriteTable(con, "dengue", dengue_tidy)
+dbWriteTable(con, "gapminder", gapminder_df)
+```
+
+
+```{sql inspecting data sql, eval=FALSE}
+```
+
+```{r inspecting data in R, eval=FALSE}
+```
+
+```{r gapminder clean, eval=FALSE}
+#Jaren verwijderen die niet aanwezig zijn in flu en dengue
+gapminder_minyear <- gapminder_df[gapminder_df$year >= min(flu_tidy$year), ]
+gapminder_maxyear <- gapminder_minyear[gapminder_minyear$year <= max(flu_tidy$year), ]
+
+#Landen weghalen die niet en flu en dengue aanwezig zijn
+landen <- c(col_dengue[2:11], col_flu[2:30],recursive=TRUE)
+gapminder_clean <- subset(gapminder_maxyear, country %in% landen)
+```
+
+```{r, eval=FALSE}
+#Oude tabel verwijderen en nieuwe tabel invoegen
+dbRemoveTable(con, "flu")
+dbWriteTable(con, "gapminder", gapminder_clean)
+```
+
+De ondesrtaande code is sql code wat gebruikt wordt om een grote tabel te creëren waar alle data in staat. Er worden left joins gebruikt omdat niet alle landen in beide de dengue dataset en flu dataset voorkomen. Deze informatie van bepaalde datasets kan wel interessant zijn voor het analyseren van data en wordt met de left join een NULL ingevoerd bij de missende data. Voor de rest worden alle kollomen van gapminder gekozen, de dag en maand van flu en de activity van beide flu en dengue. ook worden er joins op year, month en day gedaan. Dit is zodat ze gematched worden in de tabel en laad tijd verminderd bij het sorteren.
+Bij het sorteren wordt eerst op het jaartal gesorteerd en daarna op het land om het zo overzichtelijk te houden.
+
+```{SQL join, eval=FALSE}
+SELECT
+gapminder.*,
+flu."day",
+flu."month",
+flu.flu_activity,
+dengue.dengue_activity
+FROM
+    gapminder 
+LEFT JOIN flu  
+  ON gapminder."year"  = flu."year" and gapminder.country = flu.country 
+LEFT join dengue
+	ON dengue."year" = flu."year" and dengue."month" = flu."month" and dengue."day" = flu."day" and dengue.country = flu.country 
+ORDER BY gapminder."year", gapminder.country  ;
+```
+Deze query wordt uitgevoerd in het programma beaver, hieronder een foto van het dashboard
+
+FOTO !
+
+Door de volgende tekst toe te voegen boven bovenstaande query wordt er een tabel gemaakt genaamd all_data
+```{SQL table maken, eval=FALSE}
+CREATE TABLE all_data
+AS
+
+
+```
+
+Op deze afbeelding is te zien dat de tabel toegevoegd is aan de database
+
+FOTO !
+
+```{r}
+#Data uit DB ophalen
+all_data <- dbReadTable(con, "all_data")
+
+aggregate(all_data$flu_activity, list(all_data$year), mean, na.rm=TRUE)
+aggregate(all_data$dengue_activity, list(all_data$year), mean, na.rm=TRUE)
+
+```
+Nu we een dataset hebben met alle data kunnen er verschillende analyses op 
+

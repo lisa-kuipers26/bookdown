@@ -109,7 +109,7 @@ Op deze afbeelding is te zien dat de tabel toegevoegd is aan de database
 
 FOTO !
 
-```{r}
+```{r, eval=FALSE}
 #Data uit DB ophalen
 all_data <- dbReadTable(con, "all_data")
 

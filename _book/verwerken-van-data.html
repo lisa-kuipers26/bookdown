@@ -23,7 +23,7 @@
 <meta name="author" content="Lisa Kuipers" />
 
 
-<meta name="date" content="2022-05-31" />
+<meta name="date" content="2022-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -123,28 +123,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 </head>
 
@@ -175,9 +153,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-organiseren.html"><a href="data-organiseren.html"><i class="fa fa-check"></i><b>4</b> Data organiseren</a></li>
 <li class="chapter" data-level="5" data-path="cv.html"><a href="cv.html"><i class="fa fa-check"></i><b>5</b> cv</a></li>
-<li class="chapter" data-level="6" data-path="biologische-databases.html"><a href="biologische-databases.html"><i class="fa fa-check"></i><b>6</b> Biologische databases</a></li>
-<li class="chapter" data-level="7" data-path="het-citeren-van-andere-werken.html"><a href="het-citeren-van-andere-werken.html"><i class="fa fa-check"></i><b>7</b> Het citeren van andere werken</a></li>
-<li class="chapter" data-level="8" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>8</b> Databases</a></li>
+<li class="chapter" data-level="6" data-path="parameters-voor-flexibiliteit.html"><a href="parameters-voor-flexibiliteit.html"><i class="fa fa-check"></i><b>6</b> Parameters voor flexibiliteit</a></li>
 </ul>
 
       </nav>
@@ -200,18 +176,33 @@ div.csl-indent {
 <p>Het interperteren en verwerken van data van iemand anders is belangrijk in de data science. Er wordt hier data gebruikt van een onderzoek waar C. elegans nematodes blootgesteld aan verschillende soorten stoffen.</p>
 <p>Belangrijkste in een data analyse is bergrijpen waar je data over gaat. Door de metadata te lezen krijg je een goed idee van waar je dataset overgaat en wat elke kopje betekent. Voor dit onderzoek willen we het effect weten van verschillende stoffen op de nematode maar ook de het effect van verschillende concentraties. Om dit te onderzoeken worden de kolommen RawData, compConcentration en expType gebruikt. In RawData staan het aantal nematodes op de plaat, in de compConcentration de concentratie van de stof en de expType de soort stof.</p>
 <p>Om globaal een idee te krijgen van het effect worden deze variabel tegen elkaar uitget in de grafiek hieronder.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="verwerken-van-data.html#cb1-1" aria-hidden="true" tabindex="-1"></a>tabel <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span>
-<span id="cb1-2"><a href="verwerken-van-data.html#cb1-2" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">as.double</span>(tabel<span class="sc">$</span>compConcentration)</span>
-<span id="cb1-3"><a href="verwerken-van-data.html#cb1-3" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>compName <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(tabel<span class="sc">$</span>compName)</span>
-<span id="cb1-4"><a href="verwerken-van-data.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="verwerken-van-data.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#x-as concentreatie in -10log</span></span>
-<span id="cb1-6"><a href="verwerken-van-data.html#cb1-6" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(tabel<span class="sc">$</span>compConcentration<span class="sc">==</span><span class="dv">0</span>,<span class="dv">0</span>,<span class="sc">-</span><span class="fu">log10</span>(tabel<span class="sc">$</span>compConcentration))</span>
-<span id="cb1-7"><a href="verwerken-van-data.html#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="verwerken-van-data.html#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="verwerken-van-data.html#cb1-9" aria-hidden="true" tabindex="-1"></a>tabel <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>compConcentration,<span class="at">y=</span>RawData,<span class="at">color=</span>compName,<span class="at">shape=</span>expType))<span class="sc">+</span></span>
-<span id="cb1-10"><a href="verwerken-van-data.html#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
-<span id="cb1-11"><a href="verwerken-van-data.html#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
-<span id="cb1-12"><a href="verwerken-van-data.html#cb1-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="verwerken-van-data.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb1-2"><a href="verwerken-van-data.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-3"><a href="verwerken-van-data.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-4"><a href="verwerken-van-data.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+<pre><code>## v ggplot2 3.3.6     v purrr   0.3.4
+## v tibble  3.1.7     v dplyr   1.0.8
+## v tidyr   1.2.0     v stringr 1.4.0
+## v readr   2.1.2     v forcats 0.5.1</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter()     masks stats::filter()
+## x dplyr::group_rows() masks kableExtra::group_rows()
+## x dplyr::lag()        masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="verwerken-van-data.html#cb5-1" aria-hidden="true" tabindex="-1"></a>tabel <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span>
+<span id="cb5-2"><a href="verwerken-van-data.html#cb5-2" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">as.double</span>(tabel<span class="sc">$</span>compConcentration)</span></code></pre></div>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="verwerken-van-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>compName <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(tabel<span class="sc">$</span>compName)</span>
+<span id="cb7-2"><a href="verwerken-van-data.html#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="verwerken-van-data.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#x-as concentreatie in -10log</span></span>
+<span id="cb7-4"><a href="verwerken-van-data.html#cb7-4" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(tabel<span class="sc">$</span>compConcentration<span class="sc">==</span><span class="dv">0</span>,<span class="dv">0</span>,<span class="sc">-</span><span class="fu">log10</span>(tabel<span class="sc">$</span>compConcentration))</span>
+<span id="cb7-5"><a href="verwerken-van-data.html#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="verwerken-van-data.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="verwerken-van-data.html#cb7-7" aria-hidden="true" tabindex="-1"></a>tabel <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>compConcentration,<span class="at">y=</span>RawData,<span class="at">color=</span>compName,<span class="at">shape=</span>expType))<span class="sc">+</span></span>
+<span id="cb7-8"><a href="verwerken-van-data.html#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb7-9"><a href="verwerken-van-data.html#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
+<span id="cb7-10"><a href="verwerken-van-data.html#cb7-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
 <p><img src="_main_files/figure-html/grafiek_1-1.png" width="672" /></p>
 <p>In het experiment is de positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium</p>
 <p>Bij het verwerken van data is het belangrijk dat de data goed ingelezen wordt. Eén ding waar we tegen lopen bij deze dataset is dat de compConcentration ingelezen wordt als character type i.p.v. een getal. Hierdoor klopt de de x-as niet met wat je wilt zien, omdat er groepen en geen schaal weergegeven wordt. Dit wordt opgelost door het typ evan compConcentration te veranderen van een character naar een double.</p>
@@ -219,15 +210,17 @@ div.csl-indent {
 <ol style="list-style-type: decimal">
 <li>Data plotten zodat er een globaal overzicht hebt</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="verwerken-van-data.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Genormalizeerd en gemiddelde naar 1</span></span>
-<span id="cb2-2"><a href="verwerken-van-data.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="verwerken-van-data.html#cb2-3" aria-hidden="true" tabindex="-1"></a>neg_controle <span class="ot">&lt;-</span> tabel <span class="sc">%&gt;%</span> <span class="fu">filter</span>(expType<span class="sc">==</span><span class="st">&quot;controlNegative&quot;</span>)</span>
-<span id="cb2-4"><a href="verwerken-van-data.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="verwerken-van-data.html#cb2-5" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>RawData[tabel<span class="sc">$</span>expType <span class="sc">==</span> <span class="st">&#39;controlNegative&#39;</span>] <span class="ot">&lt;-</span> neg_controle<span class="sc">$</span>RawData <span class="sc">/</span> <span class="fu">mean</span>(neg_controle<span class="sc">$</span>RawData)</span>
-<span id="cb2-6"><a href="verwerken-van-data.html#cb2-6" aria-hidden="true" tabindex="-1"></a>tabel <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>compConcentration,<span class="at">y=</span>RawData,<span class="at">color=</span>compName,<span class="at">shape=</span>expType))<span class="sc">+</span></span>
-<span id="cb2-7"><a href="verwerken-van-data.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
-<span id="cb2-8"><a href="verwerken-van-data.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
-<span id="cb2-9"><a href="verwerken-van-data.html#cb2-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="verwerken-van-data.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Genormalizeerd en gemiddelde naar 1</span></span>
+<span id="cb9-2"><a href="verwerken-van-data.html#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="verwerken-van-data.html#cb9-3" aria-hidden="true" tabindex="-1"></a>neg_controle <span class="ot">&lt;-</span> tabel <span class="sc">%&gt;%</span> <span class="fu">filter</span>(expType<span class="sc">==</span><span class="st">&quot;controlNegative&quot;</span>)</span>
+<span id="cb9-4"><a href="verwerken-van-data.html#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="verwerken-van-data.html#cb9-5" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>RawData[tabel<span class="sc">$</span>expType <span class="sc">==</span> <span class="st">&#39;controlNegative&#39;</span>] <span class="ot">&lt;-</span> neg_controle<span class="sc">$</span>RawData <span class="sc">/</span> <span class="fu">mean</span>(neg_controle<span class="sc">$</span>RawData)</span>
+<span id="cb9-6"><a href="verwerken-van-data.html#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="verwerken-van-data.html#cb9-7" aria-hidden="true" tabindex="-1"></a>tabel <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>compConcentration,<span class="at">y=</span>RawData,<span class="at">color=</span>compName,<span class="at">shape=</span>expType))<span class="sc">+</span></span>
+<span id="cb9-8"><a href="verwerken-van-data.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb9-9"><a href="verwerken-van-data.html#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
+<span id="cb9-10"><a href="verwerken-van-data.html#cb9-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
 <p><img src="_main_files/figure-html/Grafiek_2-1.png" width="672" /></p>
 
 </div>

@@ -1,9 +1,2 @@
-#R packages
+# R packages
 
-```{r}
-library(available)
-available("LisasParket")
-
-
-n
-```

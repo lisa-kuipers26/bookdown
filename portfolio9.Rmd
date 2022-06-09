@@ -8,13 +8,7 @@ params:
   start_month: 1
   end_month: 12
 ---
-#Parameters voor flexibiliteit
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  message = FALSE,
-  warning = FALSE
-)
-```
+# Parameters voor flexibiliteit
 
 ```{r yaml, out.width = "200px", echo=FALSE}
 knitr::include_graphics(
@@ -51,13 +45,13 @@ data_filtered$date_range <- paste0(data_filtered$year,data_filtered$month,data_f
 
 
 plot_func <- function(dataset,condition){
-  dataset %>% ggplot(aes(x=date_range, y=datset[[condition]]))+
+  dataset %>% ggplot(aes(x=date_range, y=dataset[[condition]]))+
   geom_point()+
   scale_x_discrete(breaks=data_filtered$date_range[seq(1,length(data_filtered$date_range),by=50)])+
   theme(axis.text.x = element_text(angle = 90))+
   labs(x="Date",
-       y=type,
-       title = paste("Amount of COVID-19",type," from",data_filtered$dateRep[length(data_filtered$dateRep)],"to",data_filtered$dateRep[1]))
+       y=condition,
+       title = paste("Amount of COVID-19",condition," from",data_filtered$dateRep[length(data_filtered$dateRep)],"to",data_filtered$dateRep[1]))
 }
 ```
 

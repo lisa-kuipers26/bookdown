@@ -23,7 +23,7 @@
 <meta name="author" content="Lisa Kuipers" />
 
 
-<meta name="date" content="2022-05-31" />
+<meta name="date" content="2022-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -123,28 +123,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 </head>
 
@@ -175,9 +153,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-organiseren.html"><a href="data-organiseren.html"><i class="fa fa-check"></i><b>4</b> Data organiseren</a></li>
 <li class="chapter" data-level="5" data-path="cv.html"><a href="cv.html"><i class="fa fa-check"></i><b>5</b> cv</a></li>
-<li class="chapter" data-level="6" data-path="biologische-databases.html"><a href="biologische-databases.html"><i class="fa fa-check"></i><b>6</b> Biologische databases</a></li>
-<li class="chapter" data-level="7" data-path="het-citeren-van-andere-werken.html"><a href="het-citeren-van-andere-werken.html"><i class="fa fa-check"></i><b>7</b> Het citeren van andere werken</a></li>
-<li class="chapter" data-level="8" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>8</b> Databases</a></li>
+<li class="chapter" data-level="6" data-path="parameters-voor-flexibiliteit.html"><a href="parameters-voor-flexibiliteit.html"><i class="fa fa-check"></i><b>6</b> Parameters voor flexibiliteit</a></li>
 </ul>
 
       </nav>
@@ -311,30 +287,30 @@ Strozza C, Myrskylä M. Monitoring trends and differences in COVID-19 case-fatal
 </div>
 <div id="probleem-in-script" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Probleem in script<a href="open-peer-review.html#probleem-in-script" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="open-peer-review.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Monitoring trends and differences in COVID-19 case fatality  ##############</span></span>
-<span id="cb3-2"><a href="open-peer-review.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">### rates using decomposition methods: A demographic perspective ##############</span></span>
-<span id="cb3-3"><a href="open-peer-review.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="open-peer-review.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">### Last updated: 2020-07-16 09:27:20 CEST</span></span>
-<span id="cb3-5"><a href="open-peer-review.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-6"><a href="open-peer-review.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">### Contact:</span></span>
-<span id="cb3-7"><a href="open-peer-review.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">### riffe@demogr.mpg.de</span></span>
-<span id="cb3-8"><a href="open-peer-review.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">### acosta@demogr.mpg.de</span></span>
-<span id="cb3-9"><a href="open-peer-review.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="do">### dudel@demogr.mpg.de</span></span>
-<span id="cb3-10"><a href="open-peer-review.html#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="open-peer-review.html#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="open-peer-review.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Get data ##################################################################</span></span>
-<span id="cb3-13"><a href="open-peer-review.html#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="open-peer-review.html#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Required packages</span></span>
-<span id="cb3-15"><a href="open-peer-review.html#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>((<span class="st">&quot;R/00_functions.R&quot;</span>))</span>
-<span id="cb3-16"><a href="open-peer-review.html#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="open-peer-review.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># URL + filename</span></span>
-<span id="cb3-18"><a href="open-peer-review.html#cb3-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-19"><a href="open-peer-review.html#cb3-19" aria-hidden="true" tabindex="-1"></a>  url <span class="ot">&lt;-</span> <span class="st">&#39;https://osf.io/wu5ve//?action=download&#39;</span></span>
-<span id="cb3-20"><a href="open-peer-review.html#cb3-20" aria-hidden="true" tabindex="-1"></a>  filename <span class="ot">&lt;-</span> <span class="st">&#39;Data/Output_10.csv&#39;</span></span>
-<span id="cb3-21"><a href="open-peer-review.html#cb3-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-22"><a href="open-peer-review.html#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load data</span></span>
-<span id="cb3-23"><a href="open-peer-review.html#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">GET</span>(url, <span class="fu">write_disk</span>(filename, <span class="at">overwrite =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb3-24"><a href="open-peer-review.html#cb3-24" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(filename,<span class="at">skip=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="open-peer-review.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Monitoring trends and differences in COVID-19 case fatality  ##############</span></span>
+<span id="cb11-2"><a href="open-peer-review.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">### rates using decomposition methods: A demographic perspective ##############</span></span>
+<span id="cb11-3"><a href="open-peer-review.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="open-peer-review.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">### Last updated: 2020-07-16 09:27:20 CEST</span></span>
+<span id="cb11-5"><a href="open-peer-review.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-6"><a href="open-peer-review.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">### Contact:</span></span>
+<span id="cb11-7"><a href="open-peer-review.html#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">### riffe@demogr.mpg.de</span></span>
+<span id="cb11-8"><a href="open-peer-review.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">### acosta@demogr.mpg.de</span></span>
+<span id="cb11-9"><a href="open-peer-review.html#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="do">### dudel@demogr.mpg.de</span></span>
+<span id="cb11-10"><a href="open-peer-review.html#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="open-peer-review.html#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="open-peer-review.html#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Get data ##################################################################</span></span>
+<span id="cb11-13"><a href="open-peer-review.html#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="open-peer-review.html#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Required packages</span></span>
+<span id="cb11-15"><a href="open-peer-review.html#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>((<span class="st">&quot;R/00_functions.R&quot;</span>))</span>
+<span id="cb11-16"><a href="open-peer-review.html#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="open-peer-review.html#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># URL + filename</span></span>
+<span id="cb11-18"><a href="open-peer-review.html#cb11-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-19"><a href="open-peer-review.html#cb11-19" aria-hidden="true" tabindex="-1"></a>  url <span class="ot">&lt;-</span> <span class="st">&#39;https://osf.io/wu5ve//?action=download&#39;</span></span>
+<span id="cb11-20"><a href="open-peer-review.html#cb11-20" aria-hidden="true" tabindex="-1"></a>  filename <span class="ot">&lt;-</span> <span class="st">&#39;Data/Output_10.csv&#39;</span></span>
+<span id="cb11-21"><a href="open-peer-review.html#cb11-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-22"><a href="open-peer-review.html#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load data</span></span>
+<span id="cb11-23"><a href="open-peer-review.html#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">GET</span>(url, <span class="fu">write_disk</span>(filename, <span class="at">overwrite =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb11-24"><a href="open-peer-review.html#cb11-24" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(filename,<span class="at">skip=</span><span class="dv">3</span>)</span></code></pre></div>
 <p>Bij het uitvoeren van de code hierboven kwam de onderstaande foutmelding:</p>
 <p><img src="images/error_r.png" /><!-- -->
 In de foutmelding is een html bestand te zien. Dit hoort natuurlijk niet bij een read_csv() functie. In de code wordt het bestand van een online directory gedownload. De URL staat in de code en wanneer deze bezocht werd stond er dit bericht:</p>
@@ -342,47 +318,47 @@ In de foutmelding is een html bestand te zien. Dit hoort natuurlijk niet bij een
 <p>Het bestand bevindt zich niet meer op de plek waar de URL naar verwees en kon dus ook niet gedownload worden waardoor de html van de pagina werd overgenomen. Er was echter wel een menu aan de zijkant aanwezig waar het mogelijk is om bij de github van het project te komen. Hier vond ik het output bestand wat nodig is voor de code en heb deze handmatig gedownload en toegevoegd aan de /data directory. Nadat deze in de directory stond kon het script en de rest van de scripts vlekkeloos uitgevoerd worden.
 Hieronder staat het script met de aanpassing. De rest van het script kan gevonden worden op de bovenstaande link. De output van het script zijn 6 verschillende excel bestanden met data over het verloop van COVID-19 in 6 verschillende landen.</p>
 <hr />
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="open-peer-review.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Monitoring trends and differences in COVID-19 case fatality  ##############</span></span>
-<span id="cb4-2"><a href="open-peer-review.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">### rates using decomposition methods: A demographic perspective ##############</span></span>
-<span id="cb4-3"><a href="open-peer-review.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="open-peer-review.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">### Last updated: 2020-07-16 09:27:20 CEST</span></span>
-<span id="cb4-5"><a href="open-peer-review.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-6"><a href="open-peer-review.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">### Contact:</span></span>
-<span id="cb4-7"><a href="open-peer-review.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">### riffe@demogr.mpg.de</span></span>
-<span id="cb4-8"><a href="open-peer-review.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">### acosta@demogr.mpg.de</span></span>
-<span id="cb4-9"><a href="open-peer-review.html#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="do">### dudel@demogr.mpg.de</span></span>
-<span id="cb4-10"><a href="open-peer-review.html#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="open-peer-review.html#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="open-peer-review.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Get data ##################################################################</span></span>
-<span id="cb4-13"><a href="open-peer-review.html#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="open-peer-review.html#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Required packages</span></span>
-<span id="cb4-15"><a href="open-peer-review.html#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>((<span class="st">&quot;R/00_functions.R&quot;</span>))</span>
-<span id="cb4-16"><a href="open-peer-review.html#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="open-peer-review.html#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># URL + filename</span></span>
-<span id="cb4-18"><a href="open-peer-review.html#cb4-18" aria-hidden="true" tabindex="-1"></a>  filename <span class="ot">&lt;-</span> <span class="st">&#39;data/Output_10.csv&#39;</span></span>
-<span id="cb4-19"><a href="open-peer-review.html#cb4-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-20"><a href="open-peer-review.html#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load data</span></span>
-<span id="cb4-21"><a href="open-peer-review.html#cb4-21" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(filename,<span class="at">skip=</span><span class="dv">3</span>)</span>
-<span id="cb4-22"><a href="open-peer-review.html#cb4-22" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-23"><a href="open-peer-review.html#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="do">### Edit data (select countries, etc.) ########################################</span></span>
-<span id="cb4-24"><a href="open-peer-review.html#cb4-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-25"><a href="open-peer-review.html#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Lists of countries and regions</span></span>
-<span id="cb4-26"><a href="open-peer-review.html#cb4-26" aria-hidden="true" tabindex="-1"></a>  countrylist <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;China&quot;</span>,<span class="st">&quot;Germany&quot;</span>,<span class="st">&quot;Italy&quot;</span>,<span class="st">&quot;South Korea&quot;</span>,<span class="st">&quot;Spain&quot;</span>,<span class="st">&quot;USA&quot;</span>)</span>
-<span id="cb4-27"><a href="open-peer-review.html#cb4-27" aria-hidden="true" tabindex="-1"></a>  region <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;All&quot;</span>,<span class="st">&quot;NYC&quot;</span>)</span>
-<span id="cb4-28"><a href="open-peer-review.html#cb4-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-29"><a href="open-peer-review.html#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Restrict</span></span>
-<span id="cb4-30"><a href="open-peer-review.html#cb4-30" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">%in%</span> countrylist <span class="sc">&amp;</span> Region <span class="sc">%in%</span> region)</span>
-<span id="cb4-31"><a href="open-peer-review.html#cb4-31" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-32"><a href="open-peer-review.html#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove Tests variable</span></span>
-<span id="cb4-33"><a href="open-peer-review.html#cb4-33" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Tests=</span><span class="cn">NULL</span>)</span>
-<span id="cb4-34"><a href="open-peer-review.html#cb4-34" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-35"><a href="open-peer-review.html#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Drop if no cases/Deaths</span></span>
-<span id="cb4-36"><a href="open-peer-review.html#cb4-36" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(dat)</span>
-<span id="cb4-37"><a href="open-peer-review.html#cb4-37" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-38"><a href="open-peer-review.html#cb4-38" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-39"><a href="open-peer-review.html#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="do">### Save ######################################################################</span></span>
-<span id="cb4-40"><a href="open-peer-review.html#cb4-40" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-41"><a href="open-peer-review.html#cb4-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(dat,<span class="at">file=</span><span class="st">&quot;Data/inputdata.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="open-peer-review.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Monitoring trends and differences in COVID-19 case fatality  ##############</span></span>
+<span id="cb12-2"><a href="open-peer-review.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">### rates using decomposition methods: A demographic perspective ##############</span></span>
+<span id="cb12-3"><a href="open-peer-review.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="open-peer-review.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">### Last updated: 2020-07-16 09:27:20 CEST</span></span>
+<span id="cb12-5"><a href="open-peer-review.html#cb12-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-6"><a href="open-peer-review.html#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">### Contact:</span></span>
+<span id="cb12-7"><a href="open-peer-review.html#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">### riffe@demogr.mpg.de</span></span>
+<span id="cb12-8"><a href="open-peer-review.html#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">### acosta@demogr.mpg.de</span></span>
+<span id="cb12-9"><a href="open-peer-review.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="do">### dudel@demogr.mpg.de</span></span>
+<span id="cb12-10"><a href="open-peer-review.html#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="open-peer-review.html#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="open-peer-review.html#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Get data ##################################################################</span></span>
+<span id="cb12-13"><a href="open-peer-review.html#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="open-peer-review.html#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Required packages</span></span>
+<span id="cb12-15"><a href="open-peer-review.html#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>((<span class="st">&quot;R/00_functions.R&quot;</span>))</span>
+<span id="cb12-16"><a href="open-peer-review.html#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="open-peer-review.html#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># URL + filename</span></span>
+<span id="cb12-18"><a href="open-peer-review.html#cb12-18" aria-hidden="true" tabindex="-1"></a>  filename <span class="ot">&lt;-</span> <span class="st">&#39;data/Output_10.csv&#39;</span></span>
+<span id="cb12-19"><a href="open-peer-review.html#cb12-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-20"><a href="open-peer-review.html#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load data</span></span>
+<span id="cb12-21"><a href="open-peer-review.html#cb12-21" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(filename,<span class="at">skip=</span><span class="dv">3</span>)</span>
+<span id="cb12-22"><a href="open-peer-review.html#cb12-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-23"><a href="open-peer-review.html#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="do">### Edit data (select countries, etc.) ########################################</span></span>
+<span id="cb12-24"><a href="open-peer-review.html#cb12-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-25"><a href="open-peer-review.html#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Lists of countries and regions</span></span>
+<span id="cb12-26"><a href="open-peer-review.html#cb12-26" aria-hidden="true" tabindex="-1"></a>  countrylist <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;China&quot;</span>,<span class="st">&quot;Germany&quot;</span>,<span class="st">&quot;Italy&quot;</span>,<span class="st">&quot;South Korea&quot;</span>,<span class="st">&quot;Spain&quot;</span>,<span class="st">&quot;USA&quot;</span>)</span>
+<span id="cb12-27"><a href="open-peer-review.html#cb12-27" aria-hidden="true" tabindex="-1"></a>  region <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;All&quot;</span>,<span class="st">&quot;NYC&quot;</span>)</span>
+<span id="cb12-28"><a href="open-peer-review.html#cb12-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-29"><a href="open-peer-review.html#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Restrict</span></span>
+<span id="cb12-30"><a href="open-peer-review.html#cb12-30" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">%in%</span> countrylist <span class="sc">&amp;</span> Region <span class="sc">%in%</span> region)</span>
+<span id="cb12-31"><a href="open-peer-review.html#cb12-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-32"><a href="open-peer-review.html#cb12-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove Tests variable</span></span>
+<span id="cb12-33"><a href="open-peer-review.html#cb12-33" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Tests=</span><span class="cn">NULL</span>)</span>
+<span id="cb12-34"><a href="open-peer-review.html#cb12-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-35"><a href="open-peer-review.html#cb12-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Drop if no cases/Deaths</span></span>
+<span id="cb12-36"><a href="open-peer-review.html#cb12-36" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(dat)</span>
+<span id="cb12-37"><a href="open-peer-review.html#cb12-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-38"><a href="open-peer-review.html#cb12-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-39"><a href="open-peer-review.html#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="do">### Save ######################################################################</span></span>
+<span id="cb12-40"><a href="open-peer-review.html#cb12-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-41"><a href="open-peer-review.html#cb12-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(dat,<span class="at">file=</span><span class="st">&quot;Data/inputdata.csv&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>

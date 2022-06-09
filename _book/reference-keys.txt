@@ -9,6 +9,4 @@ beoordeling-script
 probleem-in-script
 data-organiseren
 cv
-biologische-databases
-het-citeren-van-andere-werken
-databases
+parameters-voor-flexibiliteit

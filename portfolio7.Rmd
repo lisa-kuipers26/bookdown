@@ -29,8 +29,8 @@ saveRDS(gapminder_df, file = "data/gapminder.rds")
 
 #opslaan als CSV
 write.csv(gapminder_df,"data/gapminder.csv")
-write.csv(dengue_tidy,"data/dengue.csv")
-write.csv(flu_tidy,"data/flu.csv")
+write.csv(dengue_tidy,"data/dengue_tidy.csv")
+write.csv(flu_tidy,"data/flu_tidy.csv")
 
 ```
 SQL code voor het creëren van een database:
@@ -53,13 +53,6 @@ con <- dbConnect(RPostgres::Postgres(),
 dbWriteTable(con, "flu", flu_tidy)
 dbWriteTable(con, "dengue", dengue_tidy)
 dbWriteTable(con, "gapminder", gapminder_df)
-```
-
-
-```{sql inspecting data sql, eval=FALSE}
-```
-
-```{r inspecting data in R, eval=FALSE}
 ```
 
 ```{r gapminder clean, eval=FALSE}
@@ -101,7 +94,7 @@ Deze query wordt uitgevoerd in het programma beaver, hieronder een foto van het 
 FOTO !
 
 Door de volgende tekst toe te voegen boven bovenstaande query wordt er een tabel gemaakt genaamd all_data
-```{sq; table maken, eval=FALSE}
+```{sql table maken, eval=FALSE}
 CREATE TABLE all_data
 AS
 (...)
@@ -116,7 +109,18 @@ FOTO !
 ```{r, eval=FALSE}
 #Data uit DB ophalen
 all_data <- dbReadTable(con, "all_data")
+#Dataset opslaan in data 
+saveRDS(all_data, file="data/all_data.rds")
+```
 
+```{r data ophalen}
+#Data laden voor analyse
+all_data <- readRDS("data/all_data.rds")
+```
+
+
+```{r data analyse life expectancy}
+#Functie voor life exptancy tegen andere kolom
 lifeexp_func <- function(dataset, kolom){
   means <- dataset %>%
     group_by(year) %>% 
@@ -125,10 +129,9 @@ lifeexp_func <- function(dataset, kolom){
   
   colnames(means) <- c("year",paste0("mean_",kolom),"mean_life_expectancy")
   means
-
-  
 }
 
+#Flu en dengue tegen life expactancy
 mean_flu_year <- lifeexp_func(all_data,"flu_activity")
 mean_dengue_year <- lifeexp_func(all_data,"dengue_activity")
 
@@ -142,37 +145,28 @@ mean_flu_year %>% ggplot(aes(x=year,y=mean_flu_activity))+
 mean_dengue_year %>% ggplot(aes(x=year,y=mean_dengue_activity))+
     geom_line()
 
-gdp_func <- function(dataset, kolom){
-  means <- dataset %>%
-    group_by(year) %>% 
-    summarise(naam=mean(!! sym(kolom),na.rm=TRUE),
-              "GDP"=mean(gdp,na.rm=TRUE))
-  
-  colnames(means) <- c("year",paste0("mean_",kolom),"GDP")
-  
-  means
+```
 
-  
-}
+```{r data analyse populatie}
+#country_data <- all_data %>% filter(year==2008) %>% 
+#  group_by(country) %>% 
+#  summarise(mean(flu_activity), max(population),max(gdp)) %>% na.omit()
 
-country_data <- all_data %>% filter(year==2008) %>% 
-  group_by(country) %>% 
-  summarise(mean(flu_activity), max(population),max(gdp)) %>% na.omit()
+#colnames(country_data) <- c("country","flu_activity","population","GDP")
 
-colnames(country_data) <- c("country","flu_activity","population","GDP")
+#country_data$population <- factor(country_data$population, levels=c(arrange(desc(country_data$population))))
+```
 
-country_data$population <- factor(country_data$population, levels=c(arrange(desc(country_data$population))))
-
-
-################################################################
+```{r data analyse activity door jaar}
 library(RColorBrewer)
+
+#Summarise van data per year 
 flu_dengue <- all_data %>% group_by(month, year) %>% 
   na.omit() %>% filter(year!=2002) %>% 
   summarise(mean(dengue_activity, na.rm=TRUE),mean(flu_activity, na.rm=TRUE))
-
 colnames(flu_dengue) <- c("month","year","dengue_activity","flu_activity")
 
-
+#Functie voor plot van verloop activity
 activity_years_func <- function(dataset,activity){
   dataset %>% ggplot(aes(x=month,y=dataset[[activity]], group=year, color=factor(year)))+
   geom_line()+
@@ -181,7 +175,7 @@ activity_years_func <- function(dataset,activity){
   theme_minimal()
 }
 
-activity_years_func("flu_activity")
-activity_years_func("dengue_activity")
+activity_years_func(flu_dengue,"flu_activity")
+activity_years_func(flu_dengue,"dengue_activity")
 
 ```

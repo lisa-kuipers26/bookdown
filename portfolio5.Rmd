@@ -11,6 +11,5 @@ Door gebruik te maken van shiny kan de programmeertaal R gebruikt worden om apps
 
 ***
 
-## Bibliografie
-
+<h2> Bibliografie </h2>
 <div id="refs"></div>

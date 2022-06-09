@@ -1,13 +1,4 @@
----
-params:
-  country: "Belgium"
-  start_year: 2020
-  end_year: 2022
-  start_day: 1
-  end_day: 31
-  start_month: 1
-  end_month: 12
----
+
 # Parameters voor flexibiliteit
 
 ```{r yaml, out.width = "200px", echo=FALSE}

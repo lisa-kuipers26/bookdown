@@ -8,3 +8,9 @@ Door gebruik te maken van shiny kan de programmeertaal R gebruikt worden om apps
 
 
 @SurvivalRateChildren
+
+***
+
+## Bibliografie
+
+<div id="refs"></div>

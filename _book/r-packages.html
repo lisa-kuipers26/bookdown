@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Verwerken van data | Portofolio workflows</title>
+  <title>8 R packages | Portofolio workflows</title>
   <meta name="description" content="Portflio" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Verwerken van data | Portofolio workflows" />
+  <meta property="og:title" content="8 R packages | Portofolio workflows" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Portflio" />
   <meta name="github-repo" content="lisa-kuipers26" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Verwerken van data | Portofolio workflows" />
+  <meta name="twitter:title" content="8 R packages | Portofolio workflows" />
   
   <meta name="twitter:description" content="Portflio" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="open-peer-review.html"/>
+<link rel="prev" href="databases.html"/>
+<link rel="next" href="parameters-voor-flexibiliteit.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -196,46 +196,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="verwerken-van-data" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> Verwerken van data<a href="verwerken-van-data.html#verwerken-van-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Het interperteren en verwerken van data van iemand anders is belangrijk in de data science. Er wordt hier data gebruikt van een onderzoek waar C. elegans nematodes blootgesteld aan verschillende soorten stoffen.</p>
-<p>Belangrijkste in een data analyse is bergrijpen waar je data over gaat. Door de metadata te lezen krijg je een goed idee van waar je dataset overgaat en wat elke kopje betekent. Voor dit onderzoek willen we het effect weten van verschillende stoffen op de nematode maar ook de het effect van verschillende concentraties. Om dit te onderzoeken worden de kolommen RawData, compConcentration en expType gebruikt. In RawData staan het aantal nematodes op de plaat, in de compConcentration de concentratie van de stof en de expType de soort stof.</p>
-<p>Om globaal een idee te krijgen van het effect worden deze variabel tegen elkaar uitget in de grafiek hieronder.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="verwerken-van-data.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
-<span id="cb1-2"><a href="verwerken-van-data.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb1-3"><a href="verwerken-van-data.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-4"><a href="verwerken-van-data.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-5"><a href="verwerken-van-data.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="verwerken-van-data.html#cb1-6" aria-hidden="true" tabindex="-1"></a>tabel <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span>
-<span id="cb1-7"><a href="verwerken-van-data.html#cb1-7" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">as.double</span>(tabel<span class="sc">$</span>compConcentration)</span>
-<span id="cb1-8"><a href="verwerken-van-data.html#cb1-8" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>compName <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(tabel<span class="sc">$</span>compName)</span>
-<span id="cb1-9"><a href="verwerken-van-data.html#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="verwerken-van-data.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#x-as concentreatie in -10log</span></span>
-<span id="cb1-11"><a href="verwerken-van-data.html#cb1-11" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(tabel<span class="sc">$</span>compConcentration<span class="sc">==</span><span class="dv">0</span>,<span class="dv">0</span>,<span class="sc">-</span><span class="fu">log10</span>(tabel<span class="sc">$</span>compConcentration))</span>
-<span id="cb1-12"><a href="verwerken-van-data.html#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="verwerken-van-data.html#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="verwerken-van-data.html#cb1-14" aria-hidden="true" tabindex="-1"></a>tabel <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>compConcentration,<span class="at">y=</span>RawData,<span class="at">color=</span>compName,<span class="at">shape=</span>expType))<span class="sc">+</span></span>
-<span id="cb1-15"><a href="verwerken-van-data.html#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
-<span id="cb1-16"><a href="verwerken-van-data.html#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
-<span id="cb1-17"><a href="verwerken-van-data.html#cb1-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/grafiek_1-1.png" width="672" /></p>
-<p>In het experiment is de positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium</p>
-<p>Bij het verwerken van data is het belangrijk dat de data goed ingelezen wordt. Eén ding waar we tegen lopen bij deze dataset is dat de compConcentration ingelezen wordt als character type i.p.v. een getal. Hierdoor klopt de de x-as niet met wat je wilt zien, omdat er groepen en geen schaal weergegeven wordt. Dit wordt opgelost door het typ evan compConcentration te veranderen van een character naar een double.</p>
-<p>De bovenstaande grafiek geeft een globaal overzicht, maar er kunnen geen conclusies uitgetrokken worden. Hiervoor is een verdere data analyse nodig. Zo’n data analyse kan er als volgt uitzien:</p>
-<ol style="list-style-type: decimal">
-<li>Data plotten zodat er een globaal overzicht hebt</li>
-</ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="verwerken-van-data.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Genormalizeerd en gemiddelde naar 1</span></span>
-<span id="cb2-2"><a href="verwerken-van-data.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="verwerken-van-data.html#cb2-3" aria-hidden="true" tabindex="-1"></a>neg_controle <span class="ot">&lt;-</span> tabel <span class="sc">%&gt;%</span> <span class="fu">filter</span>(expType<span class="sc">==</span><span class="st">&quot;controlNegative&quot;</span>)</span>
-<span id="cb2-4"><a href="verwerken-van-data.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="verwerken-van-data.html#cb2-5" aria-hidden="true" tabindex="-1"></a>tabel<span class="sc">$</span>RawData[tabel<span class="sc">$</span>expType <span class="sc">==</span> <span class="st">&#39;controlNegative&#39;</span>] <span class="ot">&lt;-</span> neg_controle<span class="sc">$</span>RawData <span class="sc">/</span> <span class="fu">mean</span>(neg_controle<span class="sc">$</span>RawData)</span>
-<span id="cb2-6"><a href="verwerken-van-data.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="verwerken-van-data.html#cb2-7" aria-hidden="true" tabindex="-1"></a>tabel <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>compConcentration,<span class="at">y=</span>RawData,<span class="at">color=</span>compName,<span class="at">shape=</span>expType))<span class="sc">+</span></span>
-<span id="cb2-8"><a href="verwerken-van-data.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
-<span id="cb2-9"><a href="verwerken-van-data.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
-<span id="cb2-10"><a href="verwerken-van-data.html#cb2-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/Grafiek_2-1.png" width="672" /></p>
+<div id="r-packages" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> R packages<a href="r-packages.html#r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
 </div>
             </section>
@@ -243,8 +205,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="open-peer-review.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="databases.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parameters-voor-flexibiliteit.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

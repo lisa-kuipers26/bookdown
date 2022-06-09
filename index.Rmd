@@ -6,10 +6,17 @@ site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
 new_session: yes
-github-repo: portflio
+github-repo: lisa-kuipers26
 description: "Portflio"
 bibliography: bibliography.json
 ---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  knit_engines$set("SQL")
+  message = FALSE,
+  warning = FALSE
+)
+```
 
 # Introductie
 

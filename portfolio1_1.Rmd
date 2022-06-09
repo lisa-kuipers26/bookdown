@@ -5,12 +5,9 @@ knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE
 )
-
-library(DT)
-library(kableExtra)
-library(readxl)
-library(tidyverse)
 ```
+
+
 
 Het interperteren en verwerken van data van iemand anders is belangrijk in de data science. Er wordt hier data gebruikt van een onderzoek waar  C. elegans nematodes blootgesteld aan verschillende soorten stoffen. 
 
@@ -19,6 +16,11 @@ Belangrijkste in een data analyse is bergrijpen waar je data over gaat. Door de 
 Om globaal een idee te krijgen van het effect worden deze variabel tegen elkaar uitget in de grafiek hieronder.
 
 ```{r grafiek_1}
+library(DT)
+library(kableExtra)
+library(readxl)
+library(tidyverse)
+
 tabel <- read_excel(here::here("data/CE.LIQ.FLOW.062_Tidydata.xlsx"))
 tabel$compConcentration <- as.double(tabel$compConcentration)
 tabel$compName <- as.factor(tabel$compName)
@@ -47,6 +49,7 @@ De bovenstaande grafiek geeft een globaal overzicht, maar er kunnen geen conclus
 neg_controle <- tabel %>% filter(expType=="controlNegative")
 
 tabel$RawData[tabel$expType == 'controlNegative'] <- neg_controle$RawData / mean(neg_controle$RawData)
+
 tabel %>% ggplot(aes(x=compConcentration,y=RawData,color=compName,shape=expType))+
   geom_jitter(width=0.1)+
   labs(x="Concentratie (-log10) ",

@@ -2,7 +2,7 @@
 
 <h2> Lisa Kuipers </h2>
 
-```{r foto, out.width = "200px", echo=FALSE}
+```{r ikzelf, out.width = "200px", echo=FALSE}
 knitr::include_graphics(
   here::here(
     "images",

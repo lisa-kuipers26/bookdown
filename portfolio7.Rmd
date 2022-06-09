@@ -81,7 +81,7 @@ dbWriteTable(con, "gapminder", gapminder_clean)
 De ondesrtaande code is sql code wat gebruikt wordt om een grote tabel te creëren waar alle data in staat. Er worden left joins gebruikt omdat niet alle landen in beide de dengue dataset en flu dataset voorkomen. Deze informatie van bepaalde datasets kan wel interessant zijn voor het analyseren van data en wordt met de left join een NULL ingevoerd bij de missende data. Voor de rest worden alle kollomen van gapminder gekozen, de dag en maand van flu en de activity van beide flu en dengue. ook worden er joins op year, month en day gedaan. Dit is zodat ze gematched worden in de tabel en laad tijd verminderd bij het sorteren.
 Bij het sorteren wordt eerst op het jaartal gesorteerd en daarna op het land om het zo overzichtelijk te houden.
 
-```{SQL join, eval=FALSE}
+```{sql join, eval=FALSE}
 SELECT
 gapminder.*,
 flu."day",
@@ -101,7 +101,7 @@ Deze query wordt uitgevoerd in het programma beaver, hieronder een foto van het 
 FOTO !
 
 Door de volgende tekst toe te voegen boven bovenstaande query wordt er een tabel gemaakt genaamd all_data
-```{SQL table maken, eval=FALSE}
+```{sq; table maken, eval=FALSE}
 CREATE TABLE all_data
 AS
 (...)

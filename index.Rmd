@@ -12,7 +12,7 @@ bibliography: bibliography.json
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  knit_engines$set("SQL")
+  knit_engines$set("sql")
   message = FALSE,
   warning = FALSE
 )

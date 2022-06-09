@@ -10,7 +10,6 @@ probleem-in-script
 data-organiseren
 cv
 het-citeren-van-andere-werken
-bibliografie
 databases
 r-packages
 parameters-voor-flexibiliteit

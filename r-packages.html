@@ -4,34 +4,34 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Applying the Guerrilla analytics framework to your own project. | Portofolio workflows</title>
-  <meta name="description" content="Portoflio" />
+  <title>8 R packages | Portofolio workflows</title>
+  <meta name="description" content="Portflio" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Applying the Guerrilla analytics framework to your own project. | Portofolio workflows" />
+  <meta property="og:title" content="8 R packages | Portofolio workflows" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Portoflio" />
-  <meta name="github-repo" content="portfolio" />
+  <meta property="og:description" content="Portflio" />
+  <meta name="github-repo" content="lisa-kuipers26" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Applying the Guerrilla analytics framework to your own project. | Portofolio workflows" />
+  <meta name="twitter:title" content="8 R packages | Portofolio workflows" />
   
-  <meta name="twitter:description" content="Portoflio" />
+  <meta name="twitter:description" content="Portflio" />
   
 
 <meta name="author" content="Lisa Kuipers" />
 
 
-<meta name="date" content="2022-05-09" />
+<meta name="date" content="2022-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="open-peer-review.html"/>
-<link rel="next" href="cv.html"/>
+<link rel="prev" href="databases.html"/>
+<link rel="next" href="parameters-voor-flexibiliteit.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -49,6 +49,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -59,18 +60,18 @@
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -90,7 +91,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,23 +138,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introductie</a></li>
-<li class="chapter" data-level="2" data-path="c.-elegans-plate-experiment.html"><a href="c.-elegans-plate-experiment.html"><i class="fa fa-check"></i><b>2</b> C. elegans plate experiment</a></li>
-<li class="chapter" data-level="3" data-path="open-peer-review.html"><a href="open-peer-review.html"><i class="fa fa-check"></i><b>3</b> Open Peer Review</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="open-peer-review.html"><a href="open-peer-review.html#onderzoek-op-reproduceerbaarheid-beoordelen"><i class="fa fa-check"></i><b>3.1</b> Onderzoek op reproduceerbaarheid beoordelen</a>
-<ul>
+<li class="chapter" data-level="2" data-path="verwerken-van-data.html"><a href="verwerken-van-data.html"><i class="fa fa-check"></i><b>2</b> Verwerken van data</a></li>
+<li class="chapter" data-level="3" data-path="open-peer-review.html"><a href="open-peer-review.html"><i class="fa fa-check"></i><b>3</b> Open Peer Review</a><ul>
+<li class="chapter" data-level="3.1" data-path="open-peer-review.html"><a href="open-peer-review.html#onderzoek-op-reproduceerbaarheid-beoordelen"><i class="fa fa-check"></i><b>3.1</b> Onderzoek op reproduceerbaarheid beoordelen</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="open-peer-review.html"><a href="open-peer-review.html#omschrijving-onderzoek"><i class="fa fa-check"></i><b>3.1.1</b> Omschrijving onderzoek</a></li>
 <li class="chapter" data-level="3.1.2" data-path="open-peer-review.html"><a href="open-peer-review.html#beoordeling-artikel"><i class="fa fa-check"></i><b>3.1.2</b> Beoordeling artikel</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="open-peer-review.html"><a href="open-peer-review.html#code-zelf-reproduceren"><i class="fa fa-check"></i><b>3.2</b> Code zelf reproduceren</a>
-<ul>
+<li class="chapter" data-level="3.2" data-path="open-peer-review.html"><a href="open-peer-review.html#code-zelf-reproduceren"><i class="fa fa-check"></i><b>3.2</b> Code zelf reproduceren</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="open-peer-review.html"><a href="open-peer-review.html#beoordeling-script"><i class="fa fa-check"></i><b>3.2.1</b> Beoordeling script</a></li>
 <li class="chapter" data-level="3.2.2" data-path="open-peer-review.html"><a href="open-peer-review.html#probleem-in-script"><i class="fa fa-check"></i><b>3.2.2</b> Probleem in script</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="applying-the-guerrilla-analytics-framework-to-your-own-project..html"><a href="applying-the-guerrilla-analytics-framework-to-your-own-project..html"><i class="fa fa-check"></i><b>4</b> Applying the Guerrilla analytics framework to your own project.</a></li>
+<li class="chapter" data-level="4" data-path="data-organiseren.html"><a href="data-organiseren.html"><i class="fa fa-check"></i><b>4</b> Data organiseren</a></li>
 <li class="chapter" data-level="5" data-path="cv.html"><a href="cv.html"><i class="fa fa-check"></i><b>5</b> cv</a></li>
-<li class="chapter" data-level="6" data-path="vrije-ruimte---sql.html"><a href="vrije-ruimte---sql.html"><i class="fa fa-check"></i><b>6</b> Vrije ruimte - SQL</a></li>
+<li class="chapter" data-level="6" data-path="het-citeren-van-andere-werken.html"><a href="het-citeren-van-andere-werken.html"><i class="fa fa-check"></i><b>6</b> Het citeren van andere werken</a></li>
+<li class="chapter" data-level="7" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>7</b> Databases</a></li>
+<li class="chapter" data-level="8" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>8</b> R packages</a></li>
+<li class="chapter" data-level="9" data-path="parameters-voor-flexibiliteit.html"><a href="parameters-voor-flexibiliteit.html"><i class="fa fa-check"></i><b>9</b> Parameters voor flexibiliteit</a></li>
 </ul>
 
       </nav>
@@ -171,69 +172,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="applying-the-guerrilla-analytics-framework-to-your-own-project." class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Applying the Guerrilla analytics framework to your own project.<a href="applying-the-guerrilla-analytics-framework-to-your-own-project..html#applying-the-guerrilla-analytics-framework-to-your-own-project." class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Het organizeren van data is belangrijk voor reproduceerbaarheid en algemene goede workflow. Hieronder staat een voorbeeld van een map met verschillende projecten.</p>
-<pre><code>## D:/Documenten/Data science/daur2
-## +-- metagenomics_formatief
-## |   +-- data
-## |   |   +-- fastq
-## |   |   +-- HU_waternet_MOCK2_composition.csv
-## |   |   \-- README.txt.txt
-## |   +-- doc
-## |   \-- rmd
-## |       +-- metagenomics_formatief.html
-## |       +-- metagenomics_formatief.Rmd
-## |       \-- README.txt.txt
-## +-- metagenomics_reader
-## |   +-- data
-## |   |   +-- fastq
-## |   |   +-- HU_waternet_MOCK1_composition.csv
-## |   |   \-- README.txt.txt
-## |   +-- doc
-## |   \-- rmd
-## |       +-- metagenomics_reader.html
-## |       +-- metagenomics_reader.Rmd
-## |       \-- README.txt.txt
-## +-- rna_seq_airway
-## |   +-- data
-## |   |   +-- airway_sampledata.csv
-## |   |   +-- bam
-## |   |   +-- counts
-## |   |   +-- fastqc
-## |   |   +-- fastqc_ouput
-## |   |   \-- README.txt.txt
-## |   +-- doc
-## |   \-- rmd
-## |       +-- README.txt.txt
-## |       +-- rnaseq_airway_opdracht.html
-## |       \-- rnaseq_airway_opdracht.Rmd
-## +-- rna_seq_ipsc
-## |   +-- data
-## |   |   +-- bam
-## |   |   +-- counts
-## |   |   +-- fastqc
-## |   |   +-- fastqc_ouput
-## |   |   +-- ipsc_sampledata.csv
-## |   |   \-- README.txt.txt
-## |   +-- doc
-## |   \-- rmd
-## |       +-- README.txt.txt
-## |       +-- rnaseq_ipsc_opdracht.html
-## |       \-- rnaseq_ipsc_opdracht.Rmd
-## \-- rna_seq_onecut
-##     +-- data
-##     |   +-- bam
-##     |   +-- counts
-##     |   +-- fastqc
-##     |   +-- fastqc_ouput
-##     |   +-- onecut_sampledata_OC2.csv
-##     |   \-- README.txt.txt
-##     +-- doc
-##     \-- rmd
-##         +-- README.txt.txt
-##         +-- rnaseq_onecut.Rmd
-##         \-- rnaseq_onecut_opdracht.html</code></pre>
+<div id="r-packages" class="section level1 hasAnchor">
+<h1><span class="header-section-number">8</span> R packages<a href="r-packages.html#r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
 </div>
             </section>
@@ -241,8 +181,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="open-peer-review.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="cv.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="databases.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parameters-voor-flexibiliteit.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

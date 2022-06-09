@@ -8,7 +8,8 @@ code-zelf-reproduceren
 beoordeling-script
 probleem-in-script
 data-organiseren
-biologische-databases
 cv
 het-citeren-van-andere-werken
 databases
+r-packages
+parameters-voor-flexibiliteit

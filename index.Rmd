@@ -11,11 +11,12 @@ description: "Portflio"
 bibliography: bibliography.json
 ---
 ```{r setup, include=FALSE}
+library(knitr)
+knit_engines$set("sql")
 knitr::opts_chunk$set(
-  knit_engines$set("sql"),
   message = FALSE,
   warning = FALSE
-)
+  )
 ```
 
 # Introductie

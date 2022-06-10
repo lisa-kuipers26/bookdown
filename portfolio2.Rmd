@@ -1,7 +1,8 @@
 # Data organiseren
 
-Het organizeren van data is belangrijk voor reproduceerbaarheid en algemene goede workflow. Hieronder staat een voorbeeld van een map met verschillende projecten. Elke map heeft dezelfde indeling, bij de data en scripts zijn README bestanden toegevoegd waarin metadata staat over het onderzoek. De data mappen zelf zijn verdeeld in datatypes wanneer er hier veel van aanwezig zijn. Dit is om het overzicht te houden. Scripts staan in dezelfde folder als het project.
+Het organizeren van data is belangrijk voor reproduceerbaarheid en algemene goede workflow. Hieronder staat een voorbeeld van een map met verschillende projecten. Elke map heeft dezelfde indeling, bij de data en scripts zijn README bestanden toegevoegd waarin metadata staat over het project en de bestanden. Ik vind het zelf fijn dat wanneer er veel van één soort bestand is (zoals bij bam en fastq bestanden) dat deze in een aparte map staan. De rest bestanden staan gewoon in de /data. 
 
 ```{r directory, echo=FALSE }
-#fs::dir_tree("D:/Documenten/Data science/daur2")
+fs::dir_tree("data/daur2")
 ```
+Hieronder staat een voorbeeld van de readme die ik in de repo van dit portfolioo heb staan. Ik beschrijf kort wat er in de datasets staat en waarvoor ze gebruikt. Ook staat er waar ik ze vandaan gehaald heb.

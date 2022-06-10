@@ -11,15 +11,11 @@ library(DT)
 library(kableExtra)
 library(readxl)
 library(tidyverse)
-
 tabel <- read_excel(here::here("data/CE.LIQ.FLOW.062_Tidydata.xlsx"))
 tabel$compConcentration <- as.double(tabel$compConcentration)
 tabel$compName <- as.factor(tabel$compName)
-
 #x-as concentreatie in -10log
 tabel$compConcentration <- ifelse(tabel$compConcentration==0,0,-log10(tabel$compConcentration))
-
-
 tabel %>% ggplot(aes(x=compConcentration,y=RawData,color=compName,shape=expType))+
   geom_jitter(width=0.1)+
   labs(x="Concentratie (-log10) ",
@@ -32,17 +28,23 @@ Bij het verwerken van data is het belangrijk dat de data goed ingelezen wordt. E
 
 De bovenstaande grafiek geeft een globaal overzicht, maar er kunnen geen conclusies uitgetrokken worden. Hiervoor is een verdere data analyse nodig. Zo'n data analyse kan er als volgt uitzien:   
 
-1. Data plotten zodat er een globaal overzicht hebt
+1. Data plotten zodat er een globaal overzicht hebt.
+2. Nul hypothese voor shapiro wilks test (Data is normaal verdeeld)
+3. >0,05 nulhypothese wordt aangenomen, de data is normaal verdeeld. <0,05 nul-hypothese wordt verworpen
+4. Bij een normaal verdeelde datset kan er een pearson test uitgevoerd worden.
+5. Nulhypothese van pearson test is dat er geen verband is tussen de concentratie en aantal nematode op de plaat.
+6. Nulhypothese <0,05 nulhypothese wordt verworpen, er is een correlatie tussen de concentratie en aantal nematode op de plaat. >0,05 Er is geen verband
+7. Natuurlijk wordt er bij zes alleen een berekening gedaan en er kunnen natuurlijk ook andere factoren geweest zijn die de uitslag beïnvloed hebben.
 
 ```{r Grafiek_2}
 #Genormalizeerd en gemiddelde naar 1
-
 neg_controle <- tabel %>% filter(expType=="controlNegative")
-
-tabel$RawData[tabel$expType == 'controlNegative'] <- neg_controle$RawData / mean(neg_controle$RawData)
-
+tabel$RawData <- tabel$RawData / mean(neg_controle$RawData)
 tabel %>% ggplot(aes(x=compConcentration,y=RawData,color=compName,shape=expType))+
   geom_jitter(width=0.1)+
   labs(x="Concentratie (-log10) ",
        y="Number of offspring")
 ```
+
+Bij de grafiek hierboven is de dataset genormaliseerd door de RawData te delen daar het gemiddelde van de negatieve controle. Dit is gedaan omdat in de concentratie en aantal nematode een grote range zit. Op deze manier kunnen hogere getallen de uitslag van analyses onterecht beïnvloeden. Door het op deze manier te normaliseren wordt de range kleiner en is er minder bias.
+

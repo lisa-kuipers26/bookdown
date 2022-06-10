@@ -12,7 +12,7 @@ knitr::include_graphics(
 ```
 
 Hieronder staan de parameters in een interactief scherm weergeven. Deze verschijnt wanneer het bestand geknit wordt.
-```{r parameters, fig.cap=Afbeelding 2: Parameters bij knitten. , out.width = "200px", echo=FALSE}
+```{r parameters, fig.cap="Afbeelding 2: Parameters bij knitten." , out.width = "200px", echo=FALSE}
 knitr::include_graphics(
   here::here(
     "images","para.png"))

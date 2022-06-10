@@ -46,11 +46,11 @@ plot_func <- function(dataset,condition){
 ```
 
 
-```{r functie uitvoeren cases, fig.cap= Figuur 1: Aantal COVID-19 cases van 01/03/2020 t/m 23/05/2022 in belgië. Aantal cases staat op de y-as en de datum als yyyy-mm-dd op de x-as}
+```{r functie uitvoeren cases, fig.cap= "Figuur 1: Aantal COVID-19 cases van 01/03/2020 t/m 23/05/2022 in belgië. Aantal cases staat op de y-as en de datum als yyyy-mm-dd op de x-as"}
 plot_func(data_filtered,"cases")
 ```
 
-```{r functie uitvoeren deaths,fig.cap= Figuur 2: Aantal COVID-19 cases van 01/03/2020 t/m 23/05/2022 in belgië. Aantal cases staat op de y-as en de datum als yyyy-mm-dd op de x-as}
+```{r functie uitvoeren deaths,fig.cap= "Figuur 2: Aantal COVID-19 deaths van 01/03/2020 t/m 23/05/2022 in belgië. Aantal cases staat op de y-as en de datum als yyyy-mm-dd op de x-as"}
 plot_func(data_filtered,"deaths")
 ```
 

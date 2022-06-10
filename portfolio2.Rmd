@@ -6,3 +6,9 @@ Het organizeren van data is belangrijk voor reproduceerbaarheid en algemene goed
 fs::dir_tree("data/daur2")
 ```
 Hieronder staat een voorbeeld van de readme die ik in de repo van dit portfolioo heb staan. Ik beschrijf kort wat er in de datasets staat en waarvoor ze gebruikt. Ook staat er waar ik ze vandaan gehaald heb.
+
+```{r readme voorbeeld, fig.cap="README voorbeeld bij data bestanden" , out.width = "200px", echo=FALSE}
+knitr::include_graphics(
+  here::here(
+    "images","readme.png"))
+```

@@ -12,3 +12,5 @@ Retrieved from:
 Gapminder was retrieved from the dslabs package and saved as an csv and rds file and describes the health and income of several countries over an extended time
 
 EDCC_daily.csv describes the amount of cases and deaths of covid19 in different countries per day. The data can be found at: https://www.ecdc.europa.eu/en/covid-19/data
+
+The daur2 folder contains nothing of interest as it's only used as an example for data organizing

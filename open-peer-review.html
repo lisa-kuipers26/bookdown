@@ -313,9 +313,19 @@ Strozza C, Myrskylä M. Monitoring trends and differences in COVID-19 case-fatal
 <span id="cb3-23"><a href="open-peer-review.html#cb3-23"></a>  <span class="kw">GET</span>(url, <span class="kw">write_disk</span>(filename, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>))</span>
 <span id="cb3-24"><a href="open-peer-review.html#cb3-24"></a>  dat &lt;-<span class="st"> </span><span class="kw">read_csv</span>(filename,<span class="dt">skip=</span><span class="dv">3</span>)</span></code></pre></div>
 <p>Bij het uitvoeren van de code hierboven kwam de onderstaande foutmelding:</p>
-<p><img src="images/error_r.png" /><!-- -->
-In de foutmelding is een html bestand te zien. Dit hoort natuurlijk niet bij een read_csv() functie. In de code wordt het bestand van een online directory gedownload. De URL staat in de code en wanneer deze bezocht werd stond er dit bericht:</p>
-<p><img src="images/error_web.png" /><!-- --></p>
+<div class="figure">
+<img src="images/error_r.png" alt="Error in R"  />
+<p class="caption">
+(#fig:error_r)Error in R
+</p>
+</div>
+<p>In de foutmelding is een html bestand te zien. Dit hoort natuurlijk niet bij een read_csv() functie. In de code wordt het bestand van een online directory gedownload. De URL staat in de code en wanneer deze bezocht werd stond er dit bericht:</p>
+<div class="figure">
+<img src="images/error_web.png" alt="Error op de webpagina"  />
+<p class="caption">
+(#fig:error_web)Error op de webpagina
+</p>
+</div>
 <p>Het bestand bevindt zich niet meer op de plek waar de URL naar verwees en kon dus ook niet gedownload worden waardoor de html van de pagina werd overgenomen. Er was echter wel een menu aan de zijkant aanwezig waar het mogelijk is om bij de github van het project te komen. Hier vond ik het output bestand wat nodig is voor de code en heb deze handmatig gedownload en toegevoegd aan de /data directory. Nadat deze in de directory stond kon het script en de rest van de scripts vlekkeloos uitgevoerd worden.
 Hieronder staat het script met de aanpassing. De rest van het script kan gevonden worden op de bovenstaande link. De output van het script zijn 6 verschillende excel bestanden met data over het verloop van COVID-19 in 6 verschillende landen.</p>
 <hr />

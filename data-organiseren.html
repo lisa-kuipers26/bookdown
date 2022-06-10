@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Data organiseren | Portofolio workflows</title>
+  <title>4 Data organiseren | Portofolio data science</title>
   <meta name="description" content="Portflio" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Data organiseren | Portofolio workflows" />
+  <meta property="og:title" content="4 Data organiseren | Portofolio data science" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Portflio" />
   <meta name="github-repo" content="lisa-kuipers26" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Data organiseren | Portofolio workflows" />
+  <meta name="twitter:title" content="4 Data organiseren | Portofolio data science" />
   
   <meta name="twitter:description" content="Portflio" />
   
@@ -164,7 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Portofolio workflows</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Portofolio data science</a>
           </h1>
         </div>
 
@@ -174,7 +174,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-organiseren" class="section level1 hasAnchor">
 <h1><span class="header-section-number">4</span> Data organiseren<a href="data-organiseren.html#data-organiseren" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Het organizeren van data is belangrijk voor reproduceerbaarheid en algemene goede workflow. Hieronder staat een voorbeeld van een map met verschillende projecten. Elke map heeft dezelfde indeling, bij de data en scripts zijn README bestanden toegevoegd waarin metadata staat over het onderzoek. De data mappen zelf zijn verdeeld in datatypes wanneer er hier veel van aanwezig zijn. Dit is om het overzicht te houden. Scripts staan in dezelfde folder als het project.</p>
+<p>Het organizeren van data is belangrijk voor reproduceerbaarheid en algemene goede workflow. Hieronder staat een voorbeeld van een map met verschillende projecten. Elke map heeft dezelfde indeling, bij de data en scripts zijn README bestanden toegevoegd waarin metadata staat over het project en de bestanden. Ik vind het zelf fijn dat wanneer er veel van één soort bestand is (zoals bij bam en fastq bestanden) dat deze in een aparte map staan. De rest bestanden staan gewoon in de /data.</p>
+<pre><code>## data/daur2
+## ├── metagenomics_formatief
+## │   ├── README.md
+## │   ├── data
+## │   │   ├── HU_waternet_MOCK2_composition.csv
+## │   │   └── README.md
+## │   ├── metagenomics_formatief.Rmd
+## │   ├── metagenomics_formatief.html
+## │   └── metagenomics_reader.Rproj
+## ├── metagenomics_reader
+## │   ├── README.md
+## │   ├── data
+## │   │   ├── HU_waternet_MOCK1_composition.csv
+## │   │   └── README.md
+## │   ├── metagenomics_reader.Rmd
+## │   ├── metagenomics_reader.Rproj
+## │   └── metagenomics_reader.html
+## ├── rna_seq_airway
+## │   ├── README.md
+## │   ├── data
+## │   │   ├── README.md
+## │   │   └── ipsc_sampledata.csv
+## │   ├── rnaseq_airway.Rmd
+## │   ├── rnaseq_airway.Rproj
+## │   └── rnaseq_airway.html
+## ├── rna_seq_ipsc
+## │   ├── README.md
+## │   ├── data
+## │   │   ├── README.md
+## │   │   └── ipsc_sampledata.csv
+## │   ├── rnaseq_ipsc.Rmd
+## │   ├── rnaseq_ipsc.Rproj
+## │   └── rnaseq_ipsc.html
+## └── rna_seq_onecut
+##     ├── README.md
+##     ├── data
+##     │   ├── README.md
+##     │   └── onecut_sampledata_OC2.csv
+##     ├── rnaseq_onecut.Rmd
+##     ├── rnaseq_onecut.Rproj
+##     └── rnaseq_onecut.html</code></pre>
+<p>Hieronder staat een voorbeeld van de readme die ik in de repo van dit portfolioo heb staan. Ik beschrijf kort wat er in de datasets staat en waarvoor ze gebruikt. Ook staat er waar ik ze vandaan gehaald heb.</p>
 
 
 </div>

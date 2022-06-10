@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Verwerken van data | Portofolio workflows</title>
+  <title>2 Verwerken van data | Portofolio data science</title>
   <meta name="description" content="Portflio" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Verwerken van data | Portofolio workflows" />
+  <meta property="og:title" content="2 Verwerken van data | Portofolio data science" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Portflio" />
   <meta name="github-repo" content="lisa-kuipers26" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Verwerken van data | Portofolio workflows" />
+  <meta name="twitter:title" content="2 Verwerken van data | Portofolio data science" />
   
   <meta name="twitter:description" content="Portflio" />
   
@@ -164,7 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Portofolio workflows</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Portofolio data science</a>
           </h1>
         </div>
 
@@ -181,37 +181,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="verwerken-van-data.html#cb1-2"></a><span class="kw">library</span>(kableExtra)</span>
 <span id="cb1-3"><a href="verwerken-van-data.html#cb1-3"></a><span class="kw">library</span>(readxl)</span>
 <span id="cb1-4"><a href="verwerken-van-data.html#cb1-4"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb1-5"><a href="verwerken-van-data.html#cb1-5"></a></span>
-<span id="cb1-6"><a href="verwerken-van-data.html#cb1-6"></a>tabel &lt;-<span class="st"> </span><span class="kw">read_excel</span>(here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span>
-<span id="cb1-7"><a href="verwerken-van-data.html#cb1-7"></a>tabel<span class="op">$</span>compConcentration &lt;-<span class="st"> </span><span class="kw">as.double</span>(tabel<span class="op">$</span>compConcentration)</span>
-<span id="cb1-8"><a href="verwerken-van-data.html#cb1-8"></a>tabel<span class="op">$</span>compName &lt;-<span class="st"> </span><span class="kw">as.factor</span>(tabel<span class="op">$</span>compName)</span>
-<span id="cb1-9"><a href="verwerken-van-data.html#cb1-9"></a></span>
-<span id="cb1-10"><a href="verwerken-van-data.html#cb1-10"></a><span class="co">#x-as concentreatie in -10log</span></span>
-<span id="cb1-11"><a href="verwerken-van-data.html#cb1-11"></a>tabel<span class="op">$</span>compConcentration &lt;-<span class="st"> </span><span class="kw">ifelse</span>(tabel<span class="op">$</span>compConcentration<span class="op">==</span><span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="kw">log10</span>(tabel<span class="op">$</span>compConcentration))</span>
-<span id="cb1-12"><a href="verwerken-van-data.html#cb1-12"></a></span>
-<span id="cb1-13"><a href="verwerken-van-data.html#cb1-13"></a></span>
-<span id="cb1-14"><a href="verwerken-van-data.html#cb1-14"></a>tabel <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>compConcentration,<span class="dt">y=</span>RawData,<span class="dt">color=</span>compName,<span class="dt">shape=</span>expType))<span class="op">+</span></span>
-<span id="cb1-15"><a href="verwerken-van-data.html#cb1-15"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span><span class="fl">0.1</span>)<span class="op">+</span></span>
-<span id="cb1-16"><a href="verwerken-van-data.html#cb1-16"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
-<span id="cb1-17"><a href="verwerken-van-data.html#cb1-17"></a>       <span class="dt">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
+<span id="cb1-5"><a href="verwerken-van-data.html#cb1-5"></a>tabel &lt;-<span class="st"> </span><span class="kw">read_excel</span>(here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span>
+<span id="cb1-6"><a href="verwerken-van-data.html#cb1-6"></a>tabel<span class="op">$</span>compConcentration &lt;-<span class="st"> </span><span class="kw">as.double</span>(tabel<span class="op">$</span>compConcentration)</span>
+<span id="cb1-7"><a href="verwerken-van-data.html#cb1-7"></a>tabel<span class="op">$</span>compName &lt;-<span class="st"> </span><span class="kw">as.factor</span>(tabel<span class="op">$</span>compName)</span>
+<span id="cb1-8"><a href="verwerken-van-data.html#cb1-8"></a><span class="co">#x-as concentreatie in -10log</span></span>
+<span id="cb1-9"><a href="verwerken-van-data.html#cb1-9"></a>tabel<span class="op">$</span>compConcentration &lt;-<span class="st"> </span><span class="kw">ifelse</span>(tabel<span class="op">$</span>compConcentration<span class="op">==</span><span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="kw">log10</span>(tabel<span class="op">$</span>compConcentration))</span>
+<span id="cb1-10"><a href="verwerken-van-data.html#cb1-10"></a>tabel <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>compConcentration,<span class="dt">y=</span>RawData,<span class="dt">color=</span>compName,<span class="dt">shape=</span>expType))<span class="op">+</span></span>
+<span id="cb1-11"><a href="verwerken-van-data.html#cb1-11"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span><span class="fl">0.1</span>)<span class="op">+</span></span>
+<span id="cb1-12"><a href="verwerken-van-data.html#cb1-12"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
+<span id="cb1-13"><a href="verwerken-van-data.html#cb1-13"></a>       <span class="dt">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/grafiek_1-1.png" width="672" /></p>
 <p>In het experiment is de positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium</p>
 <p>Bij het verwerken van data is het belangrijk dat de data goed ingelezen wordt. Eén ding waar we tegen lopen bij deze dataset is dat de compConcentration ingelezen wordt als character type i.p.v. een getal. Hierdoor klopt de de x-as niet met wat je wilt zien, omdat er groepen en geen schaal weergegeven wordt. Dit wordt opgelost door het typ evan compConcentration te veranderen van een character naar een double.</p>
 <p>De bovenstaande grafiek geeft een globaal overzicht, maar er kunnen geen conclusies uitgetrokken worden. Hiervoor is een verdere data analyse nodig. Zo’n data analyse kan er als volgt uitzien:</p>
 <ol style="list-style-type: decimal">
-<li>Data plotten zodat er een globaal overzicht hebt</li>
+<li>Data plotten zodat er een globaal overzicht hebt.</li>
+<li>Nul hypothese voor shapiro wilks test (Data is normaal verdeeld)</li>
+<li><blockquote>
+<p>0,05 nulhypothese wordt aangenomen, de data is normaal verdeeld. &lt;0,05 nul-hypothese wordt verworpen</p>
+</blockquote></li>
+<li>Bij een normaal verdeelde datset kan er een pearson test uitgevoerd worden.</li>
+<li>Nulhypothese van pearson test is dat er geen verband is tussen de concentratie en aantal nematode op de plaat.</li>
+<li>Nulhypothese &lt;0,05 nulhypothese wordt verworpen, er is een correlatie tussen de concentratie en aantal nematode op de plaat. &gt;0,05 Er is geen verband</li>
+<li>Natuurlijk wordt er bij zes alleen een berekening gedaan en er kunnen natuurlijk ook andere factoren geweest zijn die de uitslag beïnvloed hebben.</li>
 </ol>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="verwerken-van-data.html#cb2-1"></a><span class="co">#Genormalizeerd en gemiddelde naar 1</span></span>
-<span id="cb2-2"><a href="verwerken-van-data.html#cb2-2"></a></span>
-<span id="cb2-3"><a href="verwerken-van-data.html#cb2-3"></a>neg_controle &lt;-<span class="st"> </span>tabel <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(expType<span class="op">==</span><span class="st">&quot;controlNegative&quot;</span>)</span>
-<span id="cb2-4"><a href="verwerken-van-data.html#cb2-4"></a></span>
-<span id="cb2-5"><a href="verwerken-van-data.html#cb2-5"></a>tabel<span class="op">$</span>RawData[tabel<span class="op">$</span>expType <span class="op">==</span><span class="st"> &#39;controlNegative&#39;</span>] &lt;-<span class="st"> </span>neg_controle<span class="op">$</span>RawData <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(neg_controle<span class="op">$</span>RawData)</span>
-<span id="cb2-6"><a href="verwerken-van-data.html#cb2-6"></a></span>
-<span id="cb2-7"><a href="verwerken-van-data.html#cb2-7"></a>tabel <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>compConcentration,<span class="dt">y=</span>RawData,<span class="dt">color=</span>compName,<span class="dt">shape=</span>expType))<span class="op">+</span></span>
-<span id="cb2-8"><a href="verwerken-van-data.html#cb2-8"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span><span class="fl">0.1</span>)<span class="op">+</span></span>
-<span id="cb2-9"><a href="verwerken-van-data.html#cb2-9"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
-<span id="cb2-10"><a href="verwerken-van-data.html#cb2-10"></a>       <span class="dt">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
+<span id="cb2-2"><a href="verwerken-van-data.html#cb2-2"></a>neg_controle &lt;-<span class="st"> </span>tabel <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(expType<span class="op">==</span><span class="st">&quot;controlNegative&quot;</span>)</span>
+<span id="cb2-3"><a href="verwerken-van-data.html#cb2-3"></a>tabel<span class="op">$</span>RawData &lt;-<span class="st"> </span>tabel<span class="op">$</span>RawData <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(neg_controle<span class="op">$</span>RawData)</span>
+<span id="cb2-4"><a href="verwerken-van-data.html#cb2-4"></a>tabel <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>compConcentration,<span class="dt">y=</span>RawData,<span class="dt">color=</span>compName,<span class="dt">shape=</span>expType))<span class="op">+</span></span>
+<span id="cb2-5"><a href="verwerken-van-data.html#cb2-5"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span><span class="fl">0.1</span>)<span class="op">+</span></span>
+<span id="cb2-6"><a href="verwerken-van-data.html#cb2-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
+<span id="cb2-7"><a href="verwerken-van-data.html#cb2-7"></a>       <span class="dt">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Grafiek_2-1.png" width="672" /></p>
+<p>Bij de grafiek hierboven is de dataset genormaliseerd door de RawData te delen daar het gemiddelde van de negatieve controle. Dit is gedaan omdat in de concentratie en aantal nematode een grote range zit. Op deze manier kunnen hogere getallen de uitslag van analyses onterecht beïnvloeden. Door het op deze manier te normaliseren wordt de range kleiner en is er minder bias.</p>
 
 </div>
             </section>

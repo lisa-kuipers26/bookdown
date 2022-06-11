@@ -6,7 +6,8 @@ Belangrijkste in een data analyse is bergrijpen waar je data over gaat. Door de 
 
 Om globaal een idee te krijgen van het effect worden deze variabel tegen elkaar uitget in de grafiek hieronder.
 
-```{r grafiek_1}
+
+```{r grafiek_1, fig.cap="Test2"}
 library(DT)
 library(kableExtra)
 library(readxl)
@@ -22,6 +23,7 @@ tabel %>% ggplot(aes(x=compConcentration,y=RawData,color=compName,shape=expType)
        y="Number of offspring")
 ```
 
+***
 In het experiment is de positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium
 
 Bij het verwerken van data is het belangrijk dat de data goed ingelezen wordt. Eén ding waar we tegen lopen bij deze dataset is dat de compConcentration ingelezen wordt als character type i.p.v. een getal. Hierdoor klopt de de x-as niet met wat je wilt zien, omdat er groepen en geen schaal weergegeven wordt. Dit wordt opgelost door het typ evan compConcentration te veranderen van een character naar een double. 
@@ -30,13 +32,13 @@ De bovenstaande grafiek geeft een globaal overzicht, maar er kunnen geen conclus
 
 1. Data plotten zodat er een globaal overzicht hebt.
 2. Nul hypothese voor shapiro wilks test (Data is normaal verdeeld)
-3. >0,05 nulhypothese wordt aangenomen, de data is normaal verdeeld. <0,05 nul-hypothese wordt verworpen
+3. Bij >0,05 nulhypothese wordt aangenomen, de data is normaal verdeeld. <0,05 nul-hypothese wordt verworpen
 4. Bij een normaal verdeelde datset kan er een pearson test uitgevoerd worden.
 5. Nulhypothese van pearson test is dat er geen verband is tussen de concentratie en aantal nematode op de plaat.
 6. Nulhypothese <0,05 nulhypothese wordt verworpen, er is een correlatie tussen de concentratie en aantal nematode op de plaat. >0,05 Er is geen verband
 7. Natuurlijk wordt er bij zes alleen een berekening gedaan en er kunnen natuurlijk ook andere factoren geweest zijn die de uitslag beïnvloed hebben.
 
-```{r Grafiek_2}
+```{r Grafiek_2, fig.cap="Test"}
 #Genormalizeerd en gemiddelde naar 1
 neg_controle <- tabel %>% filter(expType=="controlNegative")
 tabel$RawData <- tabel$RawData / mean(neg_controle$RawData)
@@ -45,6 +47,8 @@ tabel %>% ggplot(aes(x=compConcentration,y=RawData,color=compName,shape=expType)
   labs(x="Concentratie (-log10) ",
        y="Number of offspring")
 ```
+
+
 
 Bij de grafiek hierboven is de dataset genormaliseerd door de RawData te delen daar het gemiddelde van de negatieve controle. Dit is gedaan omdat in de concentratie en aantal nematode een grote range zit. Op deze manier kunnen hogere getallen de uitslag van analyses onterecht beïnvloeden. Door het op deze manier te normaliseren wordt de range kleiner en is er minder bias.
 

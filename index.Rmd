@@ -5,6 +5,7 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
+fig_caption: yes
 new_session: yes
 github-repo: lisa-kuipers26
 description: "Portflio"

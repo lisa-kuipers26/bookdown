@@ -11,15 +11,15 @@ gapminder_df <- gapminder %>% as.data.frame()
 
 
 #tidy maken van data functie
-tidy_func <- function(path, ziekte){
+tidy_func <- function(path){
   read_df <- read.csv(path, skip=11) %>% as.data.frame
   col_nam <- colnames(read_df)
-  df_tidy <- read_df %>% pivot_longer(cols=col_nam[-1], names_to="country", values_to=paste0(ziekte,"_activity")) %>%
+  read_df %>% pivot_longer(cols=col_nam[-1], names_to="country", values_to=paste0("activity")) %>%
     separate(Date, into = c("year", "month","day"),convert = TRUE)
 }
 
-dengue_tidy <- tidy_func("data/dengue_data.csv","dengue")
-flu_tidy <- tidy_func("data/flu_data.csv","flu")
+dengue_tidy <- tidy_func("data/dengue_data.csv")
+flu_tidy <- tidy_func("data/flu_data.csv")
 
 #opslaan als RDS
 saveRDS(dengue_tidy, file = "data/dengue_tidy.rds")
@@ -35,7 +35,7 @@ write.csv(flu_tidy,"data/flu_tidy.csv")
 
 Er moet een database gemaakt worden om de tabellen op te slaan. Hieronder staat SQL code die ingevoerd kan worden bij het programma dBeaver (of een andere database software) voor het creëren van een database.
 ```{sql opzetten database, eval=FALSE}
-CREATE DATABASE workflowsdb;
+CREATE DATABASE workflows;
 ```
 
 Om de databse te gebruiken in R wordt er een connectie aangemaakt. Met de connectie kan R code gebruikt worden voor interactie met de database. Dit is handig omdat je dan niet steeds tussen twee programma's hoeft te switchen. Via de connectie worden de verschillende tabellen ingeladen in de database
@@ -44,7 +44,7 @@ library(DBI)
 
 #Connectie opzetten
 con <- dbConnect(RPostgres::Postgres(), 
-                 dbname = "workflowsdb", 
+                 dbname = "workflows", 
                  host="localhost", 
                  port="5432", 
                  user="postgres",
@@ -122,6 +122,7 @@ dbDisconnect(con)
 ```{r data ophalen}
 #Data laden voor analyse
 all_data <- readRDS("data/all_data.rds")
+all_data %>% select(country,dengue_activity) %>% na.omit() %>% group_by(country) %>% summarise(mean(dengue_activity))
 ```
 
 
@@ -174,7 +175,7 @@ country_data %>% ggplot(aes(x=country, y=population))+
 ```
 
 ```{r flu}
-country_data %>% ggplot(aes(x=country, y=flu_activity))+
+country_data %>% ggplot(aes(x=country, y=dengue))+
   geom_col()
 ```
 

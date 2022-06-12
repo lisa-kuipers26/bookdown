@@ -22,8 +22,8 @@ dengue_tidy <- tidy_func("data/dengue_data.csv","dengue")
 flu_tidy <- tidy_func("data/flu_data.csv","flu")
 
 #opslaan als RDS
-saveRDS(dengue_tidy, file = "data/dengue.rds")
-saveRDS(flu_tidy, file = "data/flu.rds")
+saveRDS(dengue_tidy, file = "data/dengue_tidy.rds")
+saveRDS(flu_tidy, file = "data/flu_tidy.rds")
 saveRDS(gapminder_df, file = "data/gapminder.rds")
 
 #opslaan als CSV
@@ -66,7 +66,7 @@ gapminder_clean <- subset(gapminder_maxyear, country %in% landen)
 
 ```{r, eval=FALSE}
 #Oude tabel verwijderen en nieuwe tabel invoegen
-dbRemoveTable(con, "flu")
+dbRemoveTable(con, "gapminder")
 dbWriteTable(con, "gapminder", gapminder_clean)
 ```
 
@@ -110,6 +110,9 @@ FOTO !
 all_data <- dbReadTable(con, "all_data")
 #Dataset opslaan in data 
 saveRDS(all_data, file="data/all_data.rds")
+#Connectie met database sluiten
+dbDisconnect(con) 
+
 ```
 
 ```{r data ophalen}
@@ -134,26 +137,41 @@ lifeexp_func <- function(dataset, kolom){
 mean_flu_year <- lifeexp_func(all_data,"flu_activity")
 mean_dengue_year <- lifeexp_func(all_data,"dengue_activity")
 
+```
 
+```{r life expectancy}
 mean_flu_year %>% ggplot(aes(x=year,y=mean_life_expectancy))+
     geom_line()
+```
 
+```{r flu grafiek }
 mean_flu_year %>% ggplot(aes(x=year,y=mean_flu_activity))+
     geom_line()
+```
 
+```{r dengue grafiek}
 mean_dengue_year %>% ggplot(aes(x=year,y=mean_dengue_activity))+
     geom_line()
 
 ```
 
 ```{r data analyse populatie}
-#country_data <- all_data %>% filter(year==2008) %>% 
-#  group_by(country) %>% 
-#  summarise(mean(flu_activity), max(population),max(gdp)) %>% na.omit()
+country_data <- all_data %>% filter(year==2008) %>% 
+  group_by(country) %>% 
+  summarise(mean(flu_activity), max(population),max(gdp)) %>% na.omit()
+colnames(country_data) <- c("country","flu_activity","population","GDP")
 
-#colnames(country_data) <- c("country","flu_activity","population","GDP")
+country_data[order(country_data$population, decreasing=TRUE),]
+```
 
-#country_data$population <- factor(country_data$population, levels=c(arrange(desc(country_data$population))))
+```{r populatie}
+country_data %>% ggplot(aes(x=country, y=population))+
+  geom_col()
+```
+
+```{r}
+country_data %>% ggplot(aes(x=country, y=flu_activity))+
+  geom_col()
 ```
 
 ```{r data analyse activity door jaar}

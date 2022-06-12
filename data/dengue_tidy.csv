@@ -1,4 +1,4 @@
-"","year","month","day","country","dengue_activity"
+"","year","month","day","country","activity"
 "1",2002,12,29,"Argentina",NA
 "2",2002,12,29,"Bolivia",0.101
 "3",2002,12,29,"Brazil",0.073

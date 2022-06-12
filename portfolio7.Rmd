@@ -1,7 +1,7 @@
 # Databases
 
 
-
+Om wat functie van de databse te laten zijn worden er verschillende datasets ingeladen. Hieronder staat de de code voor he tinladen, waarbij de data van de dengue en flu google trends tidy gemaakt worden door de landnamen in één kolom te zetten. Voorderest worden ook de datum opgesplitst in dagen, maanden en jaren zodat deze later beter samengevoegd kunnen worden met de gapminder data.
 ```{r data_laden, eval=FALSE}
 library(dslabs)
 library(tidyverse)
@@ -32,11 +32,13 @@ write.csv(dengue_tidy,"data/dengue_tidy.csv")
 write.csv(flu_tidy,"data/flu_tidy.csv")
 
 ```
-SQL code voor het creëren van een database:
+
+Er moet een database gemaakt worden om de tabellen op te slaan. Hieronder staat SQL code die ingevoerd kan worden bij het programma dBeaver (of een andere database software) voor het creëren van een database.
 ```{sql opzetten database, eval=FALSE}
 CREATE DATABASE workflowsdb;
 ```
 
+Om de databse te gebruiken in R wordt er een connectie aangemaakt. Met de connectie kan R code gebruikt worden voor interactie met de database. Dit is handig omdat je dan niet steeds tussen twee programma's hoeft te switchen. Via de connectie worden de verschillende tabellen ingeladen in de database
 ```{r database_laden, eval=FALSE}
 library(DBI)
 
@@ -54,6 +56,7 @@ dbWriteTable(con, "dengue", dengue_tidy)
 dbWriteTable(con, "gapminder", gapminder_df)
 ```
 
+Om de gapminder wat netter te maken heb ik ervoor gekozen om alvast de landen en jaren die niet in de flu en dengue google trend data voorkomt te verwijderen. 
 ```{r gapminder clean, eval=FALSE}
 #Jaren verwijderen die niet aanwezig zijn in flu en dengue
 gapminder_minyear <- gapminder_df[gapminder_df$year >= min(flu_tidy$year), ]
@@ -64,13 +67,14 @@ landen <- c(col_dengue[2:11], col_flu[2:30],recursive=TRUE)
 gapminder_clean <- subset(gapminder_maxyear, country %in% landen)
 ```
 
+De oude tabel gapminder wordt via de connectie verwijderd en de nette wordt ingevoerd
 ```{r, eval=FALSE}
 #Oude tabel verwijderen en nieuwe tabel invoegen
 dbRemoveTable(con, "gapminder")
 dbWriteTable(con, "gapminder", gapminder_clean)
 ```
 
-De ondesrtaande code is sql code wat gebruikt wordt om een grote tabel te creëren waar alle data in staat. Er worden left joins gebruikt omdat niet alle landen in beide de dengue dataset en flu dataset voorkomen. Deze informatie van bepaalde datasets kan wel interessant zijn voor het analyseren van data en wordt met de left join een NULL ingevoerd bij de missende data. Voor de rest worden alle kollomen van gapminder gekozen, de dag en maand van flu en de activity van beide flu en dengue. ook worden er joins op year, month en day gedaan. Dit is zodat ze gematched worden in de tabel en laad tijd verminderd bij het sorteren.
+De ondesrtaande code is SQL code die gebruikt is om een grote tabel te creëren waar alle data in staat van drie datasets instaat. Er worden left joins gebruikt omdat niet alle landen in beide de dengue dataset en flu dataset voorkomen. Deze informatie van bepaalde datasets kan wel interessant zijn voor het analyseren van data en wordt met de left join een NULL ingevoerd bij de missende data. Voor de rest worden alle kollomen van gapminder gekozen, de dag en maand van flu en de activity van beide flu en dengue. ook worden er joins op year, month en day gedaan. Dit is zodat ze gematched worden in de tabel en laad tijd verminderd bij het sorteren.
 Bij het sorteren wordt eerst op het jaartal gesorteerd en daarna op het land om het zo overzichtelijk te houden.
 
 ```{sql join, eval=FALSE}
@@ -169,7 +173,7 @@ country_data %>% ggplot(aes(x=country, y=population))+
   geom_col()
 ```
 
-```{r}
+```{r flu}
 country_data %>% ggplot(aes(x=country, y=flu_activity))+
   geom_col()
 ```
@@ -191,8 +195,15 @@ activity_years_func <- function(dataset,activity){
   scale_color_brewer(palette = "Set1")+
   theme_minimal()
 }
+```
+
+```{r}
 
 activity_years_func(flu_dengue,"flu_activity")
+```
+
+```{r}
+
 activity_years_func(flu_dengue,"dengue_activity")
 
 ```

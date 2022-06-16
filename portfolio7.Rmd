@@ -11,16 +11,17 @@ gapminder_df <- gapminder %>% as.data.frame()
 
 
 #tidy maken van data functie
-tidy_func <- function(path){
+tidy_func <- function(path,data){
   read_df <- read.csv(path, skip=11) %>% as.data.frame
   col_nam <- colnames(read_df)
   read_df %>% pivot_longer(cols=col_nam[-1], names_to="country", values_to=paste0("activity")) %>%
-    separate(Date, into = c("year", "month","day"),convert = TRUE)
+    separate(Date, into = c("year", "month","day"),convert = TRUE) %>% mutate("disease"=data)
 }
 
-dengue_tidy <- tidy_func("data/dengue_data.csv")
-flu_tidy <- tidy_func("data/flu_data.csv")
+dengue_tidy <- tidy_func("data/dengue_data.csv","dengue")
+flu_tidy <- tidy_func("data/flu_data.csv","flu")
 
+flu_tidy %>%  filter(year==2005)
 #opslaan als RDS
 saveRDS(dengue_tidy, file = "data/dengue_tidy.rds")
 saveRDS(flu_tidy, file = "data/flu_tidy.rds")
@@ -53,7 +54,7 @@ con <- dbConnect(RPostgres::Postgres(),
 #Aanmaken van tabellen in databse
 dbWriteTable(con, "flu", flu_tidy)
 dbWriteTable(con, "dengue", dengue_tidy)
-dbWriteTable(con, "gapminder", gapminder_df)
+dbWriteTable(con, "gapminder", gapminder_df) B   bBññn ñ
 ```
 
 Om de gapminder wat netter te maken heb ik ervoor gekozen om alvast de landen en jaren die niet in de flu en dengue google trend data voorkomt te verwijderen. 
@@ -63,7 +64,7 @@ gapminder_minyear <- gapminder_df[gapminder_df$year >= min(flu_tidy$year), ]
 gapminder_maxyear <- gapminder_minyear[gapminder_minyear$year <= max(flu_tidy$year), ]
 
 #Landen weghalen die niet en flu en dengue aanwezig zijn
-landen <- c(col_dengue[2:11], col_flu[2:30],recursive=TRUE)
+landen <- c(dengue_tidy$country, flu_tidy$country,recursive=TRUE)
 gapminder_clean <- subset(gapminder_maxyear, country %in% landen)
 ```
 
@@ -76,32 +77,38 @@ dbWriteTable(con, "gapminder", gapminder_clean)
 
 De ondesrtaande code is SQL code die gebruikt is om een grote tabel te creëren waar alle data in staat van drie datasets instaat. Er worden left joins gebruikt omdat niet alle landen in beide de dengue dataset en flu dataset voorkomen. Deze informatie van bepaalde datasets kan wel interessant zijn voor het analyseren van data en wordt met de left join een NULL ingevoerd bij de missende data. Voor de rest worden alle kollomen van gapminder gekozen, de dag en maand van flu en de activity van beide flu en dengue. ook worden er joins op year, month en day gedaan. Dit is zodat ze gematched worden in de tabel en laad tijd verminderd bij het sorteren.
 Bij het sorteren wordt eerst op het jaartal gesorteerd en daarna op het land om het zo overzichtelijk te houden.
+```{sql, eval=FALSE}
+CREATE TABLE flu_dengue
+AS
+
+SELECT *
+FROM 
+  flu 
+
+UNION ALL
+ 
+SELECT *
+ 
+FROM
+  dengue
+```
 
 ```{sql join, eval=FALSE}
-SELECT
+create table all_data
+as
+
+select 
 gapminder.*,
-flu."day",
-flu."month",
-flu.flu_activity,
-dengue.dengue_activity
-FROM
-    gapminder 
-LEFT JOIN flu  
-  ON gapminder."year"  = flu."year" and gapminder.country = flu.country 
-LEFT join dengue
-	ON dengue."year" = flu."year" and dengue."month" = flu."month" and dengue."day" = flu."day" and dengue.country = flu.country 
-ORDER BY gapminder."year", gapminder.country  ;
-```
-Deze query wordt uitgevoerd in het programma beaver, hieronder een foto van het dashboard
+flu_dengue."month",
+flu_dengue."day",
+flu_dengue.disease,
+flu_dengue.activity
 
-FOTO !
-
-Door de volgende tekst toe te voegen boven bovenstaande query wordt er een tabel gemaakt genaamd all_data
-```{sql table maken, eval=FALSE}
-CREATE TABLE all_data
-AS
-(...)
-
+from gapminder 
+left join flu_dengue
+on flu_dengue."year" = gapminder."year" and flu_dengue.country = gapminder.country
+ 	
+ORDER BY gapminder."year", gapminder.country, flu_dengue."month", flu_dengue."day"  ;
 
 ```
 
@@ -122,25 +129,21 @@ dbDisconnect(con)
 ```{r data ophalen}
 #Data laden voor analyse
 all_data <- readRDS("data/all_data.rds")
-all_data %>% select(country,dengue_activity) %>% na.omit() %>% group_by(country) %>% summarise(mean(dengue_activity))
 ```
 
 
 ```{r data analyse life expectancy}
 #Functie voor life exptancy tegen andere kolom
-lifeexp_func <- function(dataset, kolom){
-  means <- dataset %>%
-    group_by(year) %>% 
-    summarise(naam=mean(!! sym(kolom),na.rm=TRUE),
-              "mean_life_expectancy"=mean(life_expectancy,na.rm=TRUE))
-  
-  colnames(means) <- c("year",paste0("mean_",kolom),"mean_life_expectancy")
-  means
+lifeexp_func <- function(dataset, name){
+    dataset %>% 
+    filter(disease==name) %>%
+    group_by(year, disease) %>% 
+    summarise(mean_activity=mean(activity,na.rm=TRUE), mean_life_expectancy=mean(life_expectancy,na.rm=TRUE))
 }
 
 #Flu en dengue tegen life expactancy
-mean_flu_year <- lifeexp_func(all_data,"flu_activity")
-mean_dengue_year <- lifeexp_func(all_data,"dengue_activity")
+mean_flu_year <- lifeexp_func(all_data,"flu")
+mean_dengue_year <- lifeexp_func(all_data,"dengue")
 
 ```
 
@@ -150,61 +153,82 @@ mean_flu_year %>% ggplot(aes(x=year,y=mean_life_expectancy))+
 ```
 
 ```{r flu grafiek }
-mean_flu_year %>% ggplot(aes(x=year,y=mean_flu_activity))+
+mean_flu_year %>% ggplot(aes(x=year,y=mean_activity))+
     geom_line()
 ```
 
 ```{r dengue grafiek}
-mean_dengue_year %>% ggplot(aes(x=year,y=mean_dengue_activity))+
+mean_dengue_year %>% ggplot(aes(x=year,y=mean_activity))+
     geom_line()
 
 ```
 
 ```{r data analyse populatie}
-country_data <- all_data %>% filter(year==2008) %>% 
-  group_by(country) %>% 
-  summarise(mean(flu_activity), max(population),max(gdp)) %>% na.omit()
-colnames(country_data) <- c("country","flu_activity","population","GDP")
+populatie_func <- function(dataset,year,name){
+  country_data <- dataset %>% filter(year==2008, disease==name) %>% 
+    group_by(country) %>% 
+    summarise(mean(activity, na.rm=TRUE), max(population),max(gdp))
+  colnames(country_data) <- c("country","activity","population","GDP")
+  country_data[order(country_data$population, decreasing=TRUE),]
+  
+  
+  plot1 <- country_data %>% ggplot(aes(x=country, y=population))+
+    geom_col()+
+    theme_minimal()
+  plot2 <- country_data %>% ggplot(aes(x=country, y=activity))+
+    geom_col()+
+    theme_minimal()
+  
+  grid.arrange(plot1,plot2)
+}
 
-country_data[order(country_data$population, decreasing=TRUE),]
+flu_pop <- populatie_func(all_data, 2008, "flu")
+dengue_pop <- populatie_func(all_data, 2008, "dengue")
+
 ```
 
 ```{r populatie}
-country_data %>% ggplot(aes(x=country, y=population))+
-  geom_col()
+bar_graph_func <- function(dataset, y){
+  dataset %>% ggplot(aes(x=country, y=dataset[[y]]))+
+  geom_col()+
+  theme_minimal()
+}
 ```
 
 ```{r flu}
-country_data %>% ggplot(aes(x=country, y=dengue))+
-  geom_col()
+bar_func(dengue_pop, "population")
+bar_func(dengue_pop, "activity")
+bar_func(flu_pop, "population")
+bar_func(flu_pop, "activity")
 ```
 
 ```{r data analyse activity door jaar}
 library(RColorBrewer)
 
 #Summarise van data per year 
-flu_dengue <- all_data %>% group_by(month, year) %>% 
+flu_dengue <- all_data %>% group_by(month, year, disease) %>% 
   na.omit() %>% filter(year!=2002) %>% 
-  summarise(mean(dengue_activity, na.rm=TRUE),mean(flu_activity, na.rm=TRUE))
-colnames(flu_dengue) <- c("month","year","dengue_activity","flu_activity")
+  summarise(mean(activity))
+colnames(flu_dengue) <- c("month","year","disease", "activity")
 
 #Functie voor plot van verloop activity
-activity_years_func <- function(dataset,activity){
-  dataset %>% ggplot(aes(x=month,y=dataset[[activity]], group=year, color=factor(year)))+
-  geom_line()+
-  scale_x_continuous(name="Month", breaks=(1:12), limits=c(1, 12))+
-  scale_color_brewer(palette = "Set1")+
-  theme_minimal()
+activity_years_func <- function(dataset,name){
+  dataset %>% filter(disease==name) %>%
+    ggplot(aes(x=month,y=activity, group=year, color=factor(year)))+
+    geom_line()+
+    scale_x_continuous(name="Month", breaks=(1:12), limits=c(1, 12))+
+    scale_color_brewer(palette = "Set1")+
+    theme_minimal()
 }
 ```
 
 ```{r}
 
-activity_years_func(flu_dengue,"flu_activity")
+activity_years_func(flu_dengue,"flu")
 ```
 
 ```{r}
 
-activity_years_func(flu_dengue,"dengue_activity")
+activity_years_func(flu_dengue,"dengue")
 
 ```

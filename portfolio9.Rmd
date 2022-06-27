@@ -1,6 +1,6 @@
 # Parameters voor flexibiliteit
 
-Parameters in yaml headers kunnen gebruikt worden om je code dynamischer te maken. Het si een snelle manier van variabele veranderen van bijvoorbeel dhet filteren van een dataset.
+Parameters in yaml headers kunnen gebruikt worden om je code dynamischer te maken. Het is een snelle manier van variabelen veranderen bij het filteren van een dataset.
 
 Hieronder staat een voorbeeld van hoe de yaml header eruit ziet met verschillende parameters. Voor de analyse verderop hebben we dezelfde paramteres gebruitk als in de afbeelding.
 
@@ -10,23 +10,32 @@ knitr::include_graphics(
     "images","yaml.png"))
 ```
 
-Hieronder staan de parameters in een interactief scherm weergeven. Deze verschijnt wanneer het bestand geknit wordt.
-```{r parameters, fig.cap="Afbeelding 2: Parameters bij knitten." , out.width = "200px", echo=FALSE}
+De parameters kunnen in een interactief scherm weergegeven worden. Deze verschijnd wanneer het bestand geknit wordt.
+```{r parameters, fig.cap="Afbeelding 2: Parameters bij knitten." , out.width = "400px", echo=FALSE}
 knitr::include_graphics(
   here::here(
     "images","para.png"))
 ```
 
-Hieronder staat de code van het filteren van de de EDCC_daily dataset found at https://www.ecdc.europa.eu/en/covid-19/data. In de datset staan het aantal gevallen en sterfgevallen van COVID-19 uit de periode van 2020 t/m 2022. De parameters die boven staan zijn gebruikt in het filteren. Wanneer iemand van 1 jaar maand of dag de data wilt weergeven kan bij de end en start parameters dezelfde datum ingevoerd worden. Ikzelf heb ervoor gekozen om de hele periode te nemen.
+Hieronder staat de code van het filteren van de de EDCC_daily dataset gevonden op: https://www.ecdc.europa.eu/en/covid-19/data. In de dataset staan het aantal gevallen en sterfgevallen van COVID-19 uit de periode van 2020 t/m 2022. De parameters die boven staan zijn gebruikt in het filteren. 
+Wanneer iemand van dezelfde jaar, maand of dag de data wilt weergeven kan bij de end en start parameters dezelfde datum ingevoerd worden. Ik heb ervoor gekozen om de hele beschikbare periode te nemen voor deze analyse, om te kijken of er een verband is tussen de cases and deaths.
 
 ```{r data verwerken}
 library(tidyverse)
 library(ggplot2)
 library(params)
 library(stringr)
+
+#Data inlezen
 data_table <- read_csv("data/EDCC_daily.csv")
+
+#Data filteren
 data_filtered <- data_table %>% filter(year >= params$start_year & year <= params$end_year & countriesAndTerritories == params$country & day %in% c(params$start_day:params$end_day) & month %in% c(params$start_month:params$end_month))
+
+#Oploopbare range maken
 data_filtered$date_range <- paste0(data_filtered$year,sprintf("%02d",data_filtered$month),sprintf("%02d",data_filtered$day)) 
+
+#Functie voor plot
 plot_func <- function(dataset,condition){
   dataset %>% ggplot(aes(x=date_range, y=dataset[[condition]]))+
   geom_point()+
@@ -38,6 +47,7 @@ plot_func <- function(dataset,condition){
 }
 ```
 
+In de code is te zien dat de dataset gefilterd wordt met de parameters door `params` te gebruiken voor de gedefineerde parameter naam uit de yaml header.
 
 ```{r functie uitvoeren cases, fig.cap= "Figuur 1: Aantal COVID-19 cases van 01/03/2020 t/m 23/05/2022 in belgië. Aantal cases staat op de y-as en de datum als yyyy-mm-dd op de x-as"}
 plot_func(data_filtered,"cases")
@@ -47,5 +57,5 @@ plot_func(data_filtered,"cases")
 plot_func(data_filtered,"deaths")
 ```
 
-Wat interessant is om te zien bij deze figuren dat eigenlijk het aantal doden aan het begin het hoogste lag terwijl het aantal cases niet heel hoog waren. Bij de eerste piek van cases is bij het aantal dode ook een piek te zien ronde dezelfde datum. Daarna zwakt het aantal doden vergeleken met de cases af. Of dit komt doordat mensen met een verzwakt imuunsysteem sneller zijn overleden of omdat vaccinaties werken is natuurlijk niet direct op te maken uit deze data, maar het is wel een interessant verband. 
+Uit de gefilterde set en functie zijn twee grafieken gegenereerd. Wat ik interessant vind om te zien bij deze figuren is dat het aantal doden aan het begin het hoogste lag terwijl het aantal cases relatief niet heel hoog waren. Bij de eerste piek van cases is bij het aantal dode ook een piek te zien ronde dezelfde datum. Daarna zwakt het aantal doden vergeleken met de cases af. Of dit komt doordat mensen met een verzwakt imuunsysteem sneller zijn overleden of omdat vaccinaties hun werk gedaan hebben is niet direct op te maken uit deze data, maar het is wel een interessant verband. 
 

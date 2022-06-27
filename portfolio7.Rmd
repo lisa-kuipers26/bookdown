@@ -1,7 +1,7 @@
 # Databases
 
 
-Om wat functie van de databse te laten zijn worden er verschillende datasets ingeladen. Hieronder staat de de code voor he tinladen, waarbij de data van de dengue en flu google trends tidy gemaakt worden door de landnamen in één kolom te zetten. Voorderest worden ook de datum opgesplitst in dagen, maanden en jaren zodat deze later beter samengevoegd kunnen worden met de gapminder data.
+Om wat verschillende functies van de database te laten zien worden er verschillende datasets ingeladen. Hieronder wordt de data van de dengue en flu google trends tidy gemaakt, door de landnamen in één kolom te zetten. Ook wordt er een aparte kolom gemaakt met de naam van de ziekte. Voorderest worden ook de datum opgesplitst in dagen, maanden en jaren zodat deze later samengevoegd kunnen worden met de gapminder data.
 ```{r data_laden, eval=FALSE}
 library(dslabs)
 library(tidyverse)
@@ -11,11 +11,11 @@ gapminder_df <- gapminder %>% as.data.frame()
 
 
 #tidy maken van data functie
-tidy_func <- function(path,data){
+tidy_func <- function(path,name){
   read_df <- read.csv(path, skip=11) %>% as.data.frame
   col_nam <- colnames(read_df)
   read_df %>% pivot_longer(cols=col_nam[-1], names_to="country", values_to=paste0("activity")) %>%
-    separate(Date, into = c("year", "month","day"),convert = TRUE) %>% mutate("disease"=data)
+    separate(Date, into = c("year", "month","day"),convert = TRUE) %>% mutate("disease"=name)
 }
 
 dengue_tidy <- tidy_func("data/dengue_data.csv","dengue")
@@ -39,7 +39,8 @@ Er moet een database gemaakt worden om de tabellen op te slaan. Hieronder staat 
 CREATE DATABASE workflows;
 ```
 
-Om de databse te gebruiken in R wordt er een connectie aangemaakt. Met de connectie kan R code gebruikt worden voor interactie met de database. Dit is handig omdat je dan niet steeds tussen twee programma's hoeft te switchen. Via de connectie worden de verschillende tabellen ingeladen in de database
+Om de database te gebruiken in R wordt er een connectie aangemaakt. Met de connectie kan R code gebruikt worden voor interactie met de database. Dit is handig omdat er dan niet steeds tussen twee programma's hoeft te switchen. Via de connectie worden de verschillende tabellen ingeladen in de database.
+
 ```{r database_laden, eval=FALSE}
 library(DBI)
 
@@ -57,7 +58,8 @@ dbWriteTable(con, "dengue", dengue_tidy)
 dbWriteTable(con, "gapminder", gapminder_df) B   bBññn ñ
 ```
 
-Om de gapminder wat netter te maken heb ik ervoor gekozen om alvast de landen en jaren die niet in de flu en dengue google trend data voorkomt te verwijderen. 
+Om de gapminder wat netter te maken heb ik ervoor gekozen om alvast de landen en jaren die niet in de flu en dengue google trend data voorkomt te verwijderen.
+
 ```{r gapminder clean, eval=FALSE}
 #Jaren verwijderen die niet aanwezig zijn in flu en dengue
 gapminder_minyear <- gapminder_df[gapminder_df$year >= min(flu_tidy$year), ]
@@ -69,14 +71,14 @@ gapminder_clean <- subset(gapminder_maxyear, country %in% landen)
 ```
 
 De oude tabel gapminder wordt via de connectie verwijderd en de nette wordt ingevoerd
+
 ```{r, eval=FALSE}
 #Oude tabel verwijderen en nieuwe tabel invoegen
 dbRemoveTable(con, "gapminder")
 dbWriteTable(con, "gapminder", gapminder_clean)
 ```
 
-De ondesrtaande code is SQL code die gebruikt is om een grote tabel te creëren waar alle data in staat van drie datasets instaat. Er worden left joins gebruikt omdat niet alle landen in beide de dengue dataset en flu dataset voorkomen. Deze informatie van bepaalde datasets kan wel interessant zijn voor het analyseren van data en wordt met de left join een NULL ingevoerd bij de missende data. Voor de rest worden alle kollomen van gapminder gekozen, de dag en maand van flu en de activity van beide flu en dengue. ook worden er joins op year, month en day gedaan. Dit is zodat ze gematched worden in de tabel en laad tijd verminderd bij het sorteren.
-Bij het sorteren wordt eerst op het jaartal gesorteerd en daarna op het land om het zo overzichtelijk te houden.
+
 ```{sql, eval=FALSE}
 CREATE TABLE flu_dengue
 AS
@@ -92,6 +94,7 @@ SELECT *
 FROM
   dengue
 ```
+
 
 ```{sql join, eval=FALSE}
 create table all_data
@@ -112,9 +115,6 @@ ORDER BY gapminder."year", gapminder.country, flu_dengue."month", flu_dengue."da
 
 ```
 
-Op deze afbeelding is te zien dat de tabel toegevoegd is aan de database
-
-FOTO !
 
 ```{r, eval=FALSE}
 #Data uit DB ophalen
@@ -131,39 +131,9 @@ dbDisconnect(con)
 all_data <- readRDS("data/all_data.rds")
 ```
 
+```{r data analyse populatie, fig.height = 10}
+library(gridExtra)
 
-```{r data analyse life expectancy}
-#Functie voor life exptancy tegen andere kolom
-lifeexp_func <- function(dataset, name){
-    dataset %>% 
-    filter(disease==name) %>%
-    group_by(year, disease) %>% 
-    summarise(mean_activity=mean(activity,na.rm=TRUE), mean_life_expectancy=mean(life_expectancy,na.rm=TRUE))
-}
-
-#Flu en dengue tegen life expactancy
-mean_flu_year <- lifeexp_func(all_data,"flu")
-mean_dengue_year <- lifeexp_func(all_data,"dengue")
-
-```
-
-```{r life expectancy}
-mean_flu_year %>% ggplot(aes(x=year,y=mean_life_expectancy))+
-    geom_line()
-```
-
-```{r flu grafiek }
-mean_flu_year %>% ggplot(aes(x=year,y=mean_activity))+
-    geom_line()
-```
-
-```{r dengue grafiek}
-mean_dengue_year %>% ggplot(aes(x=year,y=mean_activity))+
-    geom_line()
-
-```
-
-```{r data analyse populatie}
 populatie_func <- function(dataset,year,name){
   country_data <- dataset %>% filter(year==2008, disease==name) %>% 
     group_by(country) %>% 
@@ -174,33 +144,25 @@ populatie_func <- function(dataset,year,name){
   
   plot1 <- country_data %>% ggplot(aes(x=country, y=population))+
     geom_col()+
-    theme_minimal()
-  plot2 <- country_data %>% ggplot(aes(x=country, y=activity))+
+    theme_minimal()+
+    theme(axis.text.x = element_text(angle = 90,vjust=0.3,hjust=1))
+  plot2 <- country_data %>% ggplot(aes(x=country, y=GDP))+
     geom_col()+
-    theme_minimal()
+    theme_minimal()+
+    theme(axis.text.x = element_text(angle = 90,vjust=0.3,hjust=1))
+  plot3 <- country_data %>% ggplot(aes(x=country, y=activity))+
+    geom_col()+
+    theme_minimal()+
+    theme(axis.text.x = element_text(angle = 90,vjust=0.3,hjust=1))
   
-  grid.arrange(plot1,plot2)
+  grid.arrange(plot1,plot2,plot3)
 }
 
-flu_pop <- populatie_func(all_data, 2008, "flu")
-dengue_pop <- populatie_func(all_data, 2008, "dengue")
+populatie_func(all_data, 2008, "flu")
+populatie_func(all_data, 2008, "dengue")
 
 ```
 
-```{r populatie}
-bar_graph_func <- function(dataset, y){
-  dataset %>% ggplot(aes(x=country, y=dataset[[y]]))+
-  geom_col()+
-  theme_minimal()
-}
-```
-
-```{r flu}
-bar_func(dengue_pop, "population")
-bar_func(dengue_pop, "activity")
-bar_func(flu_pop, "population")
-bar_func(flu_pop, "activity")
-```
 
 ```{r data analyse activity door jaar}
 library(RColorBrewer)
@@ -223,12 +185,9 @@ activity_years_func <- function(dataset,name){
 ```
 
 ```{r}
-
 activity_years_func(flu_dengue,"flu")
 ```
 
 ```{r}
-
 activity_years_func(flu_dengue,"dengue")
-
 ```

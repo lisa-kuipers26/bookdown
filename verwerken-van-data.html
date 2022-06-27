@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Verwerken van data | Portofolio data science</title>
   <meta name="description" content="Portflio" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Verwerken van data | Portofolio data science" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Lisa Kuipers" />
 
 
-<meta name="date" content="2022-06-10" />
+<meta name="date" content="2022-06-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -174,9 +174,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="verwerken-van-data" class="section level1 hasAnchor">
 <h1><span class="header-section-number">2</span> Verwerken van data<a href="verwerken-van-data.html#verwerken-van-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Het interperteren en verwerken van data van iemand anders is belangrijk in de data science. Er wordt hier data gebruikt van een onderzoek waar C. elegans nematodes blootgesteld aan verschillende soorten stoffen.</p>
+<p>Het interpreteren en verwerken van data van iemand anders is belangrijk in de data science. Er wordt hier data gebruikt van een onderzoek waar C. elegans nematoden blootgesteld aan verschillende soorten stoffen.</p>
 <p>Belangrijkste in een data analyse is bergrijpen waar je data over gaat. Door de metadata te lezen krijg je een goed idee van waar je dataset overgaat en wat elke kopje betekent. Voor dit onderzoek willen we het effect weten van verschillende stoffen op de nematode maar ook de het effect van verschillende concentraties. Om dit te onderzoeken worden de kolommen RawData, compConcentration en expType gebruikt. In RawData staan het aantal nematodes op de plaat, in de compConcentration de concentratie van de stof en de expType de soort stof.</p>
-<p>Om globaal een idee te krijgen van het effect worden deze variabel tegen elkaar uitget in de grafiek hieronder.</p>
+<p>Om globaal een idee te krijgen van het effect worden deze variabel tegen elkaar uitgezet in de grafiek hieronder.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="verwerken-van-data.html#cb1-1"></a><span class="kw">library</span>(DT)</span>
 <span id="cb1-2"><a href="verwerken-van-data.html#cb1-2"></a><span class="kw">library</span>(kableExtra)</span>
 <span id="cb1-3"><a href="verwerken-van-data.html#cb1-3"></a><span class="kw">library</span>(readxl)</span>
@@ -190,17 +190,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-11"><a href="verwerken-van-data.html#cb1-11"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span><span class="fl">0.1</span>)<span class="op">+</span></span>
 <span id="cb1-12"><a href="verwerken-van-data.html#cb1-12"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
 <span id="cb1-13"><a href="verwerken-van-data.html#cb1-13"></a>       <span class="dt">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/grafiek_1-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/grafiek-1.png" width="672" /></p>
+<hr />
 <p>In het experiment is de positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium</p>
-<p>Bij het verwerken van data is het belangrijk dat de data goed ingelezen wordt. Eén ding waar we tegen lopen bij deze dataset is dat de compConcentration ingelezen wordt als character type i.p.v. een getal. Hierdoor klopt de de x-as niet met wat je wilt zien, omdat er groepen en geen schaal weergegeven wordt. Dit wordt opgelost door het typ evan compConcentration te veranderen van een character naar een double.</p>
+<p>Bij het verwerken van data is het belangrijk dat de data goed ingelezen wordt. Eén ding waar we tegen lopen bij deze dataset is dat de compConcentration ingelezen wordt als character type i.p.v. een getal. Hierdoor klopt de x-as niet met wat je wilt zien, omdat er groepen en geen schaal weergegeven wordt. Dit wordt opgelost door het typ evan compConcentration te veranderen van een character naar een double.</p>
 <p>De bovenstaande grafiek geeft een globaal overzicht, maar er kunnen geen conclusies uitgetrokken worden. Hiervoor is een verdere data analyse nodig. Zo’n data analyse kan er als volgt uitzien:</p>
 <ol style="list-style-type: decimal">
 <li>Data plotten zodat er een globaal overzicht hebt.</li>
 <li>Nul hypothese voor shapiro wilks test (Data is normaal verdeeld)</li>
-<li><blockquote>
-<p>0,05 nulhypothese wordt aangenomen, de data is normaal verdeeld. &lt;0,05 nul-hypothese wordt verworpen</p>
-</blockquote></li>
-<li>Bij een normaal verdeelde datset kan er een pearson test uitgevoerd worden.</li>
+<li>Bij &gt;0,05 nulhypothese wordt aangenomen, de data is normaal verdeeld. &lt;0,05 nul-hypothese wordt verworpen</li>
+<li>Bij een normaal verdeelde dataset kan er een pearson test uitgevoerd worden.</li>
 <li>Nulhypothese van pearson test is dat er geen verband is tussen de concentratie en aantal nematode op de plaat.</li>
 <li>Nulhypothese &lt;0,05 nulhypothese wordt verworpen, er is een correlatie tussen de concentratie en aantal nematode op de plaat. &gt;0,05 Er is geen verband</li>
 <li>Natuurlijk wordt er bij zes alleen een berekening gedaan en er kunnen natuurlijk ook andere factoren geweest zijn die de uitslag beïnvloed hebben.</li>
@@ -212,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-5"><a href="verwerken-van-data.html#cb2-5"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span><span class="fl">0.1</span>)<span class="op">+</span></span>
 <span id="cb2-6"><a href="verwerken-van-data.html#cb2-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Concentratie (-log10) &quot;</span>,</span>
 <span id="cb2-7"><a href="verwerken-van-data.html#cb2-7"></a>       <span class="dt">y=</span><span class="st">&quot;Number of offspring&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/Grafiek_2-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/Grafiek%20genromaliseerd-1.png" width="672" /></p>
 <p>Bij de grafiek hierboven is de dataset genormaliseerd door de RawData te delen daar het gemiddelde van de negatieve controle. Dit is gedaan omdat in de concentratie en aantal nematode een grote range zit. Op deze manier kunnen hogere getallen de uitslag van analyses onterecht beïnvloeden. Door het op deze manier te normaliseren wordt de range kleiner en is er minder bias.</p>
 
 </div>

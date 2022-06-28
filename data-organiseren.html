@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>1 Introductie | Portofolio data science</title>
+<title>4 Data organiseren | Portofolio data science</title>
 <meta name="author" content="Lisa Kuipers">
-<meta name="description" content="Portflio">
+<meta name="description" content="Het organizeren van data is belangrijk voor reproduceerbaarheid en algemene goede workflow. Hieronder staat een voorbeeld van een map met verschillende projecten. Elke map heeft dezelfde indeling,...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="1 Introductie | Portofolio data science">
+<meta property="og:title" content="4 Data organiseren | Portofolio data science">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Portflio">
+<meta property="og:description" content="Het organizeren van data is belangrijk voor reproduceerbaarheid en algemene goede workflow. Hieronder staat een voorbeeld van een map met verschillende projecten. Elke map heeft dezelfde indeling,...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1 Introductie | Portofolio data science">
-<meta name="twitter:description" content="Portflio">
+<meta name="twitter:title" content="4 Data organiseren | Portofolio data science">
+<meta name="twitter:description" content="Het organizeren van data is belangrijk voor reproduceerbaarheid en algemene goede workflow. Hieronder staat een voorbeeld van een map met verschillende projecten. Elke map heeft dezelfde indeling,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -44,10 +44,10 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> Introductie</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introductie</a></li>
 <li><a class="" href="verwerken-van-data.html"><span class="header-section-number">2</span> Verwerken van data</a></li>
 <li><a class="" href="open-peer-review.html"><span class="header-section-number">3</span> Open Peer Review</a></li>
-<li><a class="" href="data-organiseren.html"><span class="header-section-number">4</span> Data organiseren</a></li>
+<li><a class="active" href="data-organiseren.html"><span class="header-section-number">4</span> Data organiseren</a></li>
 <li><a class="" href="cv.html"><span class="header-section-number">5</span> cv</a></li>
 <li><a class="" href="het-citeren-van-andere-werken.html"><span class="header-section-number">6</span> Het citeren van andere werken</a></li>
 <li><a class="" href="databases.html"><span class="header-section-number">7</span> Databases</a></li>
@@ -60,19 +60,66 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="introductie" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-organiseren" class="section level1">
 <h1>
-<span class="header-section-number">1</span> Introductie<a class="anchor" aria-label="anchor" href="#introductie"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> Data organiseren<a class="anchor" aria-label="anchor" href="#data-organiseren"><i class="fas fa-link"></i></a>
 </h1>
-<p>In dit portfolio staan verschillende onderwerpen die over reproduceerbaar werken en goede workflows gaan. Voor elk onderwerp is een aparte pagina gemaakt. Op deze pagina’s staat beschreven wat ik geleerd heb tijdens mijn minor data science.</p>
+<p>Het organizeren van data is belangrijk voor reproduceerbaarheid en algemene goede workflow. Hieronder staat een voorbeeld van een map met verschillende projecten. Elke map heeft dezelfde indeling, bij de data en scripts zijn README bestanden toegevoegd waarin metadata staat over het project en de bestanden. Ik vind het zelf fijn dat wanneer er veel van één soort bestand is (zoals bij bam en fastq bestanden) dat deze in een aparte map staan. De rest bestanden staan gewoon in de /data.</p>
+<pre><code>## data/daur2
+## ├── metagenomics_formatief
+## │   ├── README.md
+## │   ├── data
+## │   │   ├── HU_waternet_MOCK2_composition.csv
+## │   │   └── README.md
+## │   ├── metagenomics_formatief.Rmd
+## │   ├── metagenomics_formatief.html
+## │   └── metagenomics_reader.Rproj
+## ├── metagenomics_reader
+## │   ├── README.md
+## │   ├── data
+## │   │   ├── HU_waternet_MOCK1_composition.csv
+## │   │   └── README.md
+## │   ├── metagenomics_reader.Rmd
+## │   ├── metagenomics_reader.Rproj
+## │   └── metagenomics_reader.html
+## ├── rna_seq_airway
+## │   ├── README.md
+## │   ├── data
+## │   │   ├── README.md
+## │   │   └── ipsc_sampledata.csv
+## │   ├── rnaseq_airway.Rmd
+## │   ├── rnaseq_airway.Rproj
+## │   └── rnaseq_airway.html
+## ├── rna_seq_ipsc
+## │   ├── README.md
+## │   ├── data
+## │   │   ├── README.md
+## │   │   └── ipsc_sampledata.csv
+## │   ├── rnaseq_ipsc.Rmd
+## │   ├── rnaseq_ipsc.Rproj
+## │   └── rnaseq_ipsc.html
+## └── rna_seq_onecut
+##     ├── README.md
+##     ├── data
+##     │   ├── README.md
+##     │   └── onecut_sampledata_OC2.csv
+##     ├── rnaseq_onecut.Rmd
+##     ├── rnaseq_onecut.Rproj
+##     └── rnaseq_onecut.html</code></pre>
+<p>Hieronder staat een voorbeeld van de readme die ik in de repo van dit portfolioo heb staan. Ik beschrijf kort wat er in de datasets staat en waarvoor ze gebruikt. Ook staat er waar ik ze vandaan gehaald heb.</p>
+<div class="figure">
+<img src="images/readme.png" alt="README voorbeeld bij data bestanden" width="2000px"><p class="caption">
+(#fig:readme voorbeeld)README voorbeeld bij data bestanden
+</p>
+</div>
 
 </div>
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="next"><a href="verwerken-van-data.html"><span class="header-section-number">2</span> Verwerken van data</a></div>
+<div class="prev"><a href="open-peer-review.html"><span class="header-section-number">3</span> Open Peer Review</a></div>
+<div class="next"><a href="cv.html"><span class="header-section-number">5</span> cv</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#introductie"><span class="header-section-number">1</span> Introductie</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#data-organiseren"><span class="header-section-number">4</span> Data organiseren</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>3 Open Peer Review | Portofolio data science</title>
+<meta name="author" content="Lisa Kuipers">
+<meta name="description" content="3.1 Onderzoek op reproduceerbaarheid beoordelen In dit gedeelte wordt een artikel beoordeeld op de reproduceerbaarheid. Deze wordt beoordeeld aan de hand van verschillende criteria omschreven in...">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="3 Open Peer Review | Portofolio data science">
+<meta property="og:type" content="book">
+<meta property="og:description" content="3.1 Onderzoek op reproduceerbaarheid beoordelen In dit gedeelte wordt een artikel beoordeeld op de reproduceerbaarheid. Deze wordt beoordeeld aan de hand van verschillende criteria omschreven in...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3 Open Peer Review | Portofolio data science">
+<meta name="twitter:description" content="3.1 Onderzoek op reproduceerbaarheid beoordelen In dit gedeelte wordt een artikel beoordeeld op de reproduceerbaarheid. Deze wordt beoordeeld aan de hand van verschillende criteria omschreven in...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="my-styles.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Portofolio data science</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introductie</a></li>
+<li><a class="" href="verwerken-van-data.html"><span class="header-section-number">2</span> Verwerken van data</a></li>
+<li><a class="active" href="open-peer-review.html"><span class="header-section-number">3</span> Open Peer Review</a></li>
+<li><a class="" href="data-organiseren.html"><span class="header-section-number">4</span> Data organiseren</a></li>
+<li><a class="" href="cv.html"><span class="header-section-number">5</span> cv</a></li>
+<li><a class="" href="het-citeren-van-andere-werken.html"><span class="header-section-number">6</span> Het citeren van andere werken</a></li>
+<li><a class="" href="databases.html"><span class="header-section-number">7</span> Databases</a></li>
+<li><a class="" href="r-packages.html"><span class="header-section-number">8</span> R packages</a></li>
+<li><a class="" href="parameters-voor-flexibiliteit.html"><span class="header-section-number">9</span> Parameters voor flexibiliteit</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="open-peer-review" class="section level1">
+<h1>
+<span class="header-section-number">3</span> Open Peer Review<a class="anchor" aria-label="anchor" href="#open-peer-review"><i class="fas fa-link"></i></a>
+</h1>
+<div id="onderzoek-op-reproduceerbaarheid-beoordelen" class="section level2">
+<h2>
+<span class="header-section-number">3.1</span> Onderzoek op reproduceerbaarheid beoordelen<a class="anchor" aria-label="anchor" href="#onderzoek-op-reproduceerbaarheid-beoordelen"><i class="fas fa-link"></i></a>
+</h2>
+<p>In dit gedeelte wordt een artikel beoordeeld op de reproduceerbaarheid. Deze wordt beoordeeld aan de hand van verschillende criteria omschreven in de onderstaande tabel. Voor de beoordeling is een artikel gekozen primair onderzoek dat beschikbaar is op PMC.</p>
+<p>Gebruikte artikel:</p>
+<p>Amawi KF, Alkhatib AJ. Urtica Pilulifera in Treating Pre-diabetic Rat Model to Control the Blood Glucose, Lipids and Oxidative Stress. Med Arch. 2020;74(3):168-171. <a href="doi:10.5455/medarh.2020.74.168-171" class="uri">doi:10.5455/medarh.2020.74.168-171</a><br><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7405998/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7405998/</a></p>
+<div id="omschrijving-onderzoek" class="section level3">
+<h3>
+<span class="header-section-number">3.1.1</span> Omschrijving onderzoek<a class="anchor" aria-label="anchor" href="#omschrijving-onderzoek"><i class="fas fa-link"></i></a>
+</h3>
+<p>Het doel van het onderzoek is kijken of Urtica pilulifera (een plant) effect heeft op pre-diabetische ratten en ook de antioxiderende werking onderzoeken</p>
+<p>De ratten werden ingedeeld in drie groepen van 10; een controle groep, een pre diabetische groep, en een groep met de behandeling van U. pilulifera.
+De ratten pre-diabetisch gemaakt kregen een hoog sucrose dieet, de controle groep een normaal dieet en de behandelde groep kreeg hetzelfde dieet als de pre-diabetische ratten met U. pilulifera extract geïnjecteerd. Na 30 dagen werden bloed samples afgenomen en getest op glucose, triglycerides, cholesterol, GSH, TAC en MDA</p>
+<p>Uit het onderoek bleek dat glucose, triglyceride en MDA niveaus in de pre-diabetic groep significant verhoogd waren en significant verlaagd in de U. pilulifera groep.
+GSH en TAC was significant hoger in de U. pilulifera ten opzichte van de pre-diabetische groep.
+Er zat geen significant verschil in cholesterol niveau in de groepen.</p>
+</div>
+<div id="beoordeling-artikel" class="section level3">
+<h3>
+<span class="header-section-number">3.1.2</span> Beoordeling artikel<a class="anchor" aria-label="anchor" href="#beoordeling-artikel"><i class="fas fa-link"></i></a>
+</h3>
+<p>In de tabel staat of het artikel aan de verschillende criterium voldoet.</p>
+<div class="inline-table"><table class="table table-striped" style="width: auto !important; ">
+<thead><tr>
+<th style="text-align:left;">
+Criteria
+</th>
+<th style="text-align:left;">
+Answer
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Study purpose
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Data availability
+</td>
+<td style="text-align:left;">
+No
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Data location
+</td>
+<td style="text-align:left;">
+Data location not stated
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Study location
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Author review
+</td>
+<td style="text-align:left;">
+Author listed but did not fill out contact
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ethics statement
+</td>
+<td style="text-align:left;">
+No
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Funding statement
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Code availability
+</td>
+<td style="text-align:left;">
+No
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Het blijkt dat het artikel maar aan drie van acht criteria voldoet. Hoewel het artikel goed te lezen was is deze dus toch niet goed reproduceerbaar.</p>
+</div>
+</div>
+<div id="code-zelf-reproduceren" class="section level2">
+<h2>
+<span class="header-section-number">3.2</span> Code zelf reproduceren<a class="anchor" aria-label="anchor" href="#code-zelf-reproduceren"><i class="fas fa-link"></i></a>
+</h2>
+<p>Net is er gekeken reporduceerbaarheid van een primair onderzoek. In dit onderdeel wordt er gekeken naar de reporduceerbaarheid van (R) code.</p>
+<p>Data en code van onderstaand onderzoek gebruikt:
+Strozza C, Myrskylä M. Monitoring trends and differences in COVID-19 case-fatality rates using decomposition methods: Contributions of age structure and age-specific fatality. PLoS One. 2020 Sep 10;15(9):e0238904. doi: 10.1371/journal.pone.0238904. PMID: 32913365; PMCID: PMC7482960.
+<a href="https://pubmed.ncbi.nlm.nih.gov/32913365/" class="uri">https://pubmed.ncbi.nlm.nih.gov/32913365/</a></p>
+<p>Link naar de code:
+<a href="https://osf.io/g7vjd/" class="uri">https://osf.io/g7vjd/</a></p>
+<div id="beoordeling-script" class="section level3">
+<h3>
+<span class="header-section-number">3.2.1</span> Beoordeling script<a class="anchor" aria-label="anchor" href="#beoordeling-script"><i class="fas fa-link"></i></a>
+</h3>
+<p>Het script zelf was goed te lezen. Er waren 4 scripts die elkaar opvolgde, door de getallen in de bestandsnaam was het makkelijk te zien welke als eerst uitgevoerd moest worden. In de scripts zelf stonden genoeg comments om te begrijpen waar elk stuk code voor diende en ziet de code zelf er netjes uit. Ik geef de leesbaarheid dus ook een 5/5</p>
+<p>De code was ook goed reproduceerbaar. Er was alleen één probleem wat handmatig opgelost moest worden, dit probleem en hoe deze opgelost is staat beschreven hieronder. Hierdoor krijgt de reproduceerbaarheid een 4/5, want nadat dit probleem opgelost was, konden alle tabellen makkelijk gemaakt worden.</p>
+</div>
+<div id="probleem-in-script" class="section level3">
+<h3>
+<span class="header-section-number">3.2.2</span> Probleem in script<a class="anchor" aria-label="anchor" href="#probleem-in-script"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### Monitoring trends and differences in COVID-19 case fatality  ##############</span></span>
+<span><span class="co">### rates using decomposition methods: A demographic perspective ##############</span></span>
+<span></span>
+<span>  <span class="co">### Last updated: 2020-07-16 09:27:20 CEST</span></span>
+<span>  </span>
+<span>  <span class="co">### Contact:</span></span>
+<span>  <span class="co">### riffe@demogr.mpg.de</span></span>
+<span>  <span class="co">### acosta@demogr.mpg.de</span></span>
+<span>  <span class="co">### dudel@demogr.mpg.de</span></span>
+<span></span>
+<span></span>
+<span><span class="co">### Get data ##################################################################</span></span>
+<span></span>
+<span>  <span class="co"># Required packages</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="op">(</span><span class="st">"R/00_functions.R"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># URL + filename</span></span>
+<span>  </span>
+<span>  <span class="va">url</span> <span class="op">&lt;-</span> <span class="st">'https://osf.io/wu5ve//?action=download'</span></span>
+<span>  <span class="va">filename</span> <span class="op">&lt;-</span> <span class="st">'Data/Output_10.csv'</span></span>
+<span>  </span>
+<span>  <span class="co"># Load data</span></span>
+<span>  <span class="fu">GET</span><span class="op">(</span><span class="va">url</span>, <span class="fu">write_disk</span><span class="op">(</span><span class="va">filename</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">filename</span>,skip<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<p>Bij het uitvoeren van de code hierboven kwam de onderstaande foutmelding:</p>
+<div class="figure">
+<img src="images/error_r.png" alt="Error in R"><p class="caption">
+(#fig:error_r)Error in R
+</p>
+</div>
+<p>In de foutmelding is een html bestand te zien. Dit hoort natuurlijk niet bij een read_csv() functie. In de code wordt het bestand van een online directory gedownload. De URL staat in de code en wanneer deze bezocht werd stond er dit bericht:</p>
+<div class="figure">
+<img src="images/error_web.png" alt="Error op de webpagina"><p class="caption">
+(#fig:error_web)Error op de webpagina
+</p>
+</div>
+<p>Het bestand bevindt zich niet meer op de plek waar de URL naar verwees en kon dus ook niet gedownload worden waardoor de html van de pagina werd overgenomen. Er was echter wel een menu aan de zijkant aanwezig waar het mogelijk is om bij de github van het project te komen. Hier vond ik het output bestand wat nodig is voor de code en heb deze handmatig gedownload en toegevoegd aan de /data directory. Nadat deze in de directory stond kon het script en de rest van de scripts vlekkeloos uitgevoerd worden.
+Hieronder staat het script met de aanpassing. De rest van het script kan gevonden worden op de bovenstaande link. De output van het script zijn 6 verschillende excel bestanden met data over het verloop van COVID-19 in 6 verschillende landen.</p>
+<hr>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### Monitoring trends and differences in COVID-19 case fatality  ##############</span></span>
+<span><span class="co">### rates using decomposition methods: A demographic perspective ##############</span></span>
+<span></span>
+<span>  <span class="co">### Last updated: 2020-07-16 09:27:20 CEST</span></span>
+<span>  </span>
+<span>  <span class="co">### Contact:</span></span>
+<span>  <span class="co">### riffe@demogr.mpg.de</span></span>
+<span>  <span class="co">### acosta@demogr.mpg.de</span></span>
+<span>  <span class="co">### dudel@demogr.mpg.de</span></span>
+<span></span>
+<span></span>
+<span><span class="co">### Get data ##################################################################</span></span>
+<span></span>
+<span>  <span class="co"># Required packages</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="op">(</span><span class="st">"R/00_functions.R"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># URL + filename</span></span>
+<span>  <span class="va">filename</span> <span class="op">&lt;-</span> <span class="st">'data/Output_10.csv'</span></span>
+<span>  </span>
+<span>  <span class="co"># Load data</span></span>
+<span>  <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">filename</span>,skip<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="co">### Edit data (select countries, etc.) ########################################</span></span>
+<span>  </span>
+<span>  <span class="co"># Lists of countries and regions</span></span>
+<span>  <span class="va">countrylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"China"</span>,<span class="st">"Germany"</span>,<span class="st">"Italy"</span>,<span class="st">"South Korea"</span>,<span class="st">"Spain"</span>,<span class="st">"USA"</span><span class="op">)</span></span>
+<span>  <span class="va">region</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"All"</span>,<span class="st">"NYC"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Restrict</span></span>
+<span>  <span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">countrylist</span> <span class="op">&amp;</span> <span class="va">Region</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">region</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Remove Tests variable</span></span>
+<span>  <span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Tests<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Drop if no cases/Deaths</span></span>
+<span>  <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
+<span>  </span>
+<span>  </span>
+<span><span class="co">### Save ######################################################################</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">dat</span>,file<span class="op">=</span><span class="st">"Data/inputdata.csv"</span><span class="op">)</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="verwerken-van-data.html"><span class="header-section-number">2</span> Verwerken van data</a></div>
+<div class="next"><a href="data-organiseren.html"><span class="header-section-number">4</span> Data organiseren</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#open-peer-review"><span class="header-section-number">3</span> Open Peer Review</a></li>
+<li>
+<a class="nav-link" href="#onderzoek-op-reproduceerbaarheid-beoordelen"><span class="header-section-number">3.1</span> Onderzoek op reproduceerbaarheid beoordelen</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#omschrijving-onderzoek"><span class="header-section-number">3.1.1</span> Omschrijving onderzoek</a></li>
+<li><a class="nav-link" href="#beoordeling-artikel"><span class="header-section-number">3.1.2</span> Beoordeling artikel</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#code-zelf-reproduceren"><span class="header-section-number">3.2</span> Code zelf reproduceren</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#beoordeling-script"><span class="header-section-number">3.2.1</span> Beoordeling script</a></li>
+<li><a class="nav-link" href="#probleem-in-script"><span class="header-section-number">3.2.2</span> Probleem in script</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Portofolio data science</strong>" was written by Lisa Kuipers. It was last built on 2022-06-28.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

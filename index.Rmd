@@ -4,7 +4,7 @@ author: "Lisa Kuipers"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: 
-  bookdown::html_book:
+  bookdown::bs4_book:
     css: "my-styles.css"
 documentclass: book
 fig_caption: yes

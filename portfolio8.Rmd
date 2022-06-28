@@ -22,7 +22,7 @@ devtools::install_github("lisa-kuipers26/LisasParket",build_vignettes = TRUE)
 ## Package gebruiken
 Gebruik library om de package te laden
 
-```{r, eval=FALSE}
+```{r library pakket}
 library(LisasParket)
 
 ```
@@ -42,7 +42,7 @@ De functies aanwezig in de package zijn:
 De eerste 3 functies zijn te zien in databases tab en de laatste bij de parameteres tab.
 
 Nu kunnen die functies gebruikt worden, hieronder een voorbeeld:
-```{r, eval=FALSE}
+```{r functie showen}
 tidy_func("data/dengue_data.csv","dengue") %>% 
   head() %>%
   kbl() %>%
@@ -63,7 +63,7 @@ knitr::include_graphics(
 
 Naast functie kunnen ook datasets opgeslagen worden. In deze package heb ik voor demonstratie de gapminder gefiltered en opgeslagen als een nieuwe dataset. Om de dataset te laden gebruik simpelweg `data("datset")`. Om te kijken wat voor data een package bevat gebruik `data(package="LisasParket").
 
-```{r, eval=FALSE}
+```{r data}
 data("gapminder_netherlands")
 gapminder_netherlands %>%
   kbl() %>%
@@ -73,3 +73,4 @@ gapminder_netherlands %>%
 ```
 
 ## Vignette
+Door `browseVignette("LisasParket")` te gebruiken wordt een vignette geopend waarin informatie over het pakket staat. De informatie aanwezig in het vignette komt overeen met wat ik net heb laten zien.

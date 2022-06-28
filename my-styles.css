@@ -20,3 +20,9 @@ footer {
   
 }
 
+element.style {
+    border: 1px solid #ddd;
+    padding: 5px;
+    overflow-x: auto;
+    width: 100%;
+}

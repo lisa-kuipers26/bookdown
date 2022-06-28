@@ -18,7 +18,9 @@
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -80,7 +82,7 @@ Figure 9.2: Afbeelding 2: Parameters bij knitten.
 </p>
 </div>
 <p>Hieronder staat de code van het filteren van de de EDCC_daily dataset gevonden op: <a href="https://www.ecdc.europa.eu/en/covid-19/data" class="uri">https://www.ecdc.europa.eu/en/covid-19/data</a>. In de dataset staan het aantal gevallen en sterfgevallen van COVID-19 uit de periode van 2020 t/m 2022. De parameters die boven staan zijn gebruikt in het filteren. Wanneer iemand van dezelfde jaar, maand of dag de data wilt weergeven kan bij de end en start parameters dezelfde datum ingevoerd worden. Ik heb ervoor gekozen om de hele beschikbare periode te nemen voor deze analyse, om te kijken of er een verband is tussen de cases and deaths.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sahilseth/params">params</a></span><span class="op">)</span></span>
@@ -106,14 +108,14 @@ Figure 9.2: Afbeelding 2: Parameters bij knitten.
 <span>       title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Amount of COVID-19"</span>,<span class="va">condition</span>,<span class="st">"from"</span>,<span class="va">data_filtered</span><span class="op">$</span><span class="va">dateRep</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">data_filtered</span><span class="op">$</span><span class="va">dateRep</span><span class="op">)</span><span class="op">]</span>,<span class="st">"to"</span>,<span class="va">data_filtered</span><span class="op">$</span><span class="va">dateRep</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,<span class="st">"in Belgium"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>In de code is te zien dat de dataset gefilterd wordt met de parameters door <code>params</code> te gebruiken voor de gedefineerde parameter naam uit de yaml header.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">plot_func</span><span class="op">(</span><span class="va">data_filtered</span>,<span class="st">"cases"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="_main_files/figure-html/functie%20uitvoeren%20cases-1.png" alt="Figuur 1: Aantal COVID-19 cases van 01/03/2020 t/m 23/05/2022 in belgië. Aantal cases staat op de y-as en de datum als yyyy-mm-dd op de x-as" width="672"><p class="caption">
 (#fig:functie uitvoeren cases)Figuur 1: Aantal COVID-19 cases van 01/03/2020 t/m 23/05/2022 in belgië. Aantal cases staat op de y-as en de datum als yyyy-mm-dd op de x-as
 </p>
 </div>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">plot_func</span><span class="op">(</span><span class="va">data_filtered</span>,<span class="st">"deaths"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="_main_files/figure-html/functie%20uitvoeren%20deaths-1.png" alt="Figuur 2: Aantal COVID-19 deaths van 01/03/2020 t/m 23/05/2022 in belgië. Aantal cases staat op de y-as en de datum als yyyy-mm-dd op de x-as" width="672"><p class="caption">

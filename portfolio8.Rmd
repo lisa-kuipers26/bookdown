@@ -15,8 +15,8 @@ install.packages("devtools")
 ```
 
 De package zelf kan geïnstalleerd worden van de github repo:
-```{r}
-devtools::install_github("lisa-kuipers26/LisasParket",build_vignettes = TRUE,auth_token="GH_PAT")
+```{r, eval=FALSE}
+devtools::install_github("lisa-kuipers26/LisasParket",build_vignettes = TRUE)
 ```
 
 ## Package gebruiken

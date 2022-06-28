@@ -42,7 +42,7 @@ De functies aanwezig in de package zijn:
 De eerste 3 functies zijn te zien in databases tab en de laatste bij de parameteres tab.
 
 Nu kunnen die functies gebruikt worden, hieronder een voorbeeld:
-```{r}
+```{r, eval=FALSE}
 tidy_func("data/dengue_data.csv","dengue") %>% 
   head() %>%
   kbl() %>%
@@ -63,7 +63,7 @@ knitr::include_graphics(
 
 Naast functie kunnen ook datasets opgeslagen worden. In deze package heb ik voor demonstratie de gapminder gefiltered en opgeslagen als een nieuwe dataset. Om de dataset te laden gebruik simpelweg `data("datset")`. Om te kijken wat voor data een package bevat gebruik `data(package="LisasParket").
 
-```{r}
+```{r, eval=FALSE}
 data("gapminder_netherlands")
 gapminder_netherlands %>%
   kbl() %>%

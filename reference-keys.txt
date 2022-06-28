@@ -15,4 +15,9 @@ cv
 het-citeren-van-andere-werken
 databases
 r-packages
+installeren-van-package
+package-gebruiken
+functies
+data
+vignette
 parameters-voor-flexibiliteit

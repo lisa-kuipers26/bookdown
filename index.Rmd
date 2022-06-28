@@ -3,7 +3,9 @@ title: "Portofolio data science"
 author: "Lisa Kuipers"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: 
+  bookdown::html_book:
+    css: "my-styles.css"
 documentclass: book
 fig_caption: yes
 new_session: yes

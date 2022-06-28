@@ -1,2 +1,75 @@
 # R packages
+```{r, include=FALSE}
+library(tidyverse)
+library(kableExtra)
+```
+Packages zijn een manier om je data en functies gebruikt in bepaalde onderzoeken en analyses op te slaan en later weer op te halen. Door documentatie toe te voegen zijn de functies en data weer makkelijk te gebruiken voor mensen die jouw onderzoek willen reproduceren.
 
+Voor dit portfolio heb ik een package aangemaakt met de functies die hier gebruikt worden.
+
+## Installeren van package
+Installeer devtools eerst:
+
+```{r, eval=FALSE}
+install.packages("devtools")
+```
+
+De package zelf kan geïnstalleerd worden van de github repo:
+```{r}
+devtools::install_github("lisa-kuipers26/LisasParket",build_vignettes = TRUE)
+```
+
+## Package gebruiken
+Gebruik library om de package te laden
+
+```{r}
+library(LisasParket)
+
+```
+
+## Functies
+
+De functies aanwezig in de package zijn:
+
+`activity_year_func`
+
+`population_func` 
+
+`tidy_func` 
+
+`covid19_progressplot` 
+
+De eerste 3 functies zijn te zien in databases tab en de laatste bij de parameteres tab.
+
+Nu kunnen die functies gebruikt worden, hieronder een voorbeeld:
+```{r}
+tidy_func("data/dengue_data.csv","dengue") %>% 
+  head() %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = "striped", 
+                full_width = F, 
+                position = "left")
+```
+
+Omdat er documentatie toegevoegd is bij de functies, is het mogelijk om de help te raadplegen door bijvoorbeeld `?tidy_func()`. Hieronder de outpout van de help pagina.
+
+```{r out.width = "1000px", echo=FALSE}
+knitr::include_graphics(
+  here::here(
+    "images","documentatie_functie.png"))
+```
+
+## Data
+
+Naast functie kunnen ook datasets opgeslagen worden. In deze package heb ik voor demonstratie de gapminder gefiltered en opgeslagen als een nieuwe dataset. Om de dataset te laden gebruik simpelweg `data("datset")`. Om te kijken wat voor data een package bevat gebruik `data(package="LisasParket").
+
+```{r}
+data("gapminder_netherlands")
+gapminder_netherlands %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = F) %>%
+  scroll_box(width = "100%")
+```
+
+## Vignette

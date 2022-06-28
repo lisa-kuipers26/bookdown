@@ -24,7 +24,7 @@ jobs:
       - name: Install package
         env: 
             GITHUB_PAT: ${{secrets.DEV}}
-        run: Rscript -e 'devtools::install_github("lisa-kuipers26/LisasParket",build_vignettes = TRUE,auth_token="DEV")'
+        run: Rscript -e 'devtools::install_github("lisa-kuipers26/LisasParket",build_vignettes = TRUE)'
       - name: Render Book
         run: Rscript -e 'bookdown::render_book("index.Rmd")'
       - uses: actions/upload-artifact@v1

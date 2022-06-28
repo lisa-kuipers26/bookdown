@@ -22,7 +22,7 @@ devtools::install_github("lisa-kuipers26/LisasParket",build_vignettes = TRUE)
 ## Package gebruiken
 Gebruik library om de package te laden
 
-```{r}
+```{r, eval=FALSE}
 library(LisasParket)
 
 ```

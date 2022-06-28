@@ -20,7 +20,7 @@ jobs:
       - name: Install bookdown
         run: Rscript -e 'install.packages("bookdown")'
       - name: Install packages
-        run: Rscript -e 'install.packages(c("DT","kableExtra","readxl","tidyverse","here","params","knitr","stringr","captioner","gridExtra","devtools","downlit","kableExtra","dslabs"))'
+        run: Rscript -e 'install.packages(c("DT","kableExtra","readxl","tidyverse","here","params","knitr","stringr","captioner","devtools","downlit","kableExtra","dslabs","plotly"))'
       - name: Install package
         env: 
             GITHUB_PAT: ${{secrets.DEV}}

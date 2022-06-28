@@ -132,8 +132,7 @@ all_data <- readRDS("data/all_data.rds")
 ```
 
 ```{r data analyse populatie, fig.height = 10}
-library(gridExtra)
-
+library(plotly)
 populatie_func <- function(dataset,year,name){
   country_data <- dataset %>% filter(year==2008, disease==name) %>% 
     group_by(country) %>% 
@@ -141,24 +140,35 @@ populatie_func <- function(dataset,year,name){
   colnames(country_data) <- c("country","activity","population","GDP")
   country_data[order(country_data$population, decreasing=TRUE),]
   
+
   
-  plot1 <- country_data %>% ggplot(aes(x=country, y=population))+
-    geom_col()+
-    theme_minimal()+
-    theme(axis.text.x = element_text(angle = 90,vjust=0.3,hjust=1))
-  plot2 <- country_data %>% ggplot(aes(x=country, y=GDP))+
-    geom_col()+
-    theme_minimal()+
-    theme(axis.text.x = element_text(angle = 90,vjust=0.3,hjust=1))
-  plot3 <- country_data %>% ggplot(aes(x=country, y=activity))+
-    geom_col()+
-    theme_minimal()+
-    theme(axis.text.x = element_text(angle = 90,vjust=0.3,hjust=1))
+  plot1 <- plot_ly(data = country_data,
+                   x = ~activity,
+                   y = ~population, 
+                   type = 'scatter',
+                   color =~country,
+                   showlegend=FALSE) %>%
+    layout(yaxis = list(title = 'Population'))
+
+  plot2 <- plot_ly(data = country_data,
+                   x = ~activity,
+                   y = ~GDP, 
+                   type = 'scatter',
+                   color =~country,
+                   showlegend=FALSE) %>%
+    layout(xaxis = list(title = 'Activity'), 
+           yaxis = list(title = 'GDP'))
   
-  grid.arrange(plot1,plot2,plot3)
+  fig <- subplot(plot1,plot2, nrows = 2,titleY = TRUE, shareX = TRUE, titleX = TRUE) %>% 
+    layout(title = list(text = paste(str_to_title(name),"search activity tegen populatie en GDP")))
+  fig
 }
 
+```
+```{r, echo=FALSE}
 populatie_func(all_data, 2008, "flu")
+```
+```{r, echo=FALSE}
 populatie_func(all_data, 2008, "dengue")
 
 ```
@@ -166,7 +176,7 @@ populatie_func(all_data, 2008, "dengue")
 
 ```{r data analyse activity door jaar}
 library(RColorBrewer)
-
+library(ggplot2)
 #Summarise van data per year 
 flu_dengue <- all_data %>% group_by(month, year, disease) %>% 
   na.omit() %>% filter(year!=2002) %>% 

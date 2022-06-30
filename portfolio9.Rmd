@@ -54,7 +54,7 @@ In de code is te zien dat de dataset gefilterd wordt met de parameters door `par
 plot1 <- covid19_progressplot(data_filtered,"cases")
 plot2 <- covid19_progressplot(data_filtered,"deaths")
 
-fig <- subplot(plot1,plot2, nrows = 2,titleY = TRUE, shareX = TRUE, titleX = TRUE) %>%
+subplot(plot1,plot2, nrows = 2,titleY = TRUE, shareX = TRUE, titleX = TRUE) %>%
   layout(title=list(text = paste("COVID-19 cases and deaths from",
                                    data_filtered$dateRep[length(data_filtered$dateRep)],
                                    "to",

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>5 Flow cytometry analyse | Portfolio data science</title>
+<meta name="author" content="Lisa Kuipers">
+<meta name="description" content="In 32 uur hebben we de kans gekregen om een eigen vaardigheid te leren en te ontwikkelen. Daarbij moesten we vooral nadenken wat we zelf willen en wat van toepassing op onze eigen toekomst. In het...">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="5 Flow cytometry analyse | Portfolio data science">
+<meta property="og:type" content="book">
+<meta property="og:description" content="In 32 uur hebben we de kans gekregen om een eigen vaardigheid te leren en te ontwikkelen. Daarbij moesten we vooral nadenken wat we zelf willen en wat van toepassing op onze eigen toekomst. In het...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5 Flow cytometry analyse | Portfolio data science">
+<meta name="twitter:description" content="In 32 uur hebben we de kans gekregen om een eigen vaardigheid te leren en te ontwikkelen. Daarbij moesten we vooral nadenken wat we zelf willen en wat van toepassing op onze eigen toekomst. In het...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="my-styles.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Portfolio data science</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introductie</a></li>
+<li><a class="" href="verwerken-van-data.html"><span class="header-section-number">2</span> Verwerken van data</a></li>
+<li><a class="" href="open-peer-review.html"><span class="header-section-number">3</span> Open Peer Review</a></li>
+<li><a class="" href="data-organiseren.html"><span class="header-section-number">4</span> Data organiseren</a></li>
+<li><a class="active" href="flow-cytometry-analyse.html"><span class="header-section-number">5</span> Flow cytometry analyse</a></li>
+<li><a class="" href="cv.html"><span class="header-section-number">6</span> cv</a></li>
+<li><a class="" href="het-citeren-van-andere-werken.html"><span class="header-section-number">7</span> Het citeren van andere werken</a></li>
+<li><a class="" href="databases.html"><span class="header-section-number">8</span> Databases</a></li>
+<li><a class="" href="r-packages.html"><span class="header-section-number">9</span> R packages</a></li>
+<li><a class="" href="parameters-voor-flexibiliteit.html"><span class="header-section-number">10</span> Parameters voor flexibiliteit</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="flow-cytometry-analyse" class="section level1">
+<h1>
+<span class="header-section-number">5</span> Flow cytometry analyse<a class="anchor" aria-label="anchor" href="#flow-cytometry-analyse"><i class="fas fa-link"></i></a>
+</h1>
+<p>In 32 uur hebben we de kans gekregen om een eigen vaardigheid te leren en te ontwikkelen. Daarbij moesten we vooral nadenken wat we zelf willen en wat van toepassing op onze eigen toekomst. In het begin dacht ik dat ik wel meer naar de bioinformatica kant op wou, maar naar een paar weken besefte ik me dat ik het leuker vind om op het lab kan staan en mijn informatica vaardigeheden kan inzetten bij verschillende analyses en visualisatie. Hierdoor stapte ik van mijn orginele plan af wat meer technisch was en ging kijken naar welke lab analyses uitgebreid in R gedaan kunnen worden.</p>
+<p>Mij intresse ligt vooral in de immunologie. Ik ging naar de Bioconductior website om een beetje inspiratie op te doen. Na verschillende workflows op bioconductor bekeken te hebben heb ik uiteindelijk voor de flowcytometrie gekozen. Dit is een een techniek wat ik ken van praktijk lessen en die veel gebruikt wordt in de immunologie.</p>
+<p>Om deze analyse workflow te leren is er een stappenplan opgesteld</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup><col width="100%"></colgroup>
+<thead><tr class="header">
+<th>Stappen plan</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Meer over flowcytometrie inlezen. Dit zal later helpen bij het begrijpen van en interperteren van resultaten</td>
+</tr>
+<tr class="even">
+<td>Oriënteren op welke analyses mogelijk zijn in R en of er goede documentatie beschikbaar is.</td>
+</tr>
+<tr class="odd">
+<td>Proberen data te reproduceren van documentatie om de code onder de knie te krijgen.</td>
+</tr>
+<tr class="even">
+<td>Dataset zoeken voor eigen analyse. Vooral kijken naar onderzoek wat mij interessant lijkt.</td>
+</tr>
+<tr class="odd">
+<td>Geleerde technieken toepassen op nieuwe data.</td>
+</tr>
+<tr class="even">
+<td>Resulataten uitschrijven in dit Rmd bestand</td>
+</tr>
+<tr class="odd">
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<div id="introductie-wat-is-flowcytometrie" class="section level2">
+<h2>
+<span class="header-section-number">5.1</span> Introductie: Wat is flowcytometrie<a class="anchor" aria-label="anchor" href="#introductie-wat-is-flowcytometrie"><i class="fas fa-link"></i></a>
+</h2>
+<p>Met flowcytometrie komen stoffen opgelost in een buffer langs verschillende lazers. Er wordt gekeken naar de lichtbreking en naar de fluoriscentie. De grootte van een cel kan bepaald worden door een forard scatter. Met een hoek van 90 graden kan de complexiteit van de binnenkant bekeken worden</p>
+</div>
+<div id="de-workflow" class="section level2">
+<h2>
+<span class="header-section-number">5.2</span> De workflow<a class="anchor" aria-label="anchor" href="#de-workflow"><i class="fas fa-link"></i></a>
+</h2>
+<p>De workflow gebruikt verschillende soorten packages bedoelt voor verschillende analyses en visualisaties. Door BioManager te installeren kunnen deze packages geïnstalleerd worden met <code>BiocManager::install("cytofWorkflow")</code>. In de workflow staat beschreven hoe de packages gebruikt worden maar het was zeker ook handig om de individuele documentatie te lezen.</p>
+<div id="packages" class="section level3">
+<h3>
+<span class="header-section-number">5.2.1</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
+</h3>
+<p>Tijdens de tutorial is gebruikt gemaakt van de package <a href="https://bioconductor.org/packages/3.15/data/experiment/vignettes/HDCytoData/inst/doc/HDCytoData_package.html">HDCytoData</a>, om cytometrie data op te halen. De dataset wordt omgezet in een <code>SummarizedExperiment</code> en <code>flowSet</code> format zodat deze gebruitk kunne worden met bioconductor en R.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="data-organiseren.html"><span class="header-section-number">4</span> Data organiseren</a></div>
+<div class="next"><a href="cv.html"><span class="header-section-number">6</span> cv</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#flow-cytometry-analyse"><span class="header-section-number">5</span> Flow cytometry analyse</a></li>
+<li><a class="nav-link" href="#introductie-wat-is-flowcytometrie"><span class="header-section-number">5.1</span> Introductie: Wat is flowcytometrie</a></li>
+<li>
+<a class="nav-link" href="#de-workflow"><span class="header-section-number">5.2</span> De workflow</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#packages"><span class="header-section-number">5.2.1</span> Packages</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Portfolio data science</strong>" was written by Lisa Kuipers. It was last built on 2022-07-06.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

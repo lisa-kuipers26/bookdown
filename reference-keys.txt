@@ -1,4 +1,3 @@
-fig:ikzelf
 fig:yaml
 fig:parameters
 introductie
@@ -11,9 +10,16 @@ code-zelf-reproduceren
 beoordeling-script
 probleem-in-script
 data-organiseren
+flow-cytometry-analyse
+introductie-wat-is-flowcytometrie
+de-workflow
+packages
 cv
 het-citeren-van-andere-werken
 databases
+data-voorbereiden
+data-analyse
+bronnen
 r-packages
 installeren-van-package
 package-gebruiken

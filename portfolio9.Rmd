@@ -50,7 +50,7 @@ covid19_progressplot <- function(dataset,condition){
 
 In de code is te zien dat de dataset gefilterd wordt met de parameters door `params` te gebruiken voor de gedefineerde parameter naam uit de yaml header.
 
-```{r functie uitvoeren cases, fig.cap= "Figuur 1: Aantal COVID-19 cases van 01/03/2020 t/m 23/05/2022 in belgië. Aantal cases staat op de y-as en de datum als yyyy-mm-dd op de x-as"}
+```{r functie uitvoeren cases}
 plot1 <- covid19_progressplot(data_filtered,"cases")
 plot2 <- covid19_progressplot(data_filtered,"deaths")
 
@@ -61,5 +61,6 @@ subplot(plot1,plot2, nrows = 2,titleY = TRUE, shareX = TRUE, titleX = TRUE) %>%
                                    data_filtered$dateRep[1],
                                    "in Belgium")))
 ```
+Figuur...:
 
 Uit de gefilterde set en functie zijn twee grafieken gegenereerd. Deze zijn smen gevoegd met plotly waardoor de x-as gelijk loopt en het mogelijk is om op bepaalde stukken in te zoomen. Wat ik interessant vind om te zien bij deze figuren is dat het aantal doden aan het begin het hoogste lag terwijl het aantal cases relatief niet heel hoog waren. Bij de eerste piek van cases is bij het aantal dode ook een piek te zien ronde dezelfde datum. Daarna zwakt het aantal doden vergeleken met de cases af. Of dit komt doordat mensen met een verzwakt imuunsysteem sneller zijn overleden of omdat vaccinaties hun werk gedaan hebben is niet direct op te maken uit deze data, maar het is wel een interessant verband.

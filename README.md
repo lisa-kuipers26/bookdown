@@ -15,7 +15,9 @@ The pages branch contains the html and assets, like images, for the bookdown pag
 
 the *.Rmd files in this folder are used for the bookdown. These have all the text and code found in the bookdown.
 
-The bibliography.JSON file has different citations that the portfolio refrences.
+my-styles.css contains some formatting code for the website.
+
+The bibliography.JSON file has different citations that the portfolio references.
 
 /.github
 

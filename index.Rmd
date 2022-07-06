@@ -1,5 +1,5 @@
 --- 
-title: "Portofolio data science"
+title: "Portfolio data science"
 author: "Lisa Kuipers"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -33,4 +33,6 @@ knitr::opts_chunk$set(
 
 # Introductie
 
-In dit portfolio staan verschillende onderwerpen die over reproduceerbaar werken en goede workflows gaan. Voor elk onderwerp is een aparte pagina gemaakt. Op deze pagina's staat beschreven wat ik geleerd heb tijdens mijn minor data science.
+Hallo! Ik ben Lisa Kuipers, 22 jaar en studeer momenteel life science op Hogeschool Utrecht. Naast mijn major, die vooral over verschillende lab technieken gaat, heb ik ook een minor data science gedaan. In dit portfolio wordt er vooral gericht op mijn data science vaardigheden.
+
+Tijdens de opleiding hebben veel gebruik gemaakt van github, vooral met oog op version control, workflow en samenwerken. Dit portfolio wordt onder ander gehost met github pages. De opzet van het portfolio kan terug gevonden worden [deze github](https://github.com/lisa-kuipers26/lisakuipers-portfolio) pagina.

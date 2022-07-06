@@ -1,7 +1,9 @@
 # Databases
+Databases worden gebruikt om veel data in op te slaan. Deze data is makkelijk op te zoeken met de codeer taal SQL. Op deze pagina wordt weergegeven hoe databases met R gekoppeld kunnen worden en worden er een paar stukken SQL code getoond.
 
-
+## Data voorbereiden 
 Om wat verschillende functies van de database te laten zien worden er verschillende datasets ingeladen. Hieronder wordt de data van de dengue en flu google trends tidy gemaakt, door de landnamen in één kolom te zetten. Ook wordt er een aparte kolom gemaakt met de naam van de ziekte. Voorderest worden ook de datum opgesplitst in dagen, maanden en jaren zodat deze later samengevoegd kunnen worden met de gapminder data.
+
 ```{r data_laden, eval=FALSE}
 library(dslabs)
 library(tidyverse)
@@ -21,7 +23,6 @@ tidy_func <- function(path,name){
 dengue_tidy <- tidy_func("data/dengue_data.csv","dengue")
 flu_tidy <- tidy_func("data/flu_data.csv","flu")
 
-flu_tidy %>%  filter(year==2005)
 #opslaan als RDS
 saveRDS(dengue_tidy, file = "data/dengue_tidy.rds")
 saveRDS(flu_tidy, file = "data/flu_tidy.rds")
@@ -32,9 +33,12 @@ write.csv(gapminder_df,"data/gapminder.csv")
 write.csv(dengue_tidy,"data/dengue_tidy.csv")
 write.csv(flu_tidy,"data/flu_tidy.csv")
 
+gapminder_df 
+
 ```
 
 Er moet een database gemaakt worden om de tabellen op te slaan. Hieronder staat SQL code die ingevoerd kan worden bij het programma dBeaver (of een andere database software) voor het creëren van een database.
+
 ```{sql opzetten database, eval=FALSE}
 CREATE DATABASE workflows;
 ```
@@ -55,7 +59,7 @@ con <- dbConnect(RPostgres::Postgres(),
 #Aanmaken van tabellen in databse
 dbWriteTable(con, "flu", flu_tidy)
 dbWriteTable(con, "dengue", dengue_tidy)
-dbWriteTable(con, "gapminder", gapminder_df) B   bBññn ñ
+dbWriteTable(con, "gapminder", gapminder_df)
 ```
 
 Om de gapminder wat netter te maken heb ik ervoor gekozen om alvast de landen en jaren die niet in de flu en dengue google trend data voorkomt te verwijderen.
@@ -66,7 +70,7 @@ gapminder_minyear <- gapminder_df[gapminder_df$year >= min(flu_tidy$year), ]
 gapminder_maxyear <- gapminder_minyear[gapminder_minyear$year <= max(flu_tidy$year), ]
 
 #Landen weghalen die niet en flu en dengue aanwezig zijn
-landen <- c(dengue_tidy$country, flu_tidy$country,recursive=TRUE)
+landen <- as.factor(c(dengue_tidy$country, flu_tidy$country,recursive=TRUE))
 gapminder_clean <- subset(gapminder_maxyear, country %in% landen)
 ```
 
@@ -78,6 +82,7 @@ dbRemoveTable(con, "gapminder")
 dbWriteTable(con, "gapminder", gapminder_clean)
 ```
 
+SQL code is erg letterlijk en makkelijk leesbaar. Om de flu en dengue datasets meer tidy te maken wordt de functie `UNION ALL` gebruikt. Deze functie zorgt ervoor dat twee tabellen die dezelfde kolommen hebben samen worden gevoegd. Omdat alle kolommen overeenkomen kan er een sterretje gebruikt worden bij select om alle kollommen mee te nemen. Het eindresultaat een tabel genaamd flu_dengue waarin de informatie van de twee ziektes gecombineerd staat.
 
 ```{sql, eval=FALSE}
 CREATE TABLE flu_dengue
@@ -95,6 +100,7 @@ FROM
   dengue
 ```
 
+De tabel die net aangemaakt is wordt samengevoegd met de gapminder dataset door een join te gebruiken. In dit geval een left join op jaar, omdat gapminder alleen per jaar gaan en niet maanden en dagen. Door bij select worden de kollommen gekozen, waarbij alles van gapminder die ook overlap heeft met flu_dengue en de kolommen die alleen in flu_dengue aanwezig zijn. Daarbij gejoined met land zodat de dataset netter geordend is. Aan het einde wordt er geordend op jaar, land, maand en dag. Het resultaat is een tabel genaamd all_data en deze gaat gebruikt worden voor de komende analyses.
 
 ```{sql join, eval=FALSE}
 create table all_data
@@ -115,6 +121,7 @@ ORDER BY gapminder."year", gapminder.country, flu_dengue."month", flu_dengue."da
 
 ```
 
+De tabel wordt opgehaald uit de database om deze in R te gebruiken en opgeslagen als een RDS voor eventueel later gebruik. De connectie met de database is niet meer nodig dus wordt deze afgesloten.
 
 ```{r, eval=FALSE}
 #Data uit DB ophalen
@@ -126,12 +133,14 @@ dbDisconnect(con)
 
 ```
 
-```{r data ophalen}
+```{r data ophalen, include=FALSE}
 #Data laden voor analyse
 all_data <- readRDS("data/all_data.rds")
 ```
 
-```{r data analyse populatie, fig.height = 10}
+## Data analyse
+Met de gecombineerde tabel worden een paar analyses uitgevoerd
+```{r data analyse populatie}
 library(plotly)
 populatie_func <- function(dataset,year,name){
   country_data <- dataset %>% filter(year==2008, disease==name) %>% 
@@ -139,9 +148,7 @@ populatie_func <- function(dataset,year,name){
     summarise(mean(activity, na.rm=TRUE), max(population),max(gdp))
   colnames(country_data) <- c("country","activity","population","GDP")
   country_data[order(country_data$population, decreasing=TRUE),]
-  
 
-  
   plot1 <- plot_ly(data = country_data,
                    x = ~activity,
                    y = ~population, 
@@ -160,20 +167,28 @@ populatie_func <- function(dataset,year,name){
            yaxis = list(title = 'GDP'))
   
   fig <- subplot(plot1,plot2, nrows = 2,titleY = TRUE, shareX = TRUE, titleX = TRUE) %>% 
-    layout(title = list(text = paste(str_to_title(name),"search activity tegen populatie en GDP")))
+    layout(title = list(text = paste(str_to_title(name),"search activity tegen populatie en GDP in", year)))
   fig
 }
 
 ```
+
+In de code hierboven staat een functie die ervoor zorgt dat beide populatie en GDP van landen tegenover de gemiddelde search activity van flu en dengue van geplaatst wordt van een bepaald jaar. Dit gebeurt . Het leek mij immers interessant om te zien of bij grotere populaties meer gezocht werd naar deze ziektes, omdat meer mensen voor meer spreiding zorgen, maar ook omdat meer mensen kunnen zoeken. Ook wou ik kijken naar het GDP om te kijken of er verschil zit tussen rijkere en armere landen. Uit de functie volgt een plotly plot. Deze is interactief en wanneer de muis over de puntjes heen gaat zal het land en precieze data tevoorschijn komen
+
 ```{r, echo=FALSE}
 populatie_func(all_data, 2008, "flu")
 ```
+Figuur...:
+
+In het figuur hierboven wordt de flu activity bekeken. Het ziet er niet naar uit dat er een correlatie is tussen populatie of GDP en flu search activity. Canada heeft de meeste search activity terwijl niet een bepaald hoge of lage populatie of GDP. Het kan komen doordat de meeste mensen in Canada Engels spreken en er dus automatisch naar "Flu" gezocht wordt. Kijkende naar Australia die beide een wat lagere en populatie en GDP dan Canada heeft daar in tegen een veel lagere search activity. Maar twee datapunten zegt niet veel.
+
 ```{r, echo=FALSE}
 populatie_func(all_data, 2008, "dengue")
-
 ```
+Figuur...:
+Net als bij flu ziet het eruit dat er geen correlatie is tussen populatie of GDP en activity. 
 
-
+Bij de volgende analyse wordt er naar op welk tijdstip in het jaar naar flu en dengue gezocht wordt om te kijken of er dudielijke te zien is wanneer het griep seizoen is en of dengue ook een seizoen heeft wanneer deze meer actief is.
 ```{r data analyse activity door jaar}
 library(RColorBrewer)
 library(ggplot2)
@@ -192,12 +207,26 @@ activity_years_func <- function(dataset,name){
     scale_color_brewer(palette = "Set1")+
     theme_minimal()
 }
-```
 
-```{r}
+```
+Eerst wordt de data van beide dengue en flu de gemiddelde activity paar maand. Daarna is er een functie die twee plots kan genereren.
+
+```{r activity flu}
 activity_years_func(flu_dengue,"flu")
 ```
+Figuur...:
 
-```{r}
+Wanneer er griep heerst zullen mensen dit sneller opzoeken op internet. Bij figuur ... is duidelijk te zien wanneer griep het meest heerst, wat vooral van september tot maart is. Dit zakt ook weer of in de maanden van maart tot september
+```{r activity dengue}
 activity_years_func(flu_dengue,"dengue")
 ```
+Figuur...:
+
+Bij dengue is er een mindere sterke trend te zitten. Wel zijn er meer pieken te zien en het begin van het jaar en aan het einde, met vooral sterke pieken aan het einde. Bij de meeste jaren ziet het eruit dat het in het midden van het jaar zakt, maar niet bij de jaren 2007,2009 en 2010.
+
+---
+## Bronnen
+Bronnen:
+Flu dataset: "Data Source: Google Flu Trends (http://www.google.org/flutrends)"
+
+Dengue dataset: "Data Source: Google Dengue Trends (http://www.google.org/denguetrends)"

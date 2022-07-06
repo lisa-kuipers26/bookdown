@@ -1,0 +1,31 @@
+# Flow cytometry analyse
+
+In 32 uur hebben we de kans gekregen om een eigen vaardigheid te leren en te ontwikkelen. Daarbij moesten we vooral nadenken wat we zelf willen en wat van toepassing op onze eigen toekomst. In het begin dacht ik dat ik wel meer naar de bioinformatica kant op wou, maar naar een paar weken besefte ik me dat ik het leuker vind om op het lab kan staan en mijn informatica vaardigeheden kan inzetten bij verschillende analyses en visualisatie. Hierdoor stapte ik van mijn orginele plan af wat meer technisch was en ging kijken naar welke lab analyses uitgebreid in R gedaan kunnen worden. 
+
+Mij intresse ligt vooral in de immunologie. Ik ging naar de Bioconductior website om een beetje inspiratie op te doen. Na verschillende workflows op bioconductor bekeken te hebben heb ik uiteindelijk voor de flowcytometrie gekozen. Dit is een een techniek wat ik ken van praktijk lessen en die veel gebruikt wordt in de immunologie.
+
+Om deze analyse workflow te leren is er een stappenplan opgesteld
+
+
+| Stappen plan                                                                                                 |
+|--------------------------------------------------------------------------------------------------------------|
+| Meer over flowcytometrie inlezen. Dit zal later helpen bij het begrijpen van en interperteren van resultaten |
+| Oriënteren op welke analyses mogelijk zijn in R en of er goede documentatie beschikbaar is.                  |
+| Proberen data te reproduceren van documentatie om de code onder de knie te krijgen.                          |
+| Dataset zoeken voor eigen analyse. Vooral kijken naar onderzoek wat mij interessant lijkt.                   |
+| Geleerde technieken toepassen op nieuwe data.                                                                |
+| Resulataten uitschrijven in dit Rmd bestand                                                                                                             |
+|                                                                                                              |
+
+
+## Introductie: Wat is flowcytometrie
+Met flowcytometrie komen stoffen opgelost in een buffer langs verschillende lazers. Er wordt gekeken naar de lichtbreking en naar de fluoriscentie. De grootte van een cel kan bepaald worden door een forard scatter. Met een hoek van 90 graden kan de complexiteit van de binnenkant bekeken worden 
+
+## De workflow
+De workflow gebruikt verschillende soorten packages bedoelt voor verschillende analyses en visualisaties. Door BioManager te installeren kunnen deze packages geïnstalleerd worden met `BiocManager::install("cytofWorkflow")`. In de workflow staat beschreven hoe de packages gebruikt worden maar het was zeker ook handig om de individuele documentatie te lezen.
+
+### Packages
+Tijdens de tutorial is gebruikt gemaakt van de package [HDCytoData](https://bioconductor.org/packages/3.15/data/experiment/vignettes/HDCytoData/inst/doc/HDCytoData_package.html), om cytometrie data op te halen. De dataset wordt omgezet in een `SummarizedExperiment` en `flowSet` format zodat deze gebruitk kunne worden met bioconductor en R.
+
+
+

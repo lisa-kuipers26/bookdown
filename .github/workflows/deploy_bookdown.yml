@@ -21,8 +21,8 @@ jobs:
         run: Rscript -e 'install.packages("bookdown")'
       - name: Install packages
         run: Rscript -e 'install.packages(c("DT","kableExtra","readxl","tidyverse","here","params","knitr","stringr","captioner","devtools","downlit","kableExtra","dslabs","plotly","BiocManager"))'
-      - name: Rscript -e Install cyto package
-        run: BiocManager::install("cytofWorkflow")
+      - name: Install cyto package
+        run: Rscript -e 'BiocManager::install("cytofWorkflow")''
       - name: Install package
         env: 
             GITHUB_PAT: ${{secrets.DEV}}

@@ -1,2 +1,2 @@
-<h4> Bibliografie </h4>
+# Bibliografie 
 <div id="refs"></div>

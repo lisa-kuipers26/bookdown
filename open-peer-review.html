@@ -217,9 +217,12 @@ Strozza C, Myrskylä M. Monitoring trends and differences in COVID-19 case-fatal
 <span>  <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">filename</span>,skip<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <p>Bij het uitvoeren van de code hierboven kwam de onderstaande foutmelding:</p>
 <div class="inline-figure">
-<img src="images/error_r.png" width="339">
-In de foutmelding is een html bestand te zien. Dit hoort natuurlijk niet bij een read_csv() functie. In de code wordt het bestand van een online directory gedownload. De URL staat in de code en wanneer deze bezocht werd stond er dit bericht:</div>
-<div class="inline-figure"><img src="images/error_web.png" width="284"></div>
+<img src="images/error_r.png"><!-- -->
+Afbeelding1: Foutmelding in R</div>
+<p>In de foutmelding is een html bestand te zien. Dit hoort natuurlijk niet bij een read_csv() functie. In de code wordt het bestand van een online directory gedownload. De URL staat in de code en wanneer deze bezocht werd stond er dit bericht:</p>
+<div class="inline-figure">
+<img src="images/error_web.png"><!-- -->
+Afbeelding2: Foutmelding op internet</div>
 <p>Het bestand bevindt zich niet meer op de plek waar de URL naar verwees en kon dus ook niet gedownload worden waardoor de html van de pagina werd overgenomen. Er was echter wel een menu aan de zijkant aanwezig waar het mogelijk is om bij de github van het project te komen. Hier vond ik het output bestand wat nodig is voor de code en heb deze handmatig gedownload en toegevoegd aan de /data directory. Nadat deze in de directory stond kon het script en de rest van de scripts vlekkeloos uitgevoerd worden.
 Hieronder staat het script met de aanpassing. De rest van het script kan gevonden worden op de bovenstaande link. De output van het script zijn 6 verschillende excel bestanden met data over het verloop van COVID-19 in 6 verschillende landen.</p>
 <hr>
@@ -304,7 +307,7 @@ Hieronder staat het script met de aanpassing. De rest van het script kan gevonde
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Portfolio data science</strong>" was written by Lisa Kuipers. It was last built on 2022-07-06.</p>
+    <p>"<strong>Portfolio data science</strong>" was written by Lisa Kuipers. It was last built on 2022-07-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

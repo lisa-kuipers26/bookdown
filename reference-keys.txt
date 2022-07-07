@@ -11,9 +11,9 @@ beoordeling-script
 probleem-in-script
 data-organiseren
 flow-cytometry-analyse
-introductie-wat-is-flowcytometrie
+introductie-wat-is-flow-cytometrie
 de-workflow
-packages
+datasets
 cv
 het-citeren-van-andere-werken
 databases

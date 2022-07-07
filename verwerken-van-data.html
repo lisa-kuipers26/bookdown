@@ -69,7 +69,7 @@
 </h1>
 <p>Het interpreteren en verwerken van data van iemand anders is belangrijk in de data science. Er wordt hier data gebruikt van een onderzoek waar C. elegans nematoden blootgesteld aan verschillende soorten stoffen.</p>
 <p>Belangrijkste in een data analyse is bergrijpen waar je data over gaat. Door de metadata te lezen krijg je een goed idee van waar je dataset overgaat en wat elke kopje betekent. Voor dit onderzoek willen we het effect weten van verschillende stoffen op de nematode maar ook de het effect van verschillende concentraties. Om dit te onderzoeken worden de kolommen RawData, compConcentration en expType gebruikt. In RawData staan het aantal nematodes op de plaat, in de compConcentration de concentratie van de stof en de expType de soort stof.</p>
-<p>Om globaal een idee te krijgen van het effect worden deze variabel tegen elkaar uitgezet in de grafiek hieronder.</p>
+<p>Om globaal een idee te krijgen van het effect worden deze variabel tegen elkaar uitgezet in de grafiek hieronder. Omdat log niet werkt bij een getal van 0 is negatieve controle manueel op 0 gezet.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/DT">DT</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span></span>
@@ -84,7 +84,9 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Concentratie (-log10) "</span>,</span>
 <span>       y<span class="op">=</span><span class="st">"Number of offspring"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/grafiek-1.png" width="672"></div>
+<div class="inline-figure">
+<img src="_main_files/figure-html/grafiek-1.png" width="672">
+Figuur 1: Grafiek met de hoeveelheid offspring op de y-as en de concentratie in -log(10) op de x-as</div>
 <hr>
 <p>In het experiment is de positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium</p>
 <p>Bij het verwerken van data is het belangrijk dat de data goed ingelezen wordt. Eén ding waar we tegen lopen bij deze dataset is dat de compConcentration ingelezen wordt als character type i.p.v. een getal. Hierdoor klopt de x-as niet met wat je wilt zien, omdat er groepen en geen schaal weergegeven wordt. Dit wordt opgelost door het typ evan compConcentration te veranderen van een character naar een double.</p>
@@ -106,7 +108,9 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Concentratie (-log10) "</span>,</span>
 <span>       y<span class="op">=</span><span class="st">"Number of offspring"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/Grafiek%20genromaliseerd-1.png" width="672"></div>
+<div class="inline-figure">
+<img src="_main_files/figure-html/Grafiek%20genromaliseerd-1.png" width="672">
+Figuur2: De genormaliseerde versie van figuur1</div>
 <p>Bij de grafiek hierboven is de dataset genormaliseerd door de RawData te delen daar het gemiddelde van de negatieve controle. Dit is gedaan omdat in de concentratie en aantal nematode een grote range zit. Op deze manier kunnen hogere getallen de uitslag van analyses onterecht beïnvloeden. Door het op deze manier te normaliseren wordt de range kleiner en is er minder bias.</p>
 
 </div>
@@ -131,7 +135,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Portfolio data science</strong>" was written by Lisa Kuipers. It was last built on 2022-07-06.</p>
+    <p>"<strong>Portfolio data science</strong>" was written by Lisa Kuipers. It was last built on 2022-07-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

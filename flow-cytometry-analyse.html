@@ -99,24 +99,51 @@
 </tr>
 </tbody>
 </table></div>
-<div id="introductie-wat-is-flowcytometrie" class="section level2">
+<div id="introductie-wat-is-flow-cytometrie" class="section level2">
 <h2>
-<span class="header-section-number">5.1</span> Introductie: Wat is flowcytometrie<a class="anchor" aria-label="anchor" href="#introductie-wat-is-flowcytometrie"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Introductie: Wat is flow cytometrie<a class="anchor" aria-label="anchor" href="#introductie-wat-is-flow-cytometrie"><i class="fas fa-link"></i></a>
 </h2>
-<p>Met flowcytometrie komen stoffen opgelost in een buffer langs verschillende lazers. Er wordt gekeken naar de lichtbreking en naar de fluoriscentie. De grootte van een cel kan bepaald worden door een forard scatter. Met een hoek van 90 graden kan de complexiteit van de binnenkant bekeken worden</p>
+<p>Met flowcytometrie komen stoffen opgelost in een buffer langs verschillende lazers. Er wordt gekeken naar de lichtbreking en naar de fluoriscentie. De grootte van een cel kan bepaald worden door een forward scatter. Met een hoek van 90 graden kan de granuliteit bekeken worden.fluoriscentie labels die (vaak) aan antilichamen vast zitten kan ervoor zorgen dat er meer complexerere informatie onderzocht kan worden. Deze kunnen bijvoorbeeld binden aan receptoren op het cell membraan en op deze manier kan er bepaald worden wat voor cel precies aanwezig is. Dit maakt het interessant voor immunologie onderzoek, omdat cellen zoals T-cellen, B-cellen, NK-cellen, etc onderzocht kunnen worden de hoeveelheid er aanwezig is bij een bepaald immuunrespons.</p>
+<p>Naast flow cytometrie wardt de laatste jaren ook mass cytometry gebruikt. Mass cytometry maakt geen gebruik van forward en side scatter en fluoriscentie, maar van antilichamen met metaal ionen en is gebasseerd op mass spectrometry time-of-flight. <span class="citation">(<span class="citeproc-not-found" data-reference-id="mckinnonFlowCytometryOverview2018"><strong>???</strong></span>)</span></p>
 </div>
 <div id="de-workflow" class="section level2">
 <h2>
 <span class="header-section-number">5.2</span> De workflow<a class="anchor" aria-label="anchor" href="#de-workflow"><i class="fas fa-link"></i></a>
 </h2>
-<p>De workflow gebruikt verschillende soorten packages bedoelt voor verschillende analyses en visualisaties. Door BioManager te installeren kunnen deze packages geïnstalleerd worden met <code>BiocManager::install("cytofWorkflow")</code>. In de workflow staat beschreven hoe de packages gebruikt worden maar het was zeker ook handig om de individuele documentatie te lezen.</p>
-<div id="packages" class="section level3">
-<h3>
-<span class="header-section-number">5.2.1</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
-</h3>
-<p>Tijdens de tutorial is gebruikt gemaakt van de package <a href="https://bioconductor.org/packages/3.15/data/experiment/vignettes/HDCytoData/inst/doc/HDCytoData_package.html">HDCytoData</a>, om cytometrie data op te halen. De dataset wordt omgezet in een <code>SummarizedExperiment</code> en <code>flowSet</code> format zodat deze gebruitk kunne worden met bioconductor en R.</p>
-
+<p>Voor het analyseren van flow cytometry is de workflow van <span class="citation">(<span class="citeproc-not-found" data-reference-id="nowickaCyTOFWorkflowDifferential2019"><strong>???</strong></span>)</span> gebruikt. De workflow bestaat uit verschillende packages. Door BioManager te installeren kunnen deze packages geïnstalleerd worden met <code>BiocManager::install("cytofWorkflow")</code>. In de workflow staat beschreven hoe de packages gebruikt worden maar het was zeker ook handig om de individuele documentatie te lezen. Belangrijke packages zijn: <code>CATALYST</code> voor het maken van een SingleCellExperminent class, <code>flowSOM</code> voor het maken van verschillende plots en <code>ConsensusClusterPlus</code> voor de visualisatie van meta clustering.</p>
 </div>
+<div id="datasets" class="section level2">
+<h2>
+<span class="header-section-number">5.3</span> Datasets<a class="anchor" aria-label="anchor" href="#datasets"><i class="fas fa-link"></i></a>
+</h2>
+<p>Tijdens de tutorial is gebruikt gemaakt van de package <a href="https://bioconductor.org/packages/3.15/data/experiment/vignettes/HDCytoData/inst/doc/HDCytoData_package.html">HDCytoData</a>, om cytometrie data op te halen. De dataset wordt omgezet in een <code>SummarizedExperiment</code> en <code>flowSet</code> format zodat deze gebruikt kunnen worden met bioconductor en R. Voor mijn analyse wou ik een externe dataset gebruiken met een onderzoek wat mij leuk lijkt. Er zijn verschillende websites waar cyTOF datasets gevonden kunden worden zoals Cytobank en Immport. Ikzelf heb voor Immport gekozen, omdat het de makkelijkste was om datasets in te zoeken met veel informatie aanwezig. Het uikiezen van een onderzoek bleek echter niet zo makkelijk te zijn. De datasets zijn al snel heel groot en dit kost veel tijd om te downloaden en R heeft niet genoeg geheugen om het te verwerken. Zelfs kleinere datasets kosten veel geheugen en mijn laptop kon dat simpelweg niet aan. Vooral bij het maken van het sce object ging het steeds fout.</p>
+<p>Uiteindelijk heb ik gekozen voor het onderzoek van <span class="citation">(<span class="citeproc-not-found" data-reference-id="zhaoNaturalKillerCell2020"><strong>???</strong></span>)</span>. Hoewel het uiteindelijk lukte door mijn RAM te vergroten met <code>memory.limit(size = 40000)</code> duurde het heel lang voordat een graiek gegenereerd kon worden. De workflow maakte gebruik van de HDCytoData package om bestanden op te halen, maar de bestanden in deze package hebben de metadata en panel data op <a href="https://flowrepository.org/" class="uri">https://flowrepository.org/</a> staan en deze website op het moment van het schrijven van dit script niet bereikbaar.</p>
+<p>De code van het inlezen van externe data staat hieronder.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">flowCore</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">flowset</span> <span class="op">&lt;-</span> <span class="fu">read.flowSet</span><span class="op">(</span>path<span class="op">=</span><span class="st">"data/CyTOF_result"</span>,truncate_max_range <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">metadata_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="st">"data/SDY1647-DR44_Subject_2_CyTOF_result.txt"</span>,sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span></span>
+<span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"file_name"</span><span class="op">=</span><span class="va">metadata_raw</span><span class="op">$</span><span class="va">File.Name</span>,</span>
+<span>                     <span class="st">"sample_id"</span><span class="op">=</span><span class="va">metadata_raw</span><span class="op">$</span><span class="va">Expsample.Accession</span>,</span>
+<span>                     <span class="st">"patient_id"</span><span class="op">=</span><span class="va">metadata_raw</span><span class="op">$</span><span class="va">Subject.Accession</span>,</span>
+<span>                     <span class="st">"condition"</span><span class="op">=</span><span class="va">metadata_raw</span><span class="op">$</span><span class="va">ARM.Name</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">panel_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="st">"data/fcs_header_marker.txt"</span>,sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span></span>
+<span><span class="va">panel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"fcs_colname"</span><span class="op">=</span><span class="va">panel_raw</span><span class="op">$</span><span class="va">PNN_REPORTED</span>,</span>
+<span>                    <span class="st">"antigen"</span><span class="op">=</span><span class="va">panel_raw</span><span class="op">$</span><span class="va">PNS_REPORTED</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">panel</span><span class="op">$</span><span class="va">fcs_colname</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">flowset</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>De workflow tutorial gebruikt data bestanden met een formaat die al geacepteerd worden met de functies uit de CATALYST package die in de volgende stuk code aan bod komen. Om de code te laten werken worden de tabellen die aanwezig zijn omgezet in dataframes met andere namen.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">CATALYST</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">metadata</span><span class="op">$</span><span class="va">condition</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">$</span><span class="va">condition</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"healthy"</span>, <span class="st">"HESN"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">metadata</span><span class="op">$</span><span class="va">sample_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">$</span><span class="va">sample_id</span>, levels <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">sample_id</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">$</span><span class="va">condition</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu">prepData</span><span class="op">(</span><span class="va">flowset</span>, <span class="va">panel</span>, <span class="va">metadata</span>, features <span class="op">=</span> <span class="va">panel</span><span class="op">$</span><span class="va">fcs_colname</span><span class="op">)</span></span></code></pre></div>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -126,10 +153,9 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#flow-cytometry-analyse"><span class="header-section-number">5</span> Flow cytometry analyse</a></li>
-<li><a class="nav-link" href="#introductie-wat-is-flowcytometrie"><span class="header-section-number">5.1</span> Introductie: Wat is flowcytometrie</a></li>
-<li>
-<a class="nav-link" href="#de-workflow"><span class="header-section-number">5.2</span> De workflow</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#packages"><span class="header-section-number">5.2.1</span> Packages</a></li></ul>
-</li>
+<li><a class="nav-link" href="#introductie-wat-is-flow-cytometrie"><span class="header-section-number">5.1</span> Introductie: Wat is flow cytometrie</a></li>
+<li><a class="nav-link" href="#de-workflow"><span class="header-section-number">5.2</span> De workflow</a></li>
+<li><a class="nav-link" href="#datasets"><span class="header-section-number">5.3</span> Datasets</a></li>
 </ul>
 
       <div class="book-extra">
@@ -146,7 +172,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Portfolio data science</strong>" was written by Lisa Kuipers. It was last built on 2022-07-06.</p>
+    <p>"<strong>Portfolio data science</strong>" was written by Lisa Kuipers. It was last built on 2022-07-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

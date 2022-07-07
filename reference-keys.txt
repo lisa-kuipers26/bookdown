@@ -1,5 +1,3 @@
-fig:yaml
-fig:parameters
 introductie
 verwerken-van-data
 open-peer-review

@@ -61,6 +61,6 @@ subplot(plot1,plot2, nrows = 2,titleY = TRUE, shareX = TRUE, titleX = TRUE) %>%
                                    data_filtered$dateRep[1],
                                    "in Belgium")))
 ```
-Figuur...:
+Figuur7: Een interactieve plot van het aantal cases en deaths in een tijd periode van 2020 t/m 2022 met het aantal deaths en cases op de y-as en de datum op de x-as.
 
 Uit de gefilterde set en functie zijn twee grafieken gegenereerd. Deze zijn smen gevoegd met plotly waardoor de x-as gelijk loopt en het mogelijk is om op bepaalde stukken in te zoomen. Wat ik interessant vind om te zien bij deze figuren is dat het aantal doden aan het begin het hoogste lag terwijl het aantal cases relatief niet heel hoog waren. Bij de eerste piek van cases is bij het aantal dode ook een piek te zien ronde dezelfde datum. Daarna zwakt het aantal doden vergeleken met de cases af. Of dit komt doordat mensen met een verzwakt imuunsysteem sneller zijn overleden of omdat vaccinaties hun werk gedaan hebben is niet direct op te maken uit deze data, maar het is wel een interessant verband.

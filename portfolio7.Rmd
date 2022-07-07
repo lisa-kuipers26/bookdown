@@ -178,14 +178,15 @@ In de code hierboven staat een functie die ervoor zorgt dat beide populatie en G
 ```{r, echo=FALSE}
 populatie_func(all_data, 2008, "flu")
 ```
-Figuur...:
+Figuur3: Interactieve plot van google flu search activity in 2008, met op de x-as de activity en op de y-as de GDP en populatie. De puntjes zijn per land gekleurd.
 
 In het figuur hierboven wordt de flu activity bekeken. Het ziet er niet naar uit dat er een correlatie is tussen populatie of GDP en flu search activity. Canada heeft de meeste search activity terwijl niet een bepaald hoge of lage populatie of GDP. Het kan komen doordat de meeste mensen in Canada Engels spreken en er dus automatisch naar "Flu" gezocht wordt. Kijkende naar Australia die beide een wat lagere en populatie en GDP dan Canada heeft daar in tegen een veel lagere search activity. Maar twee datapunten zegt niet veel.
 
 ```{r, echo=FALSE}
 populatie_func(all_data, 2008, "dengue")
 ```
-Figuur...:
+Figuur4: Interactieve plot van google dengue search activity in 2008, met op de x-as de activity en op de y-as de GDP en populatie. De puntjes zijn per land gekleurd.
+
 Net als bij flu ziet het eruit dat er geen correlatie is tussen populatie of GDP en activity. 
 
 Bij de volgende analyse wordt er naar op welk tijdstip in het jaar naar flu en dengue gezocht wordt om te kijken of er dudielijke te zien is wanneer het griep seizoen is en of dengue ook een seizoen heeft wanneer deze meer actief is.
@@ -214,13 +215,13 @@ Eerst wordt de data van beide dengue en flu de gemiddelde activity paar maand. D
 ```{r activity flu}
 activity_years_func(flu_dengue,"flu")
 ```
-Figuur...:
+Figuur5: FLu search activity per maand per jaar. Op de x-as staat de maand en op de y-as de activity. De lijnen zijn gevormd door de gemiddelde search activity per maand te nemen.
 
 Wanneer er griep heerst zullen mensen dit sneller opzoeken op internet. Bij figuur ... is duidelijk te zien wanneer griep het meest heerst, wat vooral van september tot maart is. Dit zakt ook weer of in de maanden van maart tot september
 ```{r activity dengue}
 activity_years_func(flu_dengue,"dengue")
 ```
-Figuur...:
+Figuur6: Dengue search activity per maand per jaar. Op de x-as staat de maand en op de y-as de activity. De lijnen zijn gevormd door de gemiddelde search activity per maand te nemen.
 
 Bij dengue is er een mindere sterke trend te zitten. Wel zijn er meer pieken te zien en het begin van het jaar en aan het einde, met vooral sterke pieken aan het einde. Bij de meeste jaren ziet het eruit dat het in het midden van het jaar zakt, maar niet bij de jaren 2007,2009 en 2010.
 

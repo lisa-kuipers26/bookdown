@@ -16,16 +16,48 @@ Om deze analyse workflow te leren is er een stappenplan opgesteld
 | Geleerde technieken toepassen op nieuwe data.                                                                |
 | Resulataten uitschrijven in dit Rmd bestand                                                                                                             |
 |                                                                                                              |
+## Introductie: Wat is flow cytometrie
+Met flowcytometrie komen stoffen opgelost in een buffer langs verschillende lazers. Er wordt gekeken naar de lichtbreking en naar de fluoriscentie. De grootte van een cel kan bepaald worden door een forward scatter. Met een hoek van 90 graden kan de granuliteit bekeken worden.fluoriscentie labels die (vaak) aan antilichamen vast zitten kan ervoor zorgen dat er meer complexerere informatie onderzocht kan worden. Deze kunnen bijvoorbeeld binden aan receptoren op het cell membraan en op deze manier kan er bepaald worden wat voor cel precies aanwezig is. Dit maakt het interessant voor immunologie onderzoek, omdat cellen zoals T-cellen, B-cellen, NK-cellen, etc onderzocht kunnen worden de hoeveelheid er aanwezig is bij een bepaald immuunrespons. 
 
-
-## Introductie: Wat is flowcytometrie
-Met flowcytometrie komen stoffen opgelost in een buffer langs verschillende lazers. Er wordt gekeken naar de lichtbreking en naar de fluoriscentie. De grootte van een cel kan bepaald worden door een forard scatter. Met een hoek van 90 graden kan de complexiteit van de binnenkant bekeken worden 
+Naast flow cytometrie  wardt de laatste jaren ook mass cytometry gebruikt. Mass cytometry maakt geen gebruik van forward en side scatter en fluoriscentie, maar van antilichamen met metaal ionen en is gebasseerd op mass spectrometry time-of-flight. [@mckinnonFlowCytometryOverview2018]
 
 ## De workflow
-De workflow gebruikt verschillende soorten packages bedoelt voor verschillende analyses en visualisaties. Door BioManager te installeren kunnen deze packages geïnstalleerd worden met `BiocManager::install("cytofWorkflow")`. In de workflow staat beschreven hoe de packages gebruikt worden maar het was zeker ook handig om de individuele documentatie te lezen.
+Voor het analyseren van flow cytometry is de workflow van @nowickaCyTOFWorkflowDifferential2019 gebruikt. De workflow bestaat uit verschillende packages. Door BioManager te installeren kunnen deze packages geïnstalleerd worden met `BiocManager::install("cytofWorkflow")`. In de workflow staat beschreven hoe de packages gebruikt worden maar het was zeker ook handig om de individuele documentatie te lezen. Belangrijke packages zijn: `CATALYST` voor het maken van een SingleCellExperminent class, `flowSOM` voor het maken van verschillende plots en `ConsensusClusterPlus` voor de visualisatie van meta clustering.
 
-### Packages
-Tijdens de tutorial is gebruikt gemaakt van de package [HDCytoData](https://bioconductor.org/packages/3.15/data/experiment/vignettes/HDCytoData/inst/doc/HDCytoData_package.html), om cytometrie data op te halen. De dataset wordt omgezet in een `SummarizedExperiment` en `flowSet` format zodat deze gebruitk kunne worden met bioconductor en R.
+## Datasets
+Tijdens de tutorial is gebruikt gemaakt van de package [HDCytoData](https://bioconductor.org/packages/3.15/data/experiment/vignettes/HDCytoData/inst/doc/HDCytoData_package.html), om cytometrie data op te halen. De dataset wordt omgezet in een `SummarizedExperiment` en `flowSet` format zodat deze gebruikt kunnen worden met bioconductor en R. Voor mijn analyse wou ik een externe dataset gebruiken met een onderzoek wat mij leuk lijkt. Er zijn verschillende websites waar cyTOF datasets gevonden kunden worden zoals Cytobank en Immport. Ikzelf heb voor Immport gekozen, omdat het de makkelijkste was om datasets in te zoeken met veel informatie aanwezig. Het uikiezen van een onderzoek bleek echter niet zo makkelijk te zijn. De datasets zijn al snel heel groot en dit kost veel tijd om te downloaden en R heeft niet genoeg geheugen om het te verwerken. Zelfs kleinere datasets kosten veel geheugen en mijn laptop kon dat simpelweg niet aan. Vooral bij het maken van het sce object ging het steeds fout.
 
+Uiteindelijk heb ik gekozen voor het onderzoek van @zhaoNaturalKillerCell2020. Hoewel het uiteindelijk lukte door mijn RAM te vergroten met `memory.limit(size = 40000)` duurde het heel lang voordat een graiek gegenereerd kon worden. De workflow maakte gebruik van de HDCytoData package om bestanden op te halen, maar de bestanden in deze package hebben de metadata en panel data op https://flowrepository.org/ staan en deze website op het moment van het schrijven van dit script niet bereikbaar.
+
+De code van het inlezen van externe data staat hieronder.
+
+```{r, eval=FALSE}
+library(flowCore)
+
+flowset <- read.flowSet(path="data/CyTOF_result",truncate_max_range = FALSE)
+
+metadata_raw <- read.delim("data/SDY1647-DR44_Subject_2_CyTOF_result.txt",sep = "\t")
+metadata <- data.frame("file_name"=metadata_raw$File.Name,
+                     "sample_id"=metadata_raw$Expsample.Accession,
+                     "patient_id"=metadata_raw$Subject.Accession,
+                     "condition"=metadata_raw$ARM.Name)
+
+panel_raw <- read.delim("data/fcs_header_marker.txt",sep = "\t")
+panel <- data.frame("fcs_colname"=panel_raw$PNN_REPORTED,
+                    "antigen"=panel_raw$PNS_REPORTED)
+
+all(panel$fcs_colname %in% colnames(flowset))
+```
+
+De workflow tutorial gebruikt data bestanden met een formaat die al geacepteerd worden met de functies uit de CATALYST package die in de volgende stuk code aan bod komen. Om de code te laten werken worden de tabellen die aanwezig zijn omgezet in dataframes met andere namen. 
+
+```{r, eval=FALSE}
+library(CATALYST)
+
+metadata$condition <- factor(metadata$condition, levels = c("healthy", "HESN"))
+metadata$sample_id <- factor(metadata$sample_id, levels = metadata$sample_id[order(metadata$condition)])
+
+sce <- prepData(flowset, panel, metadata, features = panel$fcs_colname)
+```
 
 

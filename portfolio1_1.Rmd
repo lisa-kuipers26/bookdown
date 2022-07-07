@@ -4,8 +4,7 @@ Het interpreteren en verwerken van data van iemand anders is belangrijk in de da
 
 Belangrijkste in een data analyse is bergrijpen waar je data over gaat. Door de metadata te lezen krijg je een goed idee van waar je dataset overgaat en wat elke kopje betekent. Voor dit onderzoek willen we het effect weten van verschillende stoffen op de nematode maar ook de het effect van verschillende concentraties. Om dit te onderzoeken worden de kolommen RawData, compConcentration en expType gebruikt. In RawData staan het aantal nematodes op de plaat, in de compConcentration de concentratie van de stof en de expType de soort stof.
 
-Om globaal een idee te krijgen van het effect worden deze variabel tegen elkaar uitgezet in de grafiek hieronder.
-
+Om globaal een idee te krijgen van het effect worden deze variabel tegen elkaar uitgezet in de grafiek hieronder. Omdat log niet werkt bij een getal van 0 is negatieve controle manueel op 0 gezet.
 
 ```{r grafiek}
 library(DT)
@@ -22,6 +21,7 @@ tabel %>% ggplot(aes(x=compConcentration,y=RawData,color=compName,shape=expType)
   labs(x="Concentratie (-log10) ",
        y="Number of offspring")
 ```
+Figuur 1: Grafiek met de hoeveelheid offspring op de y-as en de concentratie in -log(10) op de x-as
 
 ***
 In het experiment is de positieve controle van dit experiment is ethanol . De negatieve controle van dit experiment is de S-medium
@@ -47,5 +47,7 @@ tabel %>% ggplot(aes(x=compConcentration,y=RawData,color=compName,shape=expType)
   labs(x="Concentratie (-log10) ",
        y="Number of offspring")
 ```
+Figuur2: De genormaliseerde versie van figuur1
+
 
 Bij de grafiek hierboven is de dataset genormaliseerd door de RawData te delen daar het gemiddelde van de negatieve controle. Dit is gedaan omdat in de concentratie en aantal nematode een grote range zit. Op deze manier kunnen hogere getallen de uitslag van analyses onterecht beïnvloeden. Door het op deze manier te normaliseren wordt de range kleiner en is er minder bias.

@@ -16,15 +16,6 @@ knitr::include_graphics(
 lisa.kuipers26@hotmail.com
 
 -----
-<h2> Werkervaring </h2>
-
-HEMA Rhenen | 2015 – heden  
-Kassa medewerker, horeca medewerker  
-
-  * Klanten helpen in de winkel, producten afrekenen en helpen op de klantenservice  
-  * Klanten bedienen in de horeca  
-  * Aanvullen van producten in de winkel  
-
 <h2> Opleiding </h2>
 
 Rembrandt college Veenendaal  |  2012 - 2017  
@@ -34,19 +25,41 @@ Rembrandt college Veenendaal  |  2012 - 2017
 Hogeschool Utrecht  |  2019 – Heden  
 HBO Biologie en medisch laboratoriumonderzoek (life science)
 
+Theorie geleerd over cellen, moleculaire biologie, micro-organismes, farmacologie, laboratorium technieken, hematologie, fysiologie en immunologie. Op het lab heb ik verschillende laboratorium vaardigheden geleerd op het gebied van eiwit analyse(westernblot, SDS-PAGE, ELISA), bloed onderzoek, DNA/RNA(PCR, elektroforese) en bacterie onderzoek (gram kleuring, antibiotica resistentie)
+
   * Specialisatie biomolecular research
   * Minor data science for biology  
+    _ Geleerd om te werken met grote biologische datasets, verschillende analyses uit te voeren met de programmeer R (RNAseq, metagenomics) en hoe er reproduceerbaar gewerkt kan worden.
+
+
+<h2> Werkervaring </h2>
+
+HEMA Rhenen | 2015 – heden  
+Kassa medewerker, horeca medewerker  
+
+  * Klanten helpen in de winkel, producten afrekenen en helpen op de klantenservice  
+  * Klanten bedienen in de horeca  
+  * Aanvullen van producten in de winkel  
 
 
 <h2> Talen </h2>
 Nederlands   
 Engels    
 
-<h2> Vaardigheden </h2>
-Microsoft office    
+<h2> Vaardigheden en technieken </h2>
+Algemeen:
+Microsoft office 
+
+Programmeer vaardigehden:
 R   
 Bash    
 Python    
 SQL
 
+Lab vaardigheden:
+Westernbot
+SDS-PAGE
+ELISA
+PCR
+elektroforese
 

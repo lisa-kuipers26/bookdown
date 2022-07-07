@@ -27,7 +27,9 @@ Voor het analyseren van flow cytometry is de workflow van @nowickaCyTOFWorkflowD
 ## Datasets
 Tijdens de tutorial is gebruikt gemaakt van de package [HDCytoData](https://bioconductor.org/packages/3.15/data/experiment/vignettes/HDCytoData/inst/doc/HDCytoData_package.html), om cytometrie data op te halen. De dataset wordt omgezet in een `SummarizedExperiment` en `flowSet` format zodat deze gebruikt kunnen worden met bioconductor en R. Voor mijn analyse wou ik een externe dataset gebruiken met een onderzoek wat mij leuk lijkt. Er zijn verschillende websites waar cyTOF datasets gevonden kunden worden zoals Cytobank en Immport. Ikzelf heb voor Immport gekozen, omdat het de makkelijkste was om datasets in te zoeken met veel informatie aanwezig. Het uikiezen van een onderzoek bleek echter niet zo makkelijk te zijn. De datasets zijn al snel heel groot en dit kost veel tijd om te downloaden en R heeft niet genoeg geheugen om het te verwerken. Zelfs kleinere datasets kosten veel geheugen en mijn laptop kon dat simpelweg niet aan. Vooral bij het maken van het sce object ging het steeds fout.
 
-Uiteindelijk heb ik gekozen voor het onderzoek van @zhaoNaturalKillerCell2020. Hoewel het uiteindelijk lukte door mijn RAM te vergroten met `memory.limit(size = 40000)` duurde het heel lang voordat een graiek gegenereerd kon worden. De workflow maakte gebruik van de HDCytoData package om bestanden op te halen, maar de bestanden in deze package hebben de metadata en panel data op https://flowrepository.org/ staan en deze website op het moment van het schrijven van dit script niet bereikbaar.
+Uiteindelijk heb ik gekozen voor het onderzoek van @zhaoNaturalKillerCell2020. Hoewel het uiteindelijk lukte door mijn RAM te vergroten met `memory.limit(size = 40000)` duurde het heel lang voordat een grafiek gegenereerd kon worden. 
+
+De workflow maakte gebruik van de HDCytoData package om bestanden op te halen, maar de bestanden in deze package hebben de metadata en panel data op https://flowrepository.org/ staan en deze website op het moment van het schrijven van dit script niet bereikbaar.
 
 De code van het inlezen van externe data staat hieronder.
 

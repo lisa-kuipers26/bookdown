@@ -86,7 +86,7 @@ De code was ook goed reproduceerbaar. Er was alleen één probleem wat handmatig
 
 Bij het uitvoeren van de code hierboven kwam de onderstaande foutmelding:
 
-```{r error_r, echo=FALSE}
+```{r error_r, out.width = "600px", echo=FALSE}
 knitr::include_graphics(
   here::here(
     "images",
@@ -96,7 +96,7 @@ Afbeelding1: Foutmelding in R
 
 In de foutmelding is een html bestand te zien. Dit hoort natuurlijk niet bij een read_csv() functie. In de code wordt het bestand van een online directory gedownload. De URL staat in de code en wanneer deze bezocht werd stond er dit bericht:
 
-```{r error_web, echo=FALSE}
+```{r error_web, out.width = "600px", echo=FALSE}
 knitr::include_graphics(
   here::here(
     "images",

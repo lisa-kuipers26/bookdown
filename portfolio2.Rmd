@@ -7,8 +7,10 @@ fs::dir_tree("data/daur2")
 ```
 Hieronder staat een voorbeeld van de readme die ik in de repo van dit portfolioo heb staan. Ik beschrijf kort wat er in de datasets staat en waarvoor ze gebruikt. Ook staat er waar ik ze vandaan gehaald heb.
 
-```{r readme voorbeeld, fig.cap="README voorbeeld bij data bestanden" , out.width = "2000px", echo=FALSE}
+```{r readme voorbeeld, out.width = "700px", echo=FALSE}
 knitr::include_graphics(
   here::here(
     "images","readme.png"))
 ```
+
+Afbeelding3:README voorbeeld bij data bestanden
